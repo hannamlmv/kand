@@ -12,9 +12,14 @@ class Isolate:
     def __init__(self, name: str, antibiotics: list, sir_mic: list):
         self.name = name
         self.mic = {
-            antibiotics[i]: (sir_mic[i][0], sir_mic[i][1])
-            for i in range(len(antibiotics))
+            antibiotic: (
+                (MIC_value, SIR_category) for MIC_value, SIR_category in sir_mic
+            )
+            for antibiotic in antibiotics
         }
+
+        def __repr__(self):
+            return self.name
 
     def get_name(self):
         return self.name
