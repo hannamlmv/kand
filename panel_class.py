@@ -5,7 +5,7 @@ Contains a class for panel objects and a sub-class for isolate objects.
 
 Date: 20/4-23
 """
-
+from collections import Counter
 
 class Isolate:
     def __init__(self, name: str, antibiotics: list, sir_mic: list):
@@ -63,13 +63,12 @@ class Panel:
 
     def redundancy_score(self):
         total_mics = 0
+        redundant_mics = 0
         for antibiotic in self.antibiotics:
             total_mics += len(self.antibiotic_mic[antibiotic])
-        redundant_mics = total_mics
-        return 
-
-        # calculate redundancyundance score based on self.chosen_isolates
-        #eturn redundant_mics/total_mics
+            count_mics = dict(Counter(mic_sir[0]) for mic_sir in self.create_antibiotic_mic()[antibiotic])
+            redundant_mics += sum(number-1 for number in count_mics.values() if number>1)
+        return redundant_mics/total_mics
 
     def add_isolate(self):
 
