@@ -16,6 +16,12 @@ class Panel:
                 for i in range(len(antibiotics))
             }
 
+        def get_name(self):
+            return self.name
+
+        def get_mic(self):
+            return self.mic
+
     def __init__(
         self,
         available_isolates: list,
