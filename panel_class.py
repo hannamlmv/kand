@@ -43,7 +43,9 @@ class Panel:
     def create_antibiotic_mic(self):
         antibiotic_mic = {}
         for antibiotic in self.antibiotics:
-            antibiotic_mic[antibiotic] = [isolate.get_mic(antibiotic) for isolate in self.chosen_isolates]
+            antibiotic_mic[antibiotic] = [
+                isolate.get_mic(antibiotic) for isolate in self.chosen_isolates if None not in isolate.get_mic(antibiotic)
+                ]
         return antibiotic_mic
 
 
