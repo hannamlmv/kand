@@ -7,6 +7,7 @@ Date: 20/4-23
 """
 from collections import Counter
 
+
 class Isolate:
     def __init__(self, name: str, antibiotics: list, sir_mic: list):
         self.name = name
@@ -66,9 +67,14 @@ class Panel:
         redundant_mics = 0
         for antibiotic in self.antibiotics:
             total_mics += len(self.antibiotic_mic[antibiotic])
-            count_mics = dict(Counter(mic_sir[0]) for mic_sir in self.create_antibiotic_mic()[antibiotic])
-            redundant_mics += sum(number-1 for number in count_mics.values() if number>1)
-        return redundant_mics/total_mics
+            count_mics = dict(
+                Counter(mic_sir[0])
+                for mic_sir in self.create_antibiotic_mic()[antibiotic]
+            )
+            redundant_mics += sum(
+                number - 1 for number in count_mics.values() if number > 1
+            )
+        return redundant_mics / total_mics
 
     def add_isolate(self):
 
