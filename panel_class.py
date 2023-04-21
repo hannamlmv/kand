@@ -1,10 +1,11 @@
 """
 panelclass.py
 
-Contains a class for panel objects and a sub-class for isolate objects.
+Contains a class for panel objects and a class for isolate objects.
 
 Date: 20/4-23
 """
+
 from collections import Counter
 
 
