@@ -38,7 +38,6 @@ class Panel:
 
     def spread_score(self):
         pass
-        # calculate spreadead score based on self.chosen_isolates
         # return score
 
     def coverage_score(self):
@@ -46,16 +45,17 @@ class Panel:
         for antibiotic in self.antibiotics:
             number_of_mics = len(self.antibiotic_mic[antibiotic])
             coverage = 0.2*number_of_mics
-            if coverage >1:
+            if coverage > 1:
                 coverage = 1
             sir_coverage = 1
-            #for category, penalty in {'S':0.3, 'I':0.2, 'R':0.4}.items():
-                #if category not in 
-                    #sir_coverage -= penalty
-            coverage_scores.append(coverage*sir_coverage)
-        return 
-        # calculate coverageerage score based on self.chosen_isolates
-        # return score
+            for category, penalty in {'S':0.3, 'I':0.2, 'R':0.4}.items():
+                if category not in [
+                    self.antibiotic_mic[antibiotic][i][1] for i in 
+                    range(len(self.antibiotic_mic[antibiotic]))
+                    ]:
+                    sir_coverage -= penalty
+            coverage_scores.append(coverage * sir_coverage)
+        return sum(coverage_scores) / len(coverage_scores)
 
     def redundancy_score(self):
         total_mics = 0
@@ -110,6 +110,3 @@ class Panel:
         self.coverage = self.coverage_score()
         self.redundancy = self.redundancy_score()
         self.antibiotic_mic = self.create_antibiotic_mic()
-
-
-print(sum([1,2,3]))

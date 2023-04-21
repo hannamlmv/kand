@@ -1,5 +1,5 @@
 """
-isolate_class.py
+isolate_cqlass.py
 
 Contains a class for isolate objects
 
