@@ -19,21 +19,33 @@ class Panel:
         def get_name(self):
             return self.name
 
-        def get_mic(self):
+        def get_mic(self, antibiotic_name = None):
+            if antibiotic_name:
+                return self.mic[antibiotic_name]
             return self.mic
 
     def __init__(
         self,
         available_isolates: list,
+        antibiotics: list, 
         chosen_isolates: list = [],
         hyperparameters: list = [1, 1, 1, 1],
     ):
         self.available_isolates = available_isolates
         self.chosen_isolates = chosen_isolates
+        self.antibiotics = antibiotics
         self.spread = self.spread_score()
         self.coverage = self.coverage_score()
         self.redundancy = self.redundancy_score()
         self.hyperparameters = hyperparameters  # a list with hyperparameters to be used when constructing panel
+        self.antibiotic_mic = self.create_antibiotic_mic()
+
+    def create_antibiotic_mic(self):
+        antibiotic_mic = {}
+        for antibiotic in self.antibiotics:
+            antibiotic_mic[antibiotic] = [isolate.get_mic(antibiotic) for isolate in self.chosen_isolates]
+        return antibiotic_mic
+
 
     def spread_score(self):
         pass
@@ -89,3 +101,5 @@ class Panel:
         self.spread = self.spread_score()
         self.coverage = self.coverage_score()
         self.redundancy = self.redundancy_score()
+        self.antibiotic_mic = self.create_antibiotic_mic()
+
