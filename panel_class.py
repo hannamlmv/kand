@@ -43,7 +43,9 @@ class Panel:
     def create_antibiotic_mic(self):
         antibiotic_mic = {}
         for antibiotic in self.antibiotics:
-            antibiotic_mic[antibiotic] = [isolate.get_mic(antibiotic) for isolate in self.chosen_isolates]
+            antibiotic_mic[antibiotic] = [
+                isolate.get_mic(antibiotic) for isolate in self.chosen_isolates if None not in isolate.get_mic(antibiotic)
+                ]
         return antibiotic_mic
 
 
@@ -60,8 +62,7 @@ class Panel:
     def redundancy_score(self):
         total_mics = 0
         redundant_mics = 0
-        for isolate in self.chosen_isolates:
-            pass
+        pass
 
         # calculate redundancyundance score based on self.chosen_isolates
         #eturn redundant_mics/total_mics
@@ -91,11 +92,11 @@ class Panel:
             self.chosen_isolates.remove(isolate)
 
         # Add isolate
-        best_iso = min(
+        best_isolate = min(
             isolates_cost, key=isolates_cost.get
         )  # gives the key with the maximum value
-        self.chosen_isolates.append(best_iso)
-        self.available_isolates.remove(best_iso)
+        self.chosen_isolates.append(best_isolate)
+        self.available_isolates.remove(best_isolate)
 
         # Update all scores
         self.spread = self.spread_score()
