@@ -63,11 +63,13 @@ class Panel:
 
     def redundancy_score(self):
         total_mics = 0
-        redundant_mics = 0
-        pass
+        for antibiotic in self.antibiotics:
+            total_mics += len(self.antibiotic_mic[antibiotic])
+        redundant_mics = total_mics
+        return 
 
         # calculate redundancyundance score based on self.chosen_isolates
-        # eturn redundant_mics/total_mics
+        #eturn redundant_mics/total_mics
 
     def add_isolate(self):
 
