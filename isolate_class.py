@@ -1,3 +1,12 @@
+"""
+isolateclass.py
+
+Contains a class for isolate objects
+
+Date: 20/4-23
+"""
+
+
 class Isolate:
     def __init__(self, name: str, antibiotics: list, sir_mic: list):
         self.name = name

@@ -1,7 +1,7 @@
 """
-panelclass.py
+panel_class.py
 
-Contains a class for panel objects and a class for isolate objects.
+Contains a class for panel objects
 
 Date: 20/4-23
 """
