@@ -9,7 +9,7 @@ Date: 20/4-23
 
 class Panel:
     class Isolate:
-        def __init__(self, name, antibiotics, sir_mic):
+        def __init__(self, name: str, antibiotics: list, sir_mic: list):
             self.name = name
             self.mic = {
                 antibiotics[i]: (sir_mic[i][0], sir_mic[i][1])
@@ -17,7 +17,10 @@ class Panel:
             }
 
     def __init__(
-        self, available_isolates, chosen_isolates=[], hyperparameters=[1, 1, 1, 1]
+        self,
+        available_isolates: list,
+        chosen_isolates: list = [],
+        hyperparameters: list = [1, 1, 1, 1],
     ):
         self.available_isolates = available_isolates
         self.chosen_isolates = chosen_isolates
