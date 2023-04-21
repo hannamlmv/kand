@@ -23,10 +23,12 @@ class Panel:
         self.spread = self.spread_score()
         self.coverage = self.coverage_score()
         self.redundancy = self.redundancy_score()
-        self.hyperparameters = hyperparameters  # a list with hyperparameters to be used when constructing panel
+        self.hyperparameters = hyperparameters
         self.antibiotic_mic = self.create_antibiotic_mic()
 
     def create_antibiotic_mic(self):
+        """" Gives a dictionary containing the mic-values present 
+            on the panel for each antibiotic """
         antibiotic_mic = {}
         for antibiotic in self.antibiotics:
             antibiotic_mic[antibiotic] = [
@@ -37,10 +39,12 @@ class Panel:
         return antibiotic_mic
 
     def spread_score(self):
+        """" Calculates the spread score """
         pass
         # return score
 
     def coverage_score(self):
+        """" Calculates the coverage score """
         coverage_scores = []
         for antibiotic in self.antibiotics:
             number_of_mics = len(self.antibiotic_mic[antibiotic])
@@ -58,6 +62,7 @@ class Panel:
         return sum(coverage_scores) / len(coverage_scores)
 
     def redundancy_score(self):
+        """" Calculates the redundancy score """
         total_mics = 0
         redundant_mics = 0
         for antibiotic in self.antibiotics:
@@ -75,14 +80,14 @@ class Panel:
             return redundant_mics / total_mics
 
     def add_isolate(self):
-
+        """" Adds one isolate to give the optimal panel """
         # Find isolate which gives minimum cost
         isolates_cost = {}
         for isolate in self.available_isolates:
             isolates_cost[isolate] = try_isolate(isolate)
-            remove_isolate(isolate)
 
         def try_isolate(isolate):
+            """" Investigates which isolate gives the optimal panel """
             # Add isolates and calculate temporary scores
             self.chosen_isolates.append(isolate)
             temp_scores = [
@@ -91,17 +96,15 @@ class Panel:
                 self.redundancy_score(),
                 len(self.chosen_isolates),
             ]
+            self.chosen_isolates.remove(isolate)
             # Calculate the overall cost
             cost = sum([i * j for (i, j) in zip(self.hyperparameters, temp_scores)])
             return cost
 
-        def remove_isolate(isolate):
-            self.chosen_isolates.remove(isolate)
-
         # Add isolate
         best_isolate = min(
             isolates_cost, key=isolates_cost.get
-        )  # gives the key with the maximum value
+        )
         self.chosen_isolates.append(best_isolate)
         self.available_isolates.remove(best_isolate)
 
