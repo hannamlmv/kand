@@ -46,9 +46,13 @@ class Panel:
         # return score
 
     def redundancy_score(self):
-        pass
+        total_mics = 0
+        redundant_mics = 0
+        for isolate in self.chosen_isolates:
+            pass
+
         # calculate redundancyundance score based on self.chosen_isolates
-        # return score
+        #eturn redundant_mics/total_mics
 
     def add_isolate(self):
 
