@@ -1,5 +1,5 @@
 """
-isolateclass.py
+isolate_class.py
 
 Contains a class for isolate objects
 

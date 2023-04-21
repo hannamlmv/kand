@@ -42,7 +42,18 @@ class Panel:
         # return score
 
     def coverage_score(self):
-        pass
+        coverage_scores = []
+        for antibiotic in self.antibiotics:
+            number_of_mics = len(self.antibiotic_mic[antibiotic])
+            coverage = 0.2*number_of_mics
+            if coverage >1:
+                coverage = 1
+            sir_coverage = 1
+            #for category, penalty in {'S':0.3, 'I':0.2, 'R':0.4}.items():
+                #if category not in 
+                    #sir_coverage -= penalty
+            coverage_scores.append(coverage*sir_coverage)
+        return 
         # calculate coverageerage score based on self.chosen_isolates
         # return score
 
@@ -58,7 +69,10 @@ class Panel:
             redundant_mics += sum(
                 number - 1 for number in count_mics.values() if number > 1
             )
-        return redundant_mics / total_mics
+        if total_mics == 0:
+            return 0
+        else:
+            return redundant_mics / total_mics
 
     def add_isolate(self):
 
@@ -96,3 +110,6 @@ class Panel:
         self.coverage = self.coverage_score()
         self.redundancy = self.redundancy_score()
         self.antibiotic_mic = self.create_antibiotic_mic()
+
+
+print(sum([1,2,3]))
