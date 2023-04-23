@@ -1,5 +1,5 @@
 import unittest
-from panel_class import *
+from isolate_class import *
 
 
 class Test(unittest.TestCase):
