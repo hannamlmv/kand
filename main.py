@@ -1,5 +1,6 @@
 import pandas as pd
-from panel_class import Panel, Isolate
+from panel_class import Panel
+from isolate_class import Isolate
 from data_extraction_functions import *
 
 
@@ -12,7 +13,14 @@ def main():
     # Extract isolates in chosen isolates csv file from excel
     chosen_isolates = extract_chosen_isolates(chosen_isolates_csv, matrix_EU)
 
-    isolates = extract_isolate_SIR_data(chosen_isolates, antibiotics)
+    isolates = [
+        Isolate(isolate_name, cleaned_SIR_data)
+        for isolate_name, cleaned_SIR_data in extract_isolate_SIR_data(
+            chosen_isolates, antibiotics
+        )
+    ]
+    for i in isolates:
+        print(i.get_mic())
 
 
 if __name__ == "__main__":
