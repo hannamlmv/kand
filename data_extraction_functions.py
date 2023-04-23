@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from panel_class import Isolate
+from isolate_class import Isolate
 
 
 def extract_chosen_isolates(
@@ -144,18 +144,14 @@ def clean_SIR_data(SIR_data_list: list):
             MIC_value = find_digits(SIR_data)
             scale = get_scale(SIR_data)
             cleaned_SIR_data.append((MIC_value, SIR_category))
-            # print(cleaned_SIR_data)
         else:
-            pass
-    # print(cleaned_SIR_data)
+            cleaned_SIR_data.append(None)
     return cleaned_SIR_data
 
 
 # Feels weird to have antibiotics as parameter to this function. Would like to have another solution
 def extract_isolate_SIR_data(chosen_isolates: pd.DataFrame, antibiotics: list):
-    isolates = []
     for index, row in chosen_isolates.iterrows():
         isolate_name, pathogen, SIR_data_list = row[0], row[1], list(row[3:].items())
         cleaned_SIR_data = clean_SIR_data(SIR_data_list)
-        isolates.append(Isolate(isolate_name, antibiotics, cleaned_SIR_data))
-    return isolates
+        yield (isolate_name, cleaned_SIR_data)
