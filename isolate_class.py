@@ -1,5 +1,5 @@
 class Isolate:
-    def __init__(self, isolate_name, isolate_data) -> None:
+    def __init__(self, isolate_name: str, isolate_data: dict) -> None:
         self.name = isolate_name
         self.data = isolate_data
 
