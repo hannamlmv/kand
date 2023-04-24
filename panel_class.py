@@ -14,6 +14,8 @@ class Panel:
         self.coverage_score = coverage_score
         self.redundancy_score = redundancy_score
 
+    ### Getter methods ###
+
     def get_chosen_isolates(self) -> list[Isolate]:
         return self.chosen_isolates
 
@@ -36,6 +38,8 @@ class Panel:
         return {
             isolate.get_name(): isolate.get_data() for isolate in self.chosen_isolates
         }
+
+    ### Methods to add and remove isolates from the panel ###
 
     def append_isolate(self, isolate) -> None:
         self.chosen_isolates.append(isolate)
