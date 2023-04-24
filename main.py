@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from isolate_class import Isolate
+from isolate_class import Isolate, create_isolate_list
 from panel_class import Panel
 from extract_and_parse import parse_antibiotic_data, extract_antibiotic_data
 from add_isolate_functions import add_isolate
@@ -16,7 +16,7 @@ def main():
 
     # Initiate variables
     panel = Panel()
-    all_isolates = []
+    all_isolates = create_isolate_list(matrix_EU, antibiotics)
     n = 50
     spread_score_coeff = 1
     coverage_score_coeff = 1
@@ -30,16 +30,6 @@ def main():
             number_of_isolates_coeff,
         )
     )
-
-    for _, row in matrix_EU.iterrows():
-        isolate, antibiotic_data = row[0], list(row[3:].items())
-        isolate_data = {}
-        # Store the MIC value and SIR data for all antibiotics that are not nip or missing bp
-        for antibiotic, data in zip(antibiotics, antibiotic_data):
-            if parse_antibiotic_data(data):
-                isolate_data[antibiotic] = extract_antibiotic_data(data)
-        # Add an isolate object to all_isolates with the current isolate name and isolate_data
-        all_isolates.append(Isolate(isolate, isolate_data))
 
     n = 50
     add_isolate(n, all_isolates, panel, hyperparameters)
