@@ -17,6 +17,9 @@ class Panel:
     def get_chosen_isolates(self):
         return self.chosen_isolates
 
+    def get_number_of_isolates(self):
+        return len(self.chosen_isolates)
+
     def get_spread_score(self):
         return self.spread_score
 
@@ -28,6 +31,11 @@ class Panel:
 
     def get_all_isolate_names(self):
         return [isolate.get_name() for isolate in self.chosen_isolates]
+
+    def get_all_isolate_data(self):
+        return {
+            isolate.get_name(): isolate.get_data() for isolate in self.chosen_isolates
+        }
 
     def append_isolate(self, isolate):
         self.chosen_isolates.append(isolate)
