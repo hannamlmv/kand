@@ -1,6 +1,11 @@
 import numpy as np
 from isolate_class import Isolate
 from panel_class import Panel
+from score_calc_functions import (
+    calc_coverage_score,
+    calc_redundancy_score,
+    calc_spread_score,
+)
 
 
 def try_isolates(
