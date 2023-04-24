@@ -28,3 +28,9 @@ class Panel:
 
     def get_all_isolate_names(self):
         return [isolate.get_name() for isolate in self.chosen_isolates]
+
+    def append_isolate(self, isolate):
+        self.chosen_isolates.append(isolate)
+
+    def remove_isolate(self, isolate):
+        self.chosen_isolates.remove(isolate)
