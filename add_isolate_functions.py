@@ -19,8 +19,14 @@ def choose_isolate(
         temp_coverage_score = calc_coverage_score(panel)
         temp_redundancy_score = calc_redundancy_score(panel)
         temp_scores = np.array(
-            (temp_spread_score, temp_coverage_score, temp_redundancy_score)
+            (
+                temp_spread_score,
+                temp_coverage_score,
+                temp_redundancy_score,
+                panel.get_number_of_isolates(),
+            )
         )
+        # Matrix multiplcation to get coefficients times scores
         temp_total_score = (temp_scores @ hyperparameters).sum()
         if temp_total_score > best_score:
             best_score = temp_total_score
