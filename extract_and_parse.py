@@ -1,10 +1,10 @@
-def parse_antibiotic_data(data):
+def parse_antibiotic_data(data: str):
     if data == "nip" or data.startswith("Missing BP"):
         return False
     return True
 
 
-def extract_antibiotic_data(data):
+def extract_antibiotic_data(data: str):
     SIR_category = data[0]
     if "<" in data or ">" in data:
         return (None, SIR_category)
