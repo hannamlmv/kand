@@ -11,6 +11,13 @@ from score_calc_functions import (
 def choose_isolate(
     available_isolates: list(Isolate), panel: Panel, hyperparameters: np.ndarray
 ):
+    """
+    Iterates over all available isolates. For each isolate:
+        1. Add it to the panel
+        2. Calculate all scores
+        3. Check if the score is better than current best, if yes, then replace, else, pass
+    Add the best isolate to the panel
+    """
     best_isolate, best_score = None, 0
 
     for isolate in available_isolates:
@@ -38,6 +45,7 @@ def choose_isolate(
 def add_isolate(
     n: int, all_isolates: list(Isolate), panel: Panel, hyperparameter: np.ndarray
 ):
+    """Uses choose_isolate() function to add n isolates to the panel"""
     available_isolates = [
         isolate
         for isolate in all_isolates
