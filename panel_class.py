@@ -25,3 +25,6 @@ class Panel:
 
     def get_redundancy_score(self):
         return self.redundancy_score
+
+    def get_all_isolate_names(self):
+        return [isolate.get_name() for isolate in self.chosen_isolates]
