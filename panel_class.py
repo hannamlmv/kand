@@ -4,7 +4,7 @@ from isolate_class import Isolate
 class Panel:
     def __init__(
         self,
-        chosen_isolates: list(Isolate) = [],
+        chosen_isolates: list[Isolate] = [],
         spread_score: float = 0,
         coverage_score: float = 0,
         redundancy_score: float = 0,
@@ -14,7 +14,7 @@ class Panel:
         self.coverage_score = coverage_score
         self.redundancy_score = redundancy_score
 
-    def get_chosen_isolates(self) -> list(Isolate):
+    def get_chosen_isolates(self) -> list[Isolate]:
         return self.chosen_isolates
 
     def get_number_of_isolates(self) -> int:
@@ -29,7 +29,7 @@ class Panel:
     def get_redundancy_score(self) -> float:
         return self.redundancy_score
 
-    def get_all_isolate_names(self) -> list(str):
+    def get_all_isolate_names(self) -> list[str]:
         return [isolate.get_name() for isolate in self.chosen_isolates]
 
     def get_all_isolate_data(self) -> dict:

@@ -17,7 +17,7 @@ class Isolate:
         return self.data
 
 
-def create_isolate_list(matrix_EU: pd.DataFrame, antibiotics: list) -> list(Isolate):
+def create_isolate_list(matrix_EU: pd.DataFrame, antibiotics: list) -> list[Isolate]:
     all_isolates = []
     for _, row in matrix_EU.iterrows():
         isolate, antibiotic_data = row[0], list(row[3:].items())
