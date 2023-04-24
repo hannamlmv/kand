@@ -8,7 +8,7 @@ from score_calc_functions import (
 )
 
 
-def try_isolates(
+def choose_isolate(
     available_isolates: list(Isolate), panel: Panel, hyperparameters: np.ndarray
 ):
     best_isolate, best_score = None, 0
@@ -39,5 +39,5 @@ def add_isolate(
     ]
 
     for _ in range(n):
-        chosen_isolate = try_isolates(available_isolates, panel, hyperparameter)
+        chosen_isolate = choose_isolate(available_isolates, panel, hyperparameter)
         available_isolates.remove(chosen_isolate)
