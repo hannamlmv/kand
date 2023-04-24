@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 from isolate_class import Isolate
+from panel_class import Panel
 from extract_and_parse import parse_antibiotic_data, extract_antibiotic_data
+from add_isolate_functions import add_isolate
 
 
 def main():
