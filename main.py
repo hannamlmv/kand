@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from panel_class import Panel
 from isolate_class import create_isolate_list
-from add_isolate_functions import add_isolate
+from help_functions.add_isolate_functions import add_isolate
 
 import time
 

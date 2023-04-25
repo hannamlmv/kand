@@ -1,5 +1,8 @@
 import pandas as pd
-from extract_and_parse import extract_antibiotic_data, parse_antibiotic_data
+from help_functions.extract_and_parse import (
+    extract_antibiotic_data,
+    parse_antibiotic_data,
+)
 
 
 class Isolate:
