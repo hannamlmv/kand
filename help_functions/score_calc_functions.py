@@ -75,8 +75,8 @@ def calc_spread_score(panel_data: dict, concentration_ranges: dict):
             )
             spread_list[mic_value_index] = 1
         spread_list_score += score_spread_list(spread_list)
-    if len(panel_data) == 0:
-        return 0
+    #if len(panel_data) == 0:
+    #   return 0
     return spread_list_score #/ len(panel_data)
 
 
@@ -92,9 +92,9 @@ def calc_coverage_score(panel_data: dict):
             if category not in panel_SIRs:
                 sir_coverage -= penalty
         coverage_score += coverage * sir_coverage
-    if len(panel_data) == 0:
-        return 0
-    return coverage_score #/ len(panel_data) #####
+    #if len(panel_data) == 0:
+    #    return 0
+    return coverage_score #/ len(panel_data)
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):

@@ -22,8 +22,8 @@ def measure_time(func):
 @measure_time
 def main():
     file_path = "Chosen_isolates.csv"
-    VISUALIZE = True
-    GET_CSV = False
+    VISUALIZE = False
+    GET_CSV = True
 
     # Read in data from excel
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
@@ -36,7 +36,7 @@ def main():
     redundancy_threshold = 1
     number_of_isolates = 30
     spread_score_coeff = 1
-    coverage_score_coeff = 10
+    coverage_score_coeff = 1
     redundancy_score_coeff = 1
     # number_of_isolates_coeff = 0.01
     hyperparameters = np.array(
