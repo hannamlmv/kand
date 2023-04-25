@@ -261,7 +261,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
         title_x=0.5,
     )
     fig.write_html("first_figure.html", auto_open=True)
-    # fig.show()
+    fig.show()
 
 
 def main(chosen_isolates_list=None):

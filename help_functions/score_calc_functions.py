@@ -77,7 +77,7 @@ def calc_spread_score(panel_data: dict, concentration_ranges: dict):
         spread_list_score += score_spread_list(spread_list)
     if len(panel_data) == 0:
         return 0
-    return spread_list_score / len(panel_data)
+    return spread_list_score #/ len(panel_data)
 
 
 def calc_coverage_score(panel_data: dict):
@@ -94,7 +94,7 @@ def calc_coverage_score(panel_data: dict):
         coverage_score += coverage * sir_coverage
     if len(panel_data) == 0:
         return 0
-    return coverage_score / len(panel_data)
+    return coverage_score #/ len(panel_data) #####
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):

@@ -26,7 +26,7 @@ def main():
     GET_CSV = False
 
     # Read in data from excel
-    CIB = pd.ExcelFile("Q-linea_files\CIB_TF-data_AllIsolates_20230302.xlsx")
+    CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     antibiotic_concentration_ranges = json.load(open("abx_ranges.json"))
 

@@ -18,7 +18,7 @@ def choose_isolate(
         3. Check if the score is better than current best, if yes, then replace, else, pass
     Add the best isolate to the panel
     """
-    best_isolate, best_score = None, 0
+    best_isolate, best_score = None, -np.inf
     best_score_vec = None
 
     for isolate in available_isolates:
