@@ -1,6 +1,6 @@
 """
-Functions to parse antibiotic data from the Excel file and to extract
-the data wanted in tuples. 
+Functions to parse antibiotic data in a cell of an 
+Excel file and extract the data wanted in tuples. 
 """
 
 
