@@ -1,15 +1,15 @@
 import numpy as np
 from isolate_class import Isolate
 from panel_class import Panel
-from score_calc_functions import (
-    calc_coverage_score,
-    calc_redundancy_score,
-    calc_spread_score,
-)
+from score_calc_functions import calc_scores
 
 
 def choose_isolate(
-    available_isolates: list(Isolate), panel: Panel, hyperparameters: np.ndarray
+    available_isolates: list[Isolate],
+    panel: Panel,
+    hyperparameters: np.ndarray,
+    concentration_ranges: dict,
+    redundancy_threshold: int,
 ):
     """
     Iterates over all available isolates. For each isolate:
@@ -22,15 +22,15 @@ def choose_isolate(
 
     for isolate in available_isolates:
         panel.append_isolate(isolate)
-        temp_spread_score = calc_spread_score(panel)
-        temp_coverage_score = calc_coverage_score(panel)
-        temp_redundancy_score = calc_redundancy_score(panel)
+        temp_spread_score, temp_coverage_score, temp_redundancy_score = calc_scores(
+            panel, concentration_ranges, redundancy_threshold
+        )
         temp_scores = np.array(
             (
                 temp_spread_score,
                 temp_coverage_score,
                 temp_redundancy_score,
-                panel.get_number_of_isolates(),
+                # panel.get_number_of_isolates(),
             )
         )
         # Matrix multiplcation to get coefficients times scores
@@ -40,10 +40,16 @@ def choose_isolate(
             best_isolate = isolate
         panel.remove_isolate(isolate)
     panel.append_isolate(best_isolate)
+    return best_isolate
 
 
 def add_isolate(
-    n: int, all_isolates: list(Isolate), panel: Panel, hyperparameter: np.ndarray
+    number_of_isolates: int,
+    all_isolates: list[Isolate],
+    panel: Panel,
+    hyperparameter: np.ndarray,
+    concentration_ranges: dict,
+    redundancy_threshold: int = 1,
 ):
     """Uses choose_isolate() function to add n isolates to the panel"""
     available_isolates = [
@@ -52,6 +58,12 @@ def add_isolate(
         if isolate.get_name() not in panel.get_all_isolate_names()
     ]
 
-    for _ in range(n):
-        chosen_isolate = choose_isolate(available_isolates, panel, hyperparameter)
+    for _ in range(number_of_isolates):
+        chosen_isolate = choose_isolate(
+            available_isolates,
+            panel,
+            hyperparameter,
+            concentration_ranges,
+            redundancy_threshold,
+        )
         available_isolates.remove(chosen_isolate)
