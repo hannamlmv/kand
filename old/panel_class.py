@@ -98,6 +98,7 @@ class Panel:
         for antibiotic in self.antibiotics:
             mic_values = self.antibiotic_mic[antibiotic]
             for i in mic_values:
+                pass
                 
         pass
         # return score
