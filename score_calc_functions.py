@@ -20,6 +20,7 @@ def calc_scores(panel: Panel):
         return panel_data
 
     def calc_spread_score(panel_data:dict):
+        """ Calculates the spread score """
         pass
 
     def calc_coverage_score(panel_data:dict):
@@ -27,7 +28,7 @@ def calc_scores(panel: Panel):
         coverage_score = 0
         for MIC_SIR in panel_data.values():
             number_of_mics = len(MIC_SIR)
-            coverage = min(1, 0.2*number_of_mics)
+            coverage = min(1, 0.2 * number_of_mics)
             sir_coverage = 1
             panel_SIRs = [SIR for _,SIR in MIC_SIR]
             for category, penalty in {"S": 0.3, "I": 0.2, "R": 0.4}.items():
@@ -36,7 +37,7 @@ def calc_scores(panel: Panel):
             coverage_score += coverage * sir_coverage
         return coverage_score / len(panel_data)
 
-    def calc_redundancy_score(panel_data:dict, redundancy_threshold):
+    def calc_redundancy_score(panel_data:dict, redundancy_threshold = 1):
         """ Calculates the redundancy score """
         number_of_MICS = 0
         number_of_redundant_MICS = 0
