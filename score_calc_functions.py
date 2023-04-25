@@ -36,8 +36,23 @@ def calc_scores(panel: Panel):
             coverage_score += coverage * sir_coverage
         return coverage_score / len(panel_data)
 
-    def calc_redundancy_score(panel_data:dict):
-        pass
+    def calc_redundancy_score(panel_data:dict, redundancy_threshold):
+        """ Calculates the redundancy score """
+        number_of_MICS = 0
+        number_of_redundant_MICS = 0
+        for MIC_SIR in panel_data.values():
+            MIC_counter = {}
+            for MIC, _ in MIC_SIR:
+                number_of_MICS += 1
+                if MIC not in MIC_counter:
+                    MIC_counter[MIC] = 1
+                else:
+                    MIC_counter[MIC] += 1
+                    if MIC_counter[MIC] > redundancy_threshold:
+                        number_of_redundant_MICS += 1
+        if number_of_MICS == 0:
+            return 0
+        return number_of_redundant_MICS / number_of_MICS
 
     
     return scores
