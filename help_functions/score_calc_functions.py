@@ -1,6 +1,6 @@
 import numpy as np
 from panel_class import Panel
-from spread_score_functions import score_spread_list
+from help_functions.spread_score_functions import score_spread_list
 
 
 def concentration_to_index(concentration: float, abs_lowest_concentration: int):
