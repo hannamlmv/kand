@@ -30,14 +30,11 @@ def main():
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     antibiotic_concentration_ranges = json.load(open("abx_ranges.json"))
 
-    # Create tuple of antibiotic names
-    # antibiotics = tuple(matrix_EU.columns[3:])
-
     # Initiate variables
     panel = Panel()
     all_isolates = create_isolate_list(matrix_EU)
     redundancy_threshold = 1
-    number_of_isolates = 50
+    number_of_isolates = 30
     spread_score_coeff = 1
     coverage_score_coeff = 10
     redundancy_score_coeff = 1
@@ -62,7 +59,7 @@ def main():
         visualize_panel(panel.to_DataFrame())
 
     if GET_CSV:
-        panel.to_csv()
+        panel.to_csv(file_path)
 
 
 if __name__ == "__main__":
