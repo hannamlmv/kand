@@ -6,6 +6,8 @@ Excel file and extract the data wanted in tuples.
 
 def parse_antibiotic_data(data: str):
     """Checks if the data is 'nip' or Missing BP'. Used in"""
+    if type(data) is not str:
+        return False
     if data == "nip" or data.startswith("Missing BP"):
         return False
     return True
