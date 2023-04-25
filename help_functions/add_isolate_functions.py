@@ -1,7 +1,7 @@
 import numpy as np
 from isolate_class import Isolate
 from panel_class import Panel
-from score_calc_functions import calc_scores
+from help_functions.score_calc_functions import calc_scores
 
 
 def choose_isolate(
@@ -19,6 +19,7 @@ def choose_isolate(
     Add the best isolate to the panel
     """
     best_isolate, best_score = None, 0
+    best_score_vec = None
 
     for isolate in available_isolates:
         panel.append_isolate(isolate)
@@ -29,7 +30,7 @@ def choose_isolate(
             (
                 temp_spread_score,
                 temp_coverage_score,
-                temp_redundancy_score,
+                -temp_redundancy_score,
                 # panel.get_number_of_isolates(),
             )
         )
@@ -38,8 +39,12 @@ def choose_isolate(
         if temp_total_score > best_score:
             best_score = temp_total_score
             best_isolate = isolate
+            best_score_vec = temp_scores
         panel.remove_isolate(isolate)
     panel.append_isolate(best_isolate)
+    # print(
+    #     f"Best isolate: {best_isolate}, score: {best_score}, score_vec: {best_score_vec}"
+    # )
     return best_isolate
 
 
