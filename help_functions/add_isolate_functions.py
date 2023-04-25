@@ -42,9 +42,6 @@ def choose_isolate(
             best_score_vec = temp_scores
         panel.remove_isolate(isolate)
     panel.append_isolate(best_isolate)
-    # print(
-    #     f"Best isolate: {best_isolate}, score: {best_score}, score_vec: {best_score_vec}"
-    # )
     return best_isolate
 
 

@@ -1,11 +1,11 @@
 import json
+import time
 import pandas as pd
 import numpy as np
 from panel_class import Panel
 from isolate_class import create_isolate_list
 from help_functions.add_isolate_functions import add_isolate
-
-import time
+from Visualisation.plotly_testpanel_vis import main as visualize_panel
 
 
 def measure_time(func):
@@ -22,6 +22,8 @@ def measure_time(func):
 @measure_time
 def main():
     file_path = "Chosen_isolates.csv"
+    VISUALIZE = True
+    GET_CSV = False
 
     # Read in data from excel
     CIB = pd.ExcelFile("Q-linea_files\CIB_TF-data_AllIsolates_20230302.xlsx")
@@ -37,7 +39,7 @@ def main():
     redundancy_threshold = 1
     number_of_isolates = 50
     spread_score_coeff = 1
-    coverage_score_coeff = 1
+    coverage_score_coeff = 10
     redundancy_score_coeff = 1
     # number_of_isolates_coeff = 0.01
     hyperparameters = np.array(
@@ -56,7 +58,11 @@ def main():
         redundancy_threshold,
     )
 
-    panel.to_csv(file_path)
+    if VISUALIZE:
+        visualize_panel(panel.to_DataFrame())
+
+    if GET_CSV:
+        panel.to_csv()
 
 
 if __name__ == "__main__":

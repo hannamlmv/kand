@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from data_extraction_functions import (
+from Visualisation.data_extraction_functions import (
     extract_chosen_isolates,
     extract_mic_data,
     extract_SIR,
@@ -264,9 +264,10 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
     # fig.show()
 
 
-def main():
+def main(chosen_isolates_list=None):
     # Load files
-    chosen_isolates_list = pd.read_csv("Chosen_isolates.csv")
+    if chosen_isolates_list is None:
+        chosen_isolates_list = pd.read_csv("Chosen_isolates.csv")
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
 

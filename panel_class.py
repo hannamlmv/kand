@@ -52,3 +52,6 @@ class Panel:
     def to_csv(self, file_path: str):
         df = pd.DataFrame(self.get_all_isolate_names(), columns=["Isolate"])
         df.to_csv(file_path, index=False)
+
+    def to_DataFrame(self):
+        return pd.DataFrame(self.get_all_isolate_names(), columns=["Isolate"])
