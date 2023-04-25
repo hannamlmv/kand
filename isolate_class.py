@@ -7,6 +7,9 @@ class Isolate:
         self.name = isolate_name
         self.data = isolate_data
 
+    def __str__(self) -> str:
+        return self.name
+
     def __repr__(self) -> str:
         return self.name
 
@@ -17,13 +20,15 @@ class Isolate:
         return self.data
 
 
-def create_isolate_list(matrix_EU: pd.DataFrame, antibiotics: list) -> list[Isolate]:
+def create_isolate_list(matrix_EU: pd.DataFrame) -> list[Isolate]:
     all_isolates = []
-    for _, row in matrix_EU.iterrows():
+    for index, row in matrix_EU.iterrows():
+        if index > 986:  # Sista isolatet
+            break
         isolate, antibiotic_data = row[0], list(row[3:].items())
         isolate_data = {}
         # Store the MIC value and SIR data for all antibiotics that are not nip or missing bp
-        for antibiotic, data in zip(antibiotics, antibiotic_data):
+        for antibiotic, data in antibiotic_data:
             if parse_antibiotic_data(data):
                 isolate_data[antibiotic] = extract_antibiotic_data(data)
         # Add an isolate object to all_isolates with the current isolate name and isolate_data
