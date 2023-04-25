@@ -1,10 +1,12 @@
 from panel_class import Panel
+import numpy as np
+import math
 
 
-def calc_scores(panel: Panel):
+def calc_scores(panel: Panel, concentration_ranges: dict):
     antibiotic_mic = extract_panel_data(panel)
     scores = (
-        calc_spread_score(antibiotic_mic), 
+        calc_spread_score(antibiotic_mic, concentration_ranges), 
         calc_coverage_score(antibiotic_mic), 
         calc_redundancy_score(antibiotic_mic)
         )
@@ -19,9 +21,20 @@ def calc_scores(panel: Panel):
                     panel_data[abx].append((MIC, SIR))
         return panel_data
 
-    def calc_spread_score(panel_data:dict):
+    def calc_spread_score(panel_data:dict, concentration_ranges:dict):
         """ Calculates the spread score """
-        pass
+        spread_dict = {}
+        abs_lowest_concentration = math.abs(np.log2(concentration_ranges['Lowest concentration']))
+        for abx, MIC_SIR in panel_data:
+            minimum_concentration = concentration_ranges[abx]['Lower']
+            maximum_concentration = concentration_ranges[abx]['Upper']
+            minimum_concentration_index = (int(np.log2(minimum_concentration) + abs_lowest_concentration))
+            maximum_concentration_index = (int(np.log2(maximum_concentration) + abs_lowest_concentration))
+            spread_dict[abx] = [0 for _ in range(concentration_ranges['Range'])]
+            for index in range(len(spread_dict[abx])):
+                if index < minimum_concentration_index or index > maximum_concentration_index:
+                    spread_dict[abx][index] = None
+
 
     def calc_coverage_score(panel_data:dict):
         """ Calculates the coverage score """
