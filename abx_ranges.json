@@ -1,4 +1,6 @@
 {
+    "Concentration range length": 18,
+    "Lowest concentration": 0.00195,
     "Benzylpenicillin": {
         "Lower": "0.00781",
         "Upper": "16.0"
