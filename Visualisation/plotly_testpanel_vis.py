@@ -75,7 +75,6 @@ def create_plot_df(
             on_off_scale.append(scale)
             pathogen_list.append(pathogen)
             parse_on_off_scale(scale, SIR_category, y_values, mic_value_jitter)
-            print(isolate)
             parse_fastidious(fastidious_dict, pathogen, fastidious_list)
 
     # Create a DF used for plotting
@@ -233,7 +232,6 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
 
     # Changes the dot color depending on SIR category
     def change_trace_color(trace):
-        print(trace)
         if trace.name == "Resistant":
             trace.update(marker_color="tomato")
         elif trace.name == "Intermediate":
@@ -269,7 +267,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
 def main():
     # Load files
     chosen_isolates_list = pd.read_csv("Chosen_isolates.csv")
-    CIB = pd.ExcelFile("CIB_TF-data_AllIsolates_20230302.xlsx")
+    CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
 
     # Rename a long name for plotting purposes
