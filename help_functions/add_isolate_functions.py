@@ -58,9 +58,7 @@ def add_isolate(
         if isolate.get_name() not in panel.get_all_isolate_names()
     ]
 
-    for i in range(number_of_isolates):
-        if i%10 == 0 and i != 0:
-            print(f'{i} isolates have been added')
+    for i in range(1, number_of_isolates+1):
         chosen_isolate = choose_isolate(
             available_isolates,
             panel,
@@ -69,3 +67,5 @@ def add_isolate(
             redundancy_threshold,
         )
         available_isolates.remove(chosen_isolate)
+        if i%10 == 0:
+            print(f'{i} isolates have been added')
