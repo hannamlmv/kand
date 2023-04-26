@@ -22,16 +22,17 @@ def measure_time(func):
 @measure_time
 def main():
     file_path = "Chosen_isolates.csv"
-    VISUALIZE = False
-    GET_CSV = True
+    VISUALIZE = True
+    GET_CSV = False
 
     # Read in data from excel
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     antibiotic_concentration_ranges = json.load(open("abx_ranges.json"))
+    number_of_antibiotics = len(matrix_EU.columns[3:])
 
     # Initiate variables
-    panel = Panel()
+    panel = Panel(number_of_antibiotics)
     all_isolates = create_isolate_list(matrix_EU)
     redundancy_threshold = 1
     number_of_isolates = 30
