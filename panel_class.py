@@ -5,6 +5,7 @@ from isolate_class import Isolate
 class Panel:
     def __init__(
         self,
+        number_of_antibiotics: int,
         chosen_isolates: list[Isolate] = [],
         spread_score: float = 0,
         coverage_score: float = 0,
@@ -14,6 +15,11 @@ class Panel:
         self.spread_score = spread_score
         self.coverage_score = coverage_score
         self.redundancy_score = redundancy_score
+
+        assert (
+            isinstance(number_of_antibiotics, int) and number_of_antibiotics > 0
+            ), "Number of antibiotics must be larger than 0"
+        self.number_of_antibiotics = number_of_antibiotics
 
     ### Getter methods ###
 
@@ -31,6 +37,9 @@ class Panel:
 
     def get_redundancy_score(self) -> float:
         return self.redundancy_score
+    
+    def get_number_antibiotics(self) -> int:
+        return self.number_of_antibiotics
 
     def get_all_isolate_names(self) -> list[str]:
         return [isolate.get_name() for isolate in self.chosen_isolates]

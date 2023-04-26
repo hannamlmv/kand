@@ -29,14 +29,15 @@ def main():
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     antibiotic_concentration_ranges = json.load(open("abx_ranges.json"))
+    number_of_antibiotics = len(matrix_EU.columns[3:])
 
     # Initiate variables
-    panel = Panel()
+    panel = Panel(number_of_antibiotics)
     all_isolates = create_isolate_list(matrix_EU)
     redundancy_threshold = 1
     number_of_isolates = 30
     spread_score_coeff = 1
-    coverage_score_coeff = 10
+    coverage_score_coeff = 1
     redundancy_score_coeff = 1
     # number_of_isolates_coeff = 0.01
     hyperparameters = np.array(
