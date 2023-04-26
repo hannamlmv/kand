@@ -39,7 +39,6 @@ def main():
     spread_score_coeff = 1
     coverage_score_coeff = 1
     redundancy_score_coeff = 1
-    # number_of_isolates_coeff = 0.01
     hyperparameters = np.array(
         (
             spread_score_coeff,
