@@ -82,11 +82,11 @@ def calc_coverage_score(panel_data: dict, number_of_antibiotics: int):
     """Calculates the coverage score"""
     coverage_score = 0
     for MIC_SIR in panel_data.values():
-        number_of_mics = len(MIC_SIR)
+        panel_SIRs = [SIR for MIC, SIR in MIC_SIR if MIC is not None]
+        number_of_mics = len(panel_SIRs)
         coverage = min(1, 0.2 * number_of_mics)
         sir_coverage = 1
-        panel_SIRs = [SIR for _, SIR in MIC_SIR]
-        for category, penalty in {"S": 0.3, "I": 0.2, "R": 0.4}.items():
+        for category, penalty in {"S": 0.3, "I": 0.3, "R": 0.4}.items():
             if category not in panel_SIRs:
                 sir_coverage -= penalty
         coverage_score += coverage * sir_coverage
