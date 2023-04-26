@@ -1,5 +1,6 @@
 import plotly.express as px
 import pandas as pd
+from panel_class import Panel
 
 #Funktion som gör ett lexikon av varje panel och dess scores
 #När vi är klara med alla funktioner för att räkna ut scores kan man ju ropa på dom 
@@ -28,8 +29,11 @@ def compare_plot(panels):
     fig.show()
 
 def main():
+
+
+    # Här vill vi skapa panelobjekt baserat på csv filer och skicka in dem 
     compare_plot(pd.DataFrame(data = (panel_scores(1, 0.3, 0.7, 0.4), 
-                                    panel_scores(2, 0.2, 0.9, 0.7))))
+                                    panel_scores(2, 0.2, 0.9, 0.7), panel_scores(3, 0.3, 0.7, 0.4))))
 
 if __name__ == '__main__':
     main()
