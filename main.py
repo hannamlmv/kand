@@ -35,7 +35,7 @@ def main():
     panel = Panel(number_of_antibiotics)
     all_isolates = create_isolate_list(matrix_EU)
     redundancy_threshold = 1
-    number_of_isolates = 30
+    number_of_isolates = 400
     spread_score_coeff = 1
     coverage_score_coeff = 1
     redundancy_score_coeff = 1

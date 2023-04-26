@@ -19,7 +19,6 @@ def choose_isolate(
     Add the best isolate to the panel
     """
     best_isolate, best_score = None, -np.inf
-    best_score_vec = None
 
     for isolate in available_isolates:
         panel.append_isolate(isolate)
@@ -39,7 +38,6 @@ def choose_isolate(
         if temp_total_score > best_score:
             best_score = temp_total_score
             best_isolate = isolate
-            best_score_vec = temp_scores
         panel.remove_isolate(isolate)
     panel.append_isolate(best_isolate)
     return best_isolate
@@ -60,7 +58,9 @@ def add_isolate(
         if isolate.get_name() not in panel.get_all_isolate_names()
     ]
 
-    for _ in range(number_of_isolates):
+    for i in range(number_of_isolates):
+        if i%10 == 0 and i != 0:
+            print(f'{i} isolates have been added')
         chosen_isolate = choose_isolate(
             available_isolates,
             panel,
