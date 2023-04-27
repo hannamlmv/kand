@@ -1,4 +1,15 @@
-[
-    "Chosen_isolates20.csv", 
-    "Chosen_isolates50.csv"
+[   
+    "Chosen_isolates1.csv",
+    "Chosen_isolates5.csv",
+    "Chosen_isolates10.csv",
+    "Chosen_isolates20.csv",
+    "Chosen_isolates30.csv",
+    "Chosen_isolates40.csv",
+    "Chosen_isolates50.csv",
+    "Chosen_isolates60.csv",
+    "Chosen_isolates70.csv",
+    "Chosen_isolates80.csv",
+    "Chosen_isolates90.csv",
+    "Chosen_isolates100.csv",
+    "all_isolates.csv"
 ]

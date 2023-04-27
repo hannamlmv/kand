@@ -10,7 +10,7 @@ from help_functions.validate_parameters import *
 def compare_plot(panels):
     fig = px.bar(panels, x="Panel", y=["Spridning", "Täckning", "Redundans", "Totalt score"], 
                 color_discrete_sequence = ['DarkSeaGreen', 'Teal', 'Cornflowerblue', 'RebeccaPurple'],
-                barmode='group', range_y = [0,1])
+                barmode='group')
     fig.update_layout(
     title='Jämförelse av testpaneler',
     xaxis_tickfont_size=14,
@@ -60,7 +60,11 @@ def main():
             'Spridning': spread, 
             'Täckning':coverage, 
             'Redundans': redundancy,
-            'Totalt score': spread+coverage-redundancy
+            'Totalt score': (
+            coefficients[0] * spread + 
+            coefficients[1] * coverage - 
+            coefficients[2] * redundancy
+            )
             }
         panel_scores.append(panel_dict)
 
