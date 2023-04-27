@@ -1,5 +1,6 @@
 """ Functions used to calculate the spread in a list. Used in score_calc_functions"""
 
+
 def count_gap_length(valid_list: list) -> float:
     total_gap_length = 0
     gap_length = 0
@@ -31,7 +32,7 @@ def check_edges(valid_list: list) -> float:
 
 
 def score_spread_list(spread_list: list) -> float:
-    valid_list = [i for i in spread_list if i is not None]
+    valid_list = [i for i in spread_list if i == 0 or i == 1]
 
     if len(valid_list) <= 1:
         raise ValueError("Length of valid list must be greater than 1")
@@ -41,5 +42,5 @@ def score_spread_list(spread_list: list) -> float:
     penalty += check_edges(valid_list)
 
     score = 1 - penalty / len(valid_list)
-    
+
     return score

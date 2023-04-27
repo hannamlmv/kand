@@ -22,6 +22,7 @@ def measure_time(func):
 @measure_time
 def main():
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
+    excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "abx_ranges.json"
     parameters_file_path = "parameters.json"
     VISUALIZE = False
@@ -30,7 +31,7 @@ def main():
 
     # Read in data from Excel
     CIB = pd.ExcelFile(CIB_file_path)
-    matrix_EU = pd.read_excel(CIB, "matrix EU")
+    matrix_EU = pd.read_excel(CIB, excel_sheet_name)
     number_of_antibiotics = len(matrix_EU.columns[3:])
 
     # Open json files
