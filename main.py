@@ -27,7 +27,7 @@ def main():
     parameters_file_path = "parameters.json"
     VISUALIZE = False
     GET_CSV = True
-    chosen_isolates_file_path = "Chosen_isolates.csv"
+    chosen_isolates_file_path = "Chosen_Isolates_folder/Chosen_isolates.csv"
 
     # Read in data from Excel
     CIB = pd.ExcelFile(CIB_file_path)
