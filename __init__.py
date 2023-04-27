@@ -1,1 +1,0 @@
-from .panel_class import Panel
