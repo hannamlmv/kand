@@ -10,10 +10,5 @@
         "I": 0.3,
         "R": 0.4
     },
-    "Redundancy threshold": 1,
-    "Maximum scores": {
-        "Spread": 0.6254369,
-        "Coverage": 0.6695652,
-        "Redundancy": 0.978539
-    }
+    "Redundancy threshold": 1
 }

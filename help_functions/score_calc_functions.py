@@ -77,7 +77,7 @@ def calc_spread_score(
             )
             spread_list[mic_value_index] = 1
         spread_list_score += score_spread_list(spread_list)
-    return spread_list_score / (number_of_antibiotics * 0.6254369)
+    return spread_list_score / number_of_antibiotics
 
 
 def calc_coverage_score(
@@ -94,7 +94,7 @@ def calc_coverage_score(
             if category not in panel_SIRs:
                 sir_coverage -= penalty
         coverage_score += coverage * sir_coverage
-    return coverage_score / (number_of_antibiotics * 0.6695652)
+    return coverage_score / number_of_antibiotics
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
@@ -113,7 +113,7 @@ def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
                     number_of_redundant_MICS += 1
     if number_of_MICS == 0:
         return 0
-    return number_of_redundant_MICS / (number_of_MICS * 0.978539)
+    return number_of_redundant_MICS / number_of_MICS
 
 
 def calc_scores(
