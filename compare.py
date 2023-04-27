@@ -47,12 +47,24 @@ def main():
     (_, coefficients, coverage_penalties, redundancy_threshold) = validate_parameters(
         json.load(open("parameters.json"))
     )
-    isolate_lists = []
-    panel_names = json.load(open("plots_to_compare.json"))
+
+    panel_names = json.load(open("plots_to_compare.json"))["Chosen isolates"]
 
     # Converts csv files to lists of chosen isolates
+    isolate_lists = []
     for panel in panel_names:
         isolate_lists.append(pd.read_csv(panel)["Isolate"].tolist())
+
+    # Calculate scores of panel with all isolates
+    all_isolates = json.load(open("plots_to_compare.json"))["All isolates"]
+    all_isolates_list = pd.read_csv(all_isolates)["Isolate"].tolist()
+    all_isolates_panel = create_panel(all_isolates_list)
+    (max_spread, max_coverage, max_redundancy) = calc_scores(
+            all_isolates_panel,
+            json.load(open("abx_ranges.json")),
+            redundancy_threshold,
+            coverage_penalties
+            )
 
     # Creates a list of all scores for the panels
     panel_scores = []
@@ -62,17 +74,17 @@ def main():
             panel,
             json.load(open("abx_ranges.json")),
             redundancy_threshold,
-            coverage_penalties,
+            coverage_penalties
         )
         panel_dict = {
             "Panel": panel_names[i],
-            "Spridning": spread,
-            "Täckning": coverage,
-            "Redundans": redundancy,
+            "Spridning": spread/max_spread,
+            "Täckning": coverage/max_coverage,
+            "Redundans": redundancy/max_redundancy,
             "Totalt score": (
-                coefficients[0] * spread
-                + coefficients[1] * coverage
-                - coefficients[2] * redundancy
+                coefficients[0] * spread/max_spread
+                + coefficients[1] * coverage/max_coverage
+                - coefficients[2] * redundancy/max_redundancy
             ),
         }
         panel_scores.append(panel_dict)
