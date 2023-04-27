@@ -25,7 +25,9 @@ def extract_panel_data(panel: Panel):
     return panel_data
 
 
-def calc_spread_score(panel_data: dict, concentration_ranges: dict, number_of_antibiotics: int):
+def calc_spread_score(
+    panel_data: dict, concentration_ranges: dict, number_of_antibiotics: int
+):
     """Calculates the spread score"""
     spread_list_score = 0
     abs_lowest_concentration = np.abs(
@@ -78,7 +80,9 @@ def calc_spread_score(panel_data: dict, concentration_ranges: dict, number_of_an
     return spread_list_score / number_of_antibiotics
 
 
-def calc_coverage_score(panel_data: dict, number_of_antibiotics: int):
+def calc_coverage_score(
+    panel_data: dict, number_of_antibiotics: int, coverage_penalties: dict
+):
     """Calculates the coverage score"""
     coverage_score = 0
     for MIC_SIR in panel_data.values():
@@ -86,7 +90,7 @@ def calc_coverage_score(panel_data: dict, number_of_antibiotics: int):
         number_of_mics = len(panel_SIRs)
         coverage = min(1, 0.2 * number_of_mics)
         sir_coverage = 1
-        for category, penalty in {"S": 0.3, "I": 0.3, "R": 0.4}.items():
+        for category, penalty in coverage_penalties.items():
             if category not in panel_SIRs:
                 sir_coverage -= penalty
         coverage_score += coverage * sir_coverage
@@ -116,7 +120,9 @@ def calc_scores(panel: Panel, concentration_ranges: dict, redundancy_threshold: 
     """Calculates spread, coverage and redundancy score for entire panel"""
     antibiotic_mic = extract_panel_data(panel)
     scores = (
-        calc_spread_score(antibiotic_mic, concentration_ranges, panel.get_number_antibiotics()),
+        calc_spread_score(
+            antibiotic_mic, concentration_ranges, panel.get_number_antibiotics()
+        ),
         calc_coverage_score(antibiotic_mic, panel.get_number_antibiotics()),
         calc_redundancy_score(antibiotic_mic, redundancy_threshold),
     )

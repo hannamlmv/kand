@@ -10,6 +10,7 @@ def choose_isolate(
     hyperparameters: np.ndarray,
     concentration_ranges: dict,
     redundancy_threshold: int,
+    coverage_penalties: dict,
 ):
     """
     Iterates over all available isolates. For each isolate:
@@ -23,7 +24,7 @@ def choose_isolate(
     for isolate in available_isolates:
         panel.append_isolate(isolate)
         temp_spread_score, temp_coverage_score, temp_redundancy_score = calc_scores(
-            panel, concentration_ranges, redundancy_threshold
+            panel, concentration_ranges, redundancy_threshold, coverage_penalties
         )
         temp_scores = np.array(
             (
@@ -49,7 +50,8 @@ def add_isolate(
     panel: Panel,
     hyperparameter: np.ndarray,
     concentration_ranges: dict,
-    redundancy_threshold: int = 1,
+    redundancy_threshold: int,
+    coverage_penalties: dict,
 ):
     """Uses choose_isolate() function to add n isolates to the panel"""
     available_isolates = [
@@ -58,14 +60,15 @@ def add_isolate(
         if isolate.get_name() not in panel.get_all_isolate_names()
     ]
 
-    for i in range(1, number_of_isolates+1):
+    for i in range(1, number_of_isolates + 1):
         chosen_isolate = choose_isolate(
             available_isolates,
             panel,
             hyperparameter,
             concentration_ranges,
             redundancy_threshold,
+            coverage_penalties,
         )
         available_isolates.remove(chosen_isolate)
-        if i%10 == 0:
-            print(f'{i} isolates have been added')
+        if i % 10 == 0:
+            print(f"{i} isolates have been added")
