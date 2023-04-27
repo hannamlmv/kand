@@ -33,7 +33,7 @@ def create_panel(isolate_list: list):
 
 def main():
 
-    (number_of_isolates, 
+    (_, 
      coefficients, 
      coverage_penalties, 
      redundancy_threshold
