@@ -6,7 +6,7 @@ from panel_class import Panel
 from isolate_class import create_isolate_list
 from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
-from visualisation.plotly_testpanel_vis import main as visualize_panel
+from Visualisation.plotly_testpanel_vis import main as visualize_panel
 
 
 def measure_time(func):

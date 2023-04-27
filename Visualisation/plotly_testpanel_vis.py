@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from visualisation.data_extraction_functions import (
+from Visualisation.data_extraction_functions import (
     extract_chosen_isolates,
     extract_mic_data,
     extract_SIR,
