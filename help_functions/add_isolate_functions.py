@@ -7,7 +7,7 @@ from help_functions.score_calc_functions import calc_scores
 def choose_isolate(
     available_isolates: list[Isolate],
     panel: Panel,
-    hyperparameters: np.ndarray,
+    coefficients: np.ndarray,
     concentration_ranges: dict,
     redundancy_threshold: int,
     coverage_penalties: dict,
@@ -35,7 +35,7 @@ def choose_isolate(
             )
         )
         # Matrix multiplcation to get coefficients times scores
-        temp_total_score = (temp_scores @ hyperparameters).sum()
+        temp_total_score = (temp_scores @ coefficients).sum()
         if temp_total_score > best_score:
             best_score = temp_total_score
             best_isolate = isolate
@@ -48,7 +48,7 @@ def add_isolate(
     number_of_isolates: int,
     all_isolates: list[Isolate],
     panel: Panel,
-    hyperparameter: np.ndarray,
+    coefficients: np.ndarray,
     concentration_ranges: dict,
     redundancy_threshold: int,
     coverage_penalties: dict,
@@ -64,7 +64,7 @@ def add_isolate(
         chosen_isolate = choose_isolate(
             available_isolates,
             panel,
-            hyperparameter,
+            coefficients,
             concentration_ranges,
             redundancy_threshold,
             coverage_penalties,

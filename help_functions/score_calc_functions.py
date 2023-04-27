@@ -116,14 +116,21 @@ def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
     return number_of_redundant_MICS / number_of_MICS
 
 
-def calc_scores(panel: Panel, concentration_ranges: dict, redundancy_threshold: int):
+def calc_scores(
+    panel: Panel,
+    concentration_ranges: dict,
+    redundancy_threshold: int,
+    coverage_penalties: dict,
+):
     """Calculates spread, coverage and redundancy score for entire panel"""
     antibiotic_mic = extract_panel_data(panel)
     scores = (
         calc_spread_score(
             antibiotic_mic, concentration_ranges, panel.get_number_antibiotics()
         ),
-        calc_coverage_score(antibiotic_mic, panel.get_number_antibiotics()),
+        calc_coverage_score(
+            antibiotic_mic, panel.get_number_antibiotics(), coverage_penalties
+        ),
         calc_redundancy_score(antibiotic_mic, redundancy_threshold),
     )
 

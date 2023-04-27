@@ -46,25 +46,15 @@ def main():
     # Initiate variables
     panel = Panel(number_of_antibiotics)
     all_isolates = create_isolate_list(matrix_EU)
-    number_of_isolates = 30
-    redundancy_threshold = parameters
-    spread_score_coeff = 1
-    coverage_score_coeff = 1
-    redundancy_score_coeff = 1
-    hyperparameters = np.array(
-        (
-            spread_score_coeff,
-            coverage_score_coeff,
-            redundancy_score_coeff,
-        )
-    )
+
     add_isolate(
         number_of_isolates,
         all_isolates,
         panel,
-        hyperparameters,
+        coefficients,
         antibiotic_concentration_ranges,
         redundancy_threshold,
+        coverage_penalties,
     )
 
     if VISUALIZE:

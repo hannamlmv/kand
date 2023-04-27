@@ -38,16 +38,18 @@ def validate_coverage_penalties(coverage_penalties: dict[str:float]) -> None:
     if not isinstance(coverage_penalties, dict):
         raise TypeError("Coverage penalties must be a dictionary.")
     penalty_sum = 0
-    for sir_category, penalty in coverage_penalties:
+    for sir_category, penalty in coverage_penalties.items():
         if not isinstance(sir_category, str) or sir_category not in ["S", "I", "R"]:
             raise ValueError(
                 "Key in coverage penalties must be one of strings: 'S', 'I' or 'R'."
             )
         if not isinstance(penalty, float) or penalty > 1 or penalty < 0:
             raise ValueError("Penalty value must be a float between 0 and 1.")
-        penalty_sum += penalty_sum
+        penalty_sum += penalty
     if penalty_sum != 1:
-        raise ValueError("Sum of penalties must be equal to 1.")
+        raise ValueError(
+            f"Sum of penalties must be equal to 1. Current sum: {penalty_sum}"
+        )
 
 
 def validate_redundancy_threshold(redundancy_threshold: int) -> None:
@@ -75,6 +77,13 @@ def validate_parameters(
     redundancy_threshold = parameters["Redundancy threshold"]
     validate_redundancy_threshold(redundancy_threshold)
 
-    coefficients = np.array((coefficient for _, coefficient in coefficients))
+    coefficients_array = np.array(
+        [coefficient for _, coefficient in coefficients.items()]
+    )
 
-    return (number_of_isolates, coefficients, coverage_penalties, redundancy_threshold)
+    return (
+        number_of_isolates,
+        coefficients_array,
+        coverage_penalties,
+        redundancy_threshold,
+    )
