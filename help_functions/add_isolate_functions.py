@@ -1,6 +1,6 @@
 import numpy as np
-from isolate_class import Isolate
-from panel_class import Panel
+from Classes.isolate_class import Isolate
+from Classes.panel_class import Panel
 from help_functions.score_calc_functions import calc_scores
 
 

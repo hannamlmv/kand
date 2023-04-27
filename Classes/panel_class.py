@@ -1,5 +1,5 @@
 import pandas as pd
-from isolate_class import Isolate
+from Classes.isolate_class import Isolate
 
 
 class Panel:
@@ -18,7 +18,7 @@ class Panel:
 
         assert (
             isinstance(number_of_antibiotics, int) and number_of_antibiotics > 0
-            ), "Number of antibiotics must be larger than 0"
+        ), "Number of antibiotics must be larger than 0"
         self.number_of_antibiotics = number_of_antibiotics
 
     ### Getter methods ###
@@ -37,7 +37,7 @@ class Panel:
 
     def get_redundancy_score(self) -> float:
         return self.redundancy_score
-    
+
     def get_number_antibiotics(self) -> int:
         return self.number_of_antibiotics
 
