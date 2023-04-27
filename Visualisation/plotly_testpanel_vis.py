@@ -267,7 +267,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
 def main(chosen_isolates_list=None):
     # Load files
     if chosen_isolates_list is None:
-        chosen_isolates_list = pd.read_csv("Chosen_isolates.csv")
+        chosen_isolates_list = pd.read_csv("Chosen_isolates_1.csv")
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
 
