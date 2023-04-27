@@ -6,7 +6,12 @@ from help_functions.extract_and_parse import (
 
 
 class Isolate:
-    def __init__(self, isolate_name: str, pathogen: str, isolate_data: dict) -> None:
+    def __init__(
+        self,
+        isolate_name: str,
+        pathogen: str,
+        isolate_data: dict[tuple[float, str]],
+    ) -> None:
         self.name = isolate_name
         self.pathogen = pathogen
         self.data = isolate_data
@@ -17,13 +22,13 @@ class Isolate:
     def __repr__(self) -> str:
         return self.name
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.name
 
-    def get_pathogen(self):
+    def get_pathogen(self) -> str:
         return self.pathogen
 
-    def get_data(self):
+    def get_data(self) -> dict:
         return self.data
 
 
