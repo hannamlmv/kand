@@ -25,9 +25,7 @@ class Isolate:
 
 def create_isolate_list(matrix_EU: pd.DataFrame) -> list[Isolate]:
     all_isolates = []
-    for index, row in matrix_EU.iterrows():
-        if index > 986:  # Sista isolatet
-            break
+    for _, row in matrix_EU.iterrows():
         isolate, antibiotic_data = row[0], list(row[3:].items())
         isolate_data = {}
         # Store the MIC value and SIR data for all antibiotics that are not nip or missing bp
