@@ -28,6 +28,8 @@ def extract_panel_data(panel: Panel):
 def calc_spread_score(
     panel_data: dict, concentration_ranges: dict, number_of_antibiotics: int
 ):
+    # TODO: Clean this function up. Very messy atm. Does too many things. concentration conversion should most likely
+    # be handled in own function entirely instead of partly, which it is now.
     """Calculates the spread score"""
     spread_list_score = 0
     abs_lowest_concentration = np.abs(
