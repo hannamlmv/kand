@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from panel_class import Panel
 from isolate_class import create_isolate_list
+from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
 from visualisation.plotly_testpanel_vis import main as visualize_panel
 
@@ -21,21 +22,32 @@ def measure_time(func):
 
 @measure_time
 def main():
-    file_path = "Chosen_isolates.csv"
+    CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
+    antibiotic_ranges_file_path = "abx_ranges.json"
+    parameters_file_path = "parameters.json"
     VISUALIZE = False
     GET_CSV = True
+    chosen_isolates_file_path = "Chosen_isolates.csv"
 
-    # Read in data from excel
-    CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
+    # Read in data from Excel
+    CIB = pd.ExcelFile(CIB_file_path)
     matrix_EU = pd.read_excel(CIB, "matrix EU")
-    antibiotic_concentration_ranges = json.load(open("abx_ranges.json"))
     number_of_antibiotics = len(matrix_EU.columns[3:])
+
+    # Open json files
+    antibiotic_concentration_ranges = json.load(open(antibiotic_ranges_file_path))
+    (
+        number_of_isolates,
+        coefficients,
+        coverage_penalties,
+        redundancy_threshold,
+    ) = validate_parameters(json.load(open(parameters_file_path)))
 
     # Initiate variables
     panel = Panel(number_of_antibiotics)
     all_isolates = create_isolate_list(matrix_EU)
-    redundancy_threshold = 1
     number_of_isolates = 30
+    redundancy_threshold = parameters
     spread_score_coeff = 1
     coverage_score_coeff = 1
     redundancy_score_coeff = 1
@@ -59,7 +71,7 @@ def main():
         visualize_panel(panel.to_DataFrame())
 
     if GET_CSV:
-        panel.to_csv(file_path)
+        panel.to_csv(chosen_isolates_file_path)
 
 
 if __name__ == "__main__":

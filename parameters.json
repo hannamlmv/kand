@@ -1,0 +1,14 @@
+{
+    "Number of isolates": 30,
+    "Coefficients": {
+        "Spread": 1,
+        "Coverage": 1,
+        "Redundancy": 1
+    },
+    "Coverage penalties": {
+        "S": 0.3,
+        "I": 0.3,
+        "R": 0.4
+    },
+    "Redundancy threshold": 1
+}
