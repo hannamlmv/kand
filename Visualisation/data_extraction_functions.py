@@ -62,7 +62,14 @@ def parse_fastidious(
         and pathogen not in fastidious_dict["Non-fastidious"]
     ):
         raise ValueError(
-            f"Pathogen name not found in Fastidious or Non-fastidious dictionary"
+            f"Pathogen name, {pathogen}, not found in Fastidious or Non-fastidious dictionary"
+        )
+    if (
+        pathogen in fastidious_dict["Fastidious"]
+        and pathogen in fastidious_dict["Non-fastidious"]
+    ):
+        raise LookupError(
+            f"Pathogen must be either fastidious or non-fastidious. Error raised by: {pathogen}"
         )
     if pathogen in fastidious_dict["Fastidious"]:
         fastidious_list.append("Fastidious")
