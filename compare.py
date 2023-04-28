@@ -2,7 +2,7 @@ import plotly.express as px
 import pandas as pd
 import json
 from Classes.panel_class import Panel
-from Classes.isolate_class import Isolate, create_isolate_list
+from Classes.isolate_class import create_isolate_list
 from help_functions.score_calc_functions import calc_scores
 from help_functions.validate_parameters import *
 
@@ -44,7 +44,7 @@ def create_panel(isolate_list: list):
 
 def main():
 
-    (_, coefficients, coverage_penalties, redundancy_threshold) = validate_parameters(
+    (_, coefficients, coverage_demands, redundancy_threshold) = validate_parameters(
         json.load(open("parameters.json"))
     )
 
@@ -63,7 +63,7 @@ def main():
             all_isolates_panel,
             json.load(open("abx_ranges.json")),
             redundancy_threshold,
-            coverage_penalties
+            coverage_demands
             )
 
     # Creates a list of all scores for the panels
@@ -74,7 +74,7 @@ def main():
             panel,
             json.load(open("abx_ranges.json")),
             redundancy_threshold,
-            coverage_penalties
+            coverage_demands
         )
         panel_dict = {
             "Panel": panel_names[i],
