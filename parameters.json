@@ -6,7 +6,7 @@
         "Redundancy": 1.0
     },
     "Coverage demands": {
-        "S": 10,
+        "S": 3,
         "I": 1,
         "R": 5
     },

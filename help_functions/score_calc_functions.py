@@ -26,7 +26,7 @@ def extract_panel_data(panel: Panel):
 
 
 def calc_spread_score(
-    panel_data: dict, concentration_ranges: dict, number_of_antibiotics: int
+    panel_data: dict, concentration_ranges: dict, number_of_antibiotics: int, per_antibiotic: bool = False
 ):
     # TODO: Clean this function up. Very messy atm. Does too many things. concentration conversion should most likely
     # be handled in own function entirely instead of partly, which it is now.
@@ -35,6 +35,7 @@ def calc_spread_score(
     abs_lowest_concentration = np.abs(
         np.log2(concentration_ranges["Lowest concentration"])
     )
+    spread_per_antibiotic = {}
     for abx, MIC_SIR in panel_data.items():
         # Create a set of the unique mic values and remove off-scale values, denoted as None
         unique_mic_values = {MIC for MIC, _ in MIC_SIR if MIC is not None}
@@ -79,6 +80,10 @@ def calc_spread_score(
             )
             spread_list[mic_value_index] = 1
         spread_list_score += score_spread_list(spread_list)
+        if per_antibiotic:
+            spread_per_antibiotic[abx] = spread_list_score
+    if per_antibiotic:
+        return spread_per_antibiotic
     return spread_list_score / number_of_antibiotics
 
 
