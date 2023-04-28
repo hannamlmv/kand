@@ -1,5 +1,8 @@
 """
 Generates print-out of spread for different antibiotics 
+
+Date: 28/4 
+Author: Hanna Malmvall
 """
 
 import pandas as pd

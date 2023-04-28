@@ -1,5 +1,8 @@
 """
 Function that creates a panel object from a list of isolate namnes. 
+
+Date: 27/4 
+Author: Hanna Malmvall
 """
 import pandas as pd
 from Classes.panel_class import Panel

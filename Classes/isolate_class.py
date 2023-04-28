@@ -1,3 +1,10 @@
+"""
+An isolate class
+
+Date: 24/4 
+Author: Victor Wong and Hanna Malmvall
+"""
+
 import pandas as pd
 from help_functions.extract_and_parse import (
     extract_antibiotic_data,
