@@ -34,9 +34,16 @@ def get_scale(SIR: str) -> bool:
 def parse_on_off_scale(
     scale: bool, SIR_category: str, y_values: list, mic_value_jitter: float
 ) -> None:
+
+    if not isinstance(scale, bool):
+        raise ValueError(
+            f"scale must be Boolean value, not {type(scale)}. Current value: {scale}"
+        )
+
     if scale is True:
         y_values.append(mic_value_jitter)
 
+    # TODO: Remove hard-coding of -10 and 11 which are the maximum and minimum values for the y_range
     # If off-scale move value to MAX_C or MIN_C
     elif scale is False:
         if SIR_category == "S":
@@ -45,21 +52,22 @@ def parse_on_off_scale(
             y_values.append(11)
         else:
             raise ValueError(f"SIR Category must be either S or R, not: {SIR_category}")
-    else:
-        raise ValueError(
-            f"scale must be Boolean value, not {type(scale)}. Current value: {scale}"
-        )
 
 
 def parse_fastidious(
     fastidious_dict: dict, pathogen: str, fastidious_list: list
 ) -> None:
+    if (
+        pathogen not in fastidious_dict["Fastidious"]
+        and pathogen not in fastidious_dict["Non-fastidious"]
+    ):
+        raise ValueError(
+            f"Pathogen name not found in Fastidious or Non-fastidious dictionary"
+        )
     if pathogen in fastidious_dict["Fastidious"]:
         fastidious_list.append("Fastidious")
     elif pathogen in fastidious_dict["Non-fastidious"]:
         fastidious_list.append("Non-fastidious")
-    else:
-        raise ValueError(f"Pathogen must be Fastidious or Non-fastidious")
 
 
 def parse_SIR(SIR: str) -> bool:
