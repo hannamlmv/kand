@@ -54,6 +54,8 @@ def main():
     (max_spread, max_coverage, max_redundancy) = calc_scores(
             all_isolates_panel,
             json.load(open("abx_ranges.json")),
+            redundancy_threshold,
+            coverage_demands
             )
 
     # Creates a list of all scores for the panels
