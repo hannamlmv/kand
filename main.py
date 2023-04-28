@@ -25,8 +25,8 @@ def main():
     excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "abx_ranges.json"
     parameters_file_path = "parameters.json"
-    VISUALIZE = False
-    GET_CSV = True
+    VISUALIZE = True
+    GET_CSV = False
     chosen_isolates_file_path = "Chosen_Isolates_folder/Chosen_isolates.csv"
 
     # Read in data from Excel
@@ -39,7 +39,7 @@ def main():
     (
         number_of_isolates,
         coefficients,
-        coverage_penalties,
+        coverage_demands,
         redundancy_threshold,
     ) = validate_parameters(json.load(open(parameters_file_path)))
 
@@ -54,7 +54,7 @@ def main():
         coefficients,
         antibiotic_concentration_ranges,
         redundancy_threshold,
-        coverage_penalties,
+        coverage_demands,
     )
 
     if VISUALIZE:

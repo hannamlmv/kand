@@ -67,6 +67,8 @@ def parse_SIR(SIR: str) -> bool:
     Find the isolates with valid SIRs. Not 'Missing BP'
     and not 'nip'.
     """
+    if type(SIR) is not str:
+        return False
     if SIR.startswith("Missing BP"):
         return False
     if SIR == "nip":

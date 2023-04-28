@@ -82,7 +82,7 @@ def calc_spread_score(
     return spread_list_score / number_of_antibiotics
 
 
-def calc_coverage_score(
+def calc_coverage_score_old(
     panel_data: dict, number_of_antibiotics: int, coverage_penalties: dict
 ):
     """Calculates the coverage score"""
@@ -96,6 +96,21 @@ def calc_coverage_score(
             if category not in panel_SIRs:
                 sir_coverage -= penalty
         coverage_score += coverage * sir_coverage
+    return coverage_score / number_of_antibiotics
+
+
+def calc_coverage_score(
+    panel_data: dict, number_of_antibiotics: int, coverage_demands: dict
+):
+    """Calculates the coverage score"""
+    coverage_score = 0
+    for mic_sir in panel_data.values():
+        coverage_counter = {key:0 for key in coverage_demands}
+        for _, sir in mic_sir:
+            coverage_counter[sir] += 1
+        for sir in coverage_counter:
+            coverage_counter[sir] = min(coverage_counter[sir], coverage_demands[sir])
+        coverage_score += sum(coverage_counter.values())/sum(coverage_demands.values())
     return coverage_score / number_of_antibiotics
 
 

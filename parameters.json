@@ -1,14 +1,14 @@
 {
-    "Number of isolates": 1,
+    "Number of isolates": 30,
     "Coefficients": {
         "Spread": 1.0,
         "Coverage": 1.0,
         "Redundancy": 1.0
     },
-    "Coverage penalties": {
-        "S": 0.3,
-        "I": 0.3,
-        "R": 0.4
+    "Coverage demands": {
+        "S": 10,
+        "I": 1,
+        "R": 5
     },
     "Redundancy threshold": 1
 }

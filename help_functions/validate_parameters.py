@@ -30,26 +30,20 @@ def validate_coefficients(coefficients: dict[str:float]) -> None:
             raise ValueError("Coefficient values must be floats greater than 0.")
 
 
-def validate_coverage_penalties(coverage_penalties: dict[str:float]) -> None:
+def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
     """
-    Checks to see if the coverage_penalties dictionary contains
-    correct data types and if the penalties add up to 1
+    Checks to see if the coverage_demands dictionary contains
+    correct data types and if the demands are greater than 1
     """
-    if not isinstance(coverage_penalties, dict):
-        raise TypeError("Coverage penalties must be a dictionary.")
-    penalty_sum = 0
-    for sir_category, penalty in coverage_penalties.items():
+    if not isinstance(coverage_demands, dict):
+        raise TypeError("Coverage demands must be a dictionary.")
+    for sir_category, demand in coverage_demands.items():
         if not isinstance(sir_category, str) or sir_category not in ["S", "I", "R"]:
             raise ValueError(
-                "Key in coverage penalties must be one of strings: 'S', 'I' or 'R'."
+                "Key in coverage demands must be one of strings: 'S', 'I' or 'R'."
             )
-        if not isinstance(penalty, float) or penalty > 1 or penalty < 0:
-            raise ValueError("Penalty value must be a float between 0 and 1.")
-        penalty_sum += penalty
-    if penalty_sum != 1:
-        raise ValueError(
-            f"Sum of penalties must be equal to 1. Current sum: {penalty_sum}"
-        )
+        if not isinstance(demand, int) or demand < 1:
+            raise ValueError("Demand value must be an int greater or equal to than 1.")
 
 
 def validate_redundancy_threshold(redundancy_threshold: int) -> None:
@@ -71,8 +65,8 @@ def validate_parameters(
     coefficients = parameters["Coefficients"]
     validate_coefficients(coefficients)
 
-    coverage_penalties = parameters["Coverage penalties"]
-    validate_coverage_penalties(coverage_penalties)
+    coverage_demands = parameters["Coverage demands"]
+    validate_coverage_demands(coverage_demands)
 
     redundancy_threshold = parameters["Redundancy threshold"]
     validate_redundancy_threshold(redundancy_threshold)
@@ -84,6 +78,6 @@ def validate_parameters(
     return (
         number_of_isolates,
         coefficients_array,
-        coverage_penalties,
+        coverage_demands,
         redundancy_threshold,
     )
