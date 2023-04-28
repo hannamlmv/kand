@@ -1,3 +1,10 @@
+"""
+Generates a bar-chart showing scores for different panels
+
+Date: 27/4 
+Author: Hanna Malmvall
+"""
+
 import plotly.express as px
 import pandas as pd
 import json

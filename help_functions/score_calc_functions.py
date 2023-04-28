@@ -1,3 +1,10 @@
+"""
+Calculates scores for a given panel
+
+Date: 25/4 
+Author: Victor Wong and Hanna Malmvall
+"""
+
 import numpy as np
 from Classes.panel_class import Panel
 from help_functions.spread_score_functions import score_spread_list

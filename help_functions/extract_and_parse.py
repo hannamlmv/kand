@@ -1,6 +1,9 @@
 """
 Functions to parse antibiotic data in a cell of an 
 Excel file and extract the data wanted in tuples. 
+
+Date: 10/4 
+Author: Victor Wong
 """
 
 

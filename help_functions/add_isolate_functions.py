@@ -1,3 +1,10 @@
+"""
+Adds isolates to a panel
+
+Date: 25/4 
+Author: Victor Wong and Hanna Malmvall
+"""
+
 import numpy as np
 from Classes.isolate_class import Isolate
 from Classes.panel_class import Panel

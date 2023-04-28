@@ -1,3 +1,9 @@
+"""
+A panel class
+
+Date: 24/4 
+Author: Victor Wong and Hanna Malmvall
+"""
 import pandas as pd
 from Classes.isolate_class import Isolate
 

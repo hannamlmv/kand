@@ -1,3 +1,10 @@
+"""
+Creates a panel
+
+Date: 24/4 
+Author: Victor Wong
+"""
+
 import json
 import time
 import pandas as pd

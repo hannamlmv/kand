@@ -1,3 +1,10 @@
+"""
+Check that all parameters are valid
+
+Date: 27/4 
+Author: Victor Wong
+"""
+
 import numpy as np
 
 

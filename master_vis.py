@@ -1,3 +1,10 @@
+"""
+Generates visualisations and print-outs for a given panel
+
+Date: 28/4 
+Author: Hanna Malmvall
+"""
+
 from Visualisation.plotly_testpanel_vis import main as spread_vis
 from spread_per_antibiotic import main as spread_print
 
@@ -9,7 +16,6 @@ spread_visualisation = True
 
 # Print-outs
 spread_printout = True
-
 
 
 
