@@ -20,7 +20,7 @@ def choose_isolate(
     Add the best isolate to the panel
     """
     best_isolate, best_score = None, -np.inf
-
+    best_score_vec = None
     for isolate in available_isolates:
         panel.append_isolate(isolate)
         temp_spread_score, temp_coverage_score, temp_redundancy_score = calc_scores(
@@ -39,8 +39,10 @@ def choose_isolate(
         if temp_total_score > best_score:
             best_score = temp_total_score
             best_isolate = isolate
+            best_score_vec = temp_scores
         panel.remove_isolate(isolate)
     panel.append_isolate(best_isolate)
+    print(best_isolate, best_score, best_score_vec)
     return best_isolate
 
 
