@@ -1,3 +1,10 @@
+"""
+Measures runtime for creation of new panels
+
+Date: 18/4
+Author: Victor Wong
+"""
+
 import time
 import matplotlib.pyplot as plt
 from main import main as func

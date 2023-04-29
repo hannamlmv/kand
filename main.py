@@ -1,3 +1,10 @@
+"""
+Creates a panel
+
+Date: 24/4 
+Author: Victor Wong
+"""
+
 import json
 import time
 import pandas as pd
@@ -25,8 +32,8 @@ def main():
     excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "abx_ranges.json"
     parameters_file_path = "parameters.json"
-    VISUALIZE = True
-    GET_CSV = False
+    VISUALIZE = False
+    GET_CSV = True
     chosen_isolates_file_path = "Chosen_Isolates_folder/Chosen_isolates.csv"
 
     # Read in data from Excel

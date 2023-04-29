@@ -1,3 +1,10 @@
+"""
+Data extraction functions
+
+Date: 10/4 
+Author: Victor Wong
+"""
+
 import pandas as pd
 import numpy as np
 

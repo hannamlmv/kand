@@ -1,5 +1,10 @@
-""" Functions used to calculate the spread in a list. Used in score_calc_functions"""
+"""
+Functions used to calculate the spread in a list. 
+Used in score_calc_functions
 
+Date: 24/4 
+Author: Victor Wong
+"""
 
 def count_gap_length(valid_list: list) -> float:
     total_gap_length = 0

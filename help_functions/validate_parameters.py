@@ -1,3 +1,10 @@
+"""
+Check that all parameters are valid
+
+Date: 27/4 
+Author: Victor Wong
+"""
+
 import numpy as np
 
 
@@ -33,18 +40,21 @@ def validate_coefficients(coefficients: dict[str:float]) -> None:
 def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
     """
     Checks to see if the coverage_demands dictionary contains
-    correct data types and if the demands are greater than 1
+    correct data types and if the demands are greater than 0
     """
     if not isinstance(coverage_demands, dict):
         raise TypeError("Coverage demands must be a dictionary.")
+    demand_sum = 0
     for sir_category, demand in coverage_demands.items():
         if not isinstance(sir_category, str) or sir_category not in ["S", "I", "R"]:
             raise ValueError(
                 "Key in coverage demands must be one of strings: 'S', 'I' or 'R'."
             )
-        if not isinstance(demand, int) or demand < 1:
-            raise ValueError("Demand value must be an int greater or equal to than 1.")
-
+        if not isinstance(demand, int) or demand < 0:
+            raise ValueError("Demand value must be an int greater or equal to than 0.")
+        demand_sum += demand
+    if demand_sum == 0:
+        raise ValueError("Sum of demand values can not be 0.")
 
 def validate_redundancy_threshold(redundancy_threshold: int) -> None:
     if not isinstance(redundancy_threshold, int) or redundancy_threshold < 1:

@@ -1,3 +1,10 @@
+"""
+Calculates scores for a given panel
+
+Date: 25/4 
+Author: Victor Wong and Hanna Malmvall
+"""
+
 import numpy as np
 from Classes.panel_class import Panel
 from help_functions.spread_score_functions import score_spread_list
@@ -31,7 +38,7 @@ def calc_spread_score(
     # TODO: Clean this function up. Very messy atm. Does too many things. concentration conversion should most likely
     # be handled in own function entirely instead of partly, which it is now.
     """Calculates the spread score"""
-    spread_list_score = 0
+    total_spread_list_score = 0
     abs_lowest_concentration = np.abs(
         np.log2(concentration_ranges["Lowest concentration"])
     )
@@ -79,12 +86,12 @@ def calc_spread_score(
                 mic_value, abs_lowest_concentration
             )
             spread_list[mic_value_index] = 1
-        spread_list_score += score_spread_list(spread_list)
+        total_spread_list_score += score_spread_list(spread_list)
         if per_antibiotic:
-            spread_per_antibiotic[abx] = spread_list_score
+            spread_per_antibiotic[abx] = score_spread_list(spread_list)
     if per_antibiotic:
         return spread_per_antibiotic
-    return spread_list_score / number_of_antibiotics
+    return total_spread_list_score / number_of_antibiotics
 
 
 def calc_coverage_score_old(

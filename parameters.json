@@ -6,9 +6,9 @@
         "Redundancy": 1.0
     },
     "Coverage demands": {
-        "S": 3,
-        "I": 1,
-        "R": 5
+        "S": 0,
+        "I": 0,
+        "R": 1
     },
     "Redundancy threshold": 1
 }
