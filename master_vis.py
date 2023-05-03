@@ -7,20 +7,27 @@ Author: Hanna Malmvall
 
 from Visualisation.Plots.Spread.spread_plot import main as spread_vis
 from Visualisation.Plots.Spread.spread_per_antibiotic import main as spread_print
+import json
 
 panel = "Chosen_isolates_folder/Chosen_isolates.csv"
 all_isolates = "Chosen_isolates_folder/all_isolates.csv"
 
-# Visualisations
-spread_visualisation = True
+bools = json.load(open("Parameters/visualisation_parameters.json"))
 
-# Print-outs
-spread_printout = True
-
-
-
-if spread_visualisation:
+#Visualisations
+if bools["Spread visualisation"]:
     spread_vis(panel)
+if bools["Coverage visualisation"]:
+    pass
+if bools["Redundancy heatmap"]:
+    pass
+if bools["Redundancy tree"]:
+    pass
+if bools["Redundancy bars"]:
+    pass
 
-if spread_printout:
+#Printouts
+if bools["Spread per antibiotic print-out"]:
     spread_print(panel, all_isolates)
+if bools["Uniqueness print-out"]:
+    pass
