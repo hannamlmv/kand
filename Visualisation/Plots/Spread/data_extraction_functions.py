@@ -8,6 +8,7 @@ Author: Victor Wong
 import pandas as pd
 import numpy as np
 
+
 def extract_chosen_isolates(
     chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
 ) -> pd.DataFrame:

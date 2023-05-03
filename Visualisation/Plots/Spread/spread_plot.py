@@ -9,10 +9,13 @@ import pandas as pd
 from Visualisation.Plots.Spread.spread_plot_functions import *
 from Visualisation.Plots.Spread.data_extraction_functions import *
 
+
 def main(chosen_isolates_list=None):
     # Load files
     if chosen_isolates_list is None:
         chosen_isolates_list = pd.read_csv("Chosen_isolates_1.csv")
+    else:
+        chosen_isolates_list = pd.read_csv(chosen_isolates_list)
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
 
@@ -20,7 +23,6 @@ def main(chosen_isolates_list=None):
     matrix_EU.rename(
         columns={"Trimethoprim-sulfamethoxazole": "Trimeth-sulf"}, inplace=True
     )
-
     # Select isolates
     chosen_isolates = extract_chosen_isolates(chosen_isolates_list, matrix_EU)
 
