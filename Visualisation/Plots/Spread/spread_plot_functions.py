@@ -15,7 +15,11 @@ from Visualisation.Plots.Spread.data_extraction_functions import (
 
 
 def create_plot_df(
-    antibiotics: list, mic_data: list, x_jitter: float = 0.15, y_jitter: float = 0.05
+    antibiotics: list,
+    mic_data: list,
+    fastidious_dict: dict,
+    x_jitter: float = 0.15,
+    y_jitter: float = 0.05,
 ) -> pd.DataFrame:
     """Create dataframe used for plotting"""
 
@@ -23,39 +27,6 @@ def create_plot_df(
 
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]
-
-    # TODO Move this outside of function. Read in this data from json file
-    fastidious_dict = {
-        "Non-fastidious": [
-            "Staphylococcus epidermidis",
-            "Staphylococcus hominis",
-            "Staphylococcus capitis",
-            "Staphylococcus haemolyticus",
-            "Staphylococcus warneri",
-            "Staphylococcus auricularis",
-            "Staphylococcus aureus",
-            "Staphylococcus lugdunensis",
-            "Enterococcus faecium",
-            "Enterococcus faecalis",
-        ],
-        "Fastidious": [
-            "Streptococcus pneumoniae",
-            "Streptococcus mitis",
-            "Streptococcus oralis",
-            "Streptococcus anginosus",
-            "Streptococcus salivarius",
-            "Streptococcus gallolyticus",
-            "Streptococcus parasanguinis",
-            "Streptococcus constellatus",
-            "Streptococcus gordonii",
-            "Streptococcus intermedius",
-            "Streptococcus mutans",
-            "Streptococcus pyogenes",
-            "Streptococcus agalactiae",
-            "Streptococcus dysgalactiae",
-            "Streptococcus sanguinis",
-        ],
-    }
 
     # Initialize lists to hold values used for plotting
     x_values, y_values = [], []
@@ -184,7 +155,11 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
     )
 
 
-def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
+def plotly_dotplot(
+    plot_df: pd.DataFrame,
+    antibiotics: list,
+    antibiotic_ranges: dict,
+) -> None:
 
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]
@@ -250,7 +225,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
     # Update dot color
     fig.for_each_trace(change_trace_color)
 
-    add_rectangles_to_plot(fig, antibiotics)
+    add_rectangles_to_plot(fig, antibiotics, antibiotic_ranges)
 
     # Add border to dots
     fig.update_traces(marker=dict(line=dict(width=1, color="DarkSlateGrey")))

@@ -5,6 +5,7 @@ Date: 10/4
 Author: Victor Wong
 """
 
+import json
 import pandas as pd
 from Visualisation.Plots.Spread.spread_plot_functions import (
     create_plot_df,
@@ -26,6 +27,8 @@ def main(chosen_isolates_list=None):
         chosen_isolates_list = pd.read_csv(chosen_isolates_list)
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
+    antibiotic_ranges = json.load(open("Parameters/antibiotic_ranges.json"))
+    fastidious_dict = json.load(open("Parameters/pathogen_fastidiousness.json"))
 
     # Rename a long name for plotting purposes
     matrix_EU.rename(
@@ -47,7 +50,7 @@ def main(chosen_isolates_list=None):
     mic_data = extract_mic_data(filtered_chosen_isolates_SIR, antibiotics)
 
     # Create dataframe used for plotting
-    plot_df = create_plot_df(antibiotics, mic_data)
+    plot_df = create_plot_df(antibiotics, mic_data, antibiotic_ranges, fastidious_dict)
 
     plotly_dotplot(plot_df, antibiotics)
 
