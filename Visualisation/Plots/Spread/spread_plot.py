@@ -13,9 +13,9 @@ from Visualisation.Plots.Spread.spread_plot_functions import (
 )
 from Visualisation.Plots.Spread.data_extraction_functions import (
     extract_chosen_isolates,
-    extract_mic_data,
-    extract_SIR,
-    filter_mic_values,
+    extract_mic_sir_data,
+    filter_mic_sir_data,
+    extract_mic_values_per_antibiotic,
 )
 
 
@@ -41,13 +41,15 @@ def main(chosen_isolates_list=None):
     antibiotics = list(chosen_isolates.columns[3:])
 
     # Extract all SIRs for an antibiotic.
-    chosen_isolates_SIR = extract_SIR(chosen_isolates, antibiotics)
+    chosen_isolates_SIR = extract_mic_sir_data(chosen_isolates, antibiotics)
 
     # Remove the tuples that have None in their SIR data
-    filtered_chosen_isolates_SIR = filter_mic_values(chosen_isolates_SIR)
+    filtered_chosen_isolates_SIR = filter_mic_sir_data(chosen_isolates_SIR)
 
     # Extract the mic-values of each isolate for each antibiotic.
-    mic_data = extract_mic_data(filtered_chosen_isolates_SIR, antibiotics)
+    mic_data = extract_mic_values_per_antibiotic(
+        filtered_chosen_isolates_SIR, antibiotics
+    )
 
     # Create dataframe used for plotting
     plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)

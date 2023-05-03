@@ -19,27 +19,27 @@ def extract_chosen_isolates(
     return matrix_EU[chosen_rows]
 
 
-def find_digits(SIR: str) -> int:
+def find_digits(mic_sir_data: str) -> int:
     """Find numbers in a string"""
     digit = ""
-    for character in SIR:
+    for character in mic_sir_data:
         if character.isdigit() or character == ".":
             digit += character
     return float(digit)
 
 
-def get_scale(SIR: str) -> bool:
+def get_scale(mic_sir_data: str) -> bool:
     """Get on or off scale. True == on-scale"""
-    if "=" in SIR:
+    if "=" in mic_sir_data:
         return True
-    elif "<" in SIR or ">" in SIR:
+    elif "<" in mic_sir_data or ">" in mic_sir_data:
         return False
     else:
         raise ValueError("Not a valid SIR")
 
 
 def parse_on_off_scale(
-    scale: bool, SIR_category: str, y_values: list, mic_value_jitter: float
+    scale: bool, sir_category: str, y_values: list, mic_value_jitter: float
 ) -> None:
 
     if not isinstance(scale, bool):
@@ -53,12 +53,12 @@ def parse_on_off_scale(
     # TODO: Remove hard-coding of -10 and 11 which are the maximum and minimum values for the y_range
     # If off-scale move value to MAX_C or MIN_C
     elif scale is False:
-        if SIR_category == "S":
+        if sir_category == "S":
             y_values.append(-10)
-        elif SIR_category == "R":
+        elif sir_category == "R":
             y_values.append(11)
         else:
-            raise ValueError(f"SIR Category must be either S or R, not: {SIR_category}")
+            raise ValueError(f"SIR Category must be either S or R, not: {sir_category}")
 
 
 def parse_fastidious(
@@ -84,61 +84,67 @@ def parse_fastidious(
         fastidious_list.append("Non-fastidious")
 
 
-def parse_SIR(SIR: str) -> bool:
+def parse_mic_sir_data(mic_sir_data: str) -> bool:
     """
-    Find the isolates with valid SIRs. Not 'Missing BP'
+    Find the isolates with valid data. Not 'Missing BP'
     and not 'nip'.
     """
-    if type(SIR) is not str:
+    if type(mic_sir_data) is not str:
         return False
-    if SIR.startswith("Missing BP"):
+    if mic_sir_data.startswith("Missing BP"):
         return False
-    if SIR == "nip":
+    if mic_sir_data == "nip":
         return False
     return True
 
 
-def extract_SIR(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
+def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
     """
     Extract all SIRs for an antibiotic. Returns a dictionary
     with antibiotcs as keys and lists of the isolates and their
     SIRs in tuples as value.
     """
-    chosen_isolates_SIR = {antibiotic: [] for antibiotic in antibiotics}
+    chosen_isolates_mic_sir_data = {antibiotic: [] for antibiotic in antibiotics}
 
     for index, row in chosen_isolates.iterrows():
-        isolate, pathogen, antibiotic_SIR = row[0], row[1], list(row[3:].items())
-        for antibiotic, SIR in antibiotic_SIR:
-            if parse_SIR(SIR):
-                mic_category = SIR[0]
-                mic = find_digits(SIR)
-                scale = get_scale(SIR)
-                chosen_isolates_SIR[antibiotic].append(
-                    (isolate, mic, mic_category, scale, pathogen)
+        isolate, pathogen, antibiotic_mic_sir_data = (
+            row[0],
+            row[1],
+            list(row[3:].items()),
+        )
+        for antibiotic, mic_sir_data in antibiotic_mic_sir_data:
+            if parse_mic_sir_data(mic_sir_data):
+                sir_category = mic_sir_data[0]
+                mic = find_digits(mic_sir_data)
+                scale = get_scale(mic_sir_data)
+                chosen_isolates_mic_sir_data[antibiotic].append(
+                    (isolate, mic, sir_category, scale, pathogen)
                 )
             else:
                 # If SIR = "Missing BP" or "nip"
-                chosen_isolates_SIR[antibiotic].append(
-                    (isolate, SIR, None, None, pathogen)
+                chosen_isolates_mic_sir_data[antibiotic].append(
+                    (isolate, mic, None, None, pathogen)
                 )
-    return chosen_isolates_SIR
+    return chosen_isolates_mic_sir_data
 
 
-def filter_mic_values(chosen_isolates_SIR: dict) -> None:
+def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict) -> None:
     """
     Remove the tuples that have None in their SIR data
     """
-    for antibiotic, SIR_data in chosen_isolates_SIR.items():
+    for antibiotic, mic_sir_data in chosen_isolates_mic_sir_data.items():
         # tup = (isolate, mic_value, mic_category, scale, pathogen)
 
-        chosen_isolates_SIR[antibiotic] = [
-            tup for tup in SIR_data if tup[2] is not None
+        chosen_isolates_mic_sir_data[antibiotic] = [
+            tup for tup in mic_sir_data if tup[2] is not None
         ]
 
-    return chosen_isolates_SIR
+    return chosen_isolates_mic_sir_data
 
 
-def extract_mic_data(chosen_isolates_SIR: dict, antibiotics: list) -> list:
+def extract_mic_values_per_antibiotic(
+    chosen_isolates_sir: dict, antibiotics: list
+) -> list:
     """
     Extract the mic-values of each isolate for each antibiotic.
     Returns a nested list. Each list represents the mic-values of
@@ -150,8 +156,8 @@ def extract_mic_data(chosen_isolates_SIR: dict, antibiotics: list) -> list:
         # Create a list to hold the mic-values of isolates for that abx
         antibiotic_mic_values = []
         # Get value of current abx.
-        SIR_data = chosen_isolates_SIR[antibiotic]
-        for isolate, mic_value, mic_category, scale, pathogen in SIR_data:
+        sir_data = chosen_isolates_sir[antibiotic]
+        for isolate, mic_value, mic_category, scale, pathogen in sir_data:
             antibiotic_mic_values.append(
                 (isolate, np.log2(mic_value), mic_category, scale, pathogen)
             )

@@ -24,11 +24,11 @@ def extract_panel_data(panel: Panel):
     """
     panel_data = {}
     for isolate in panel.get_chosen_isolates():
-        for abx, (MIC, SIR) in isolate.get_data().items():
+        for abx, (mic, sir) in isolate.get_data().items():
             if abx not in panel_data:
-                panel_data[abx] = [(MIC, SIR)]
+                panel_data[abx] = [(mic, sir)]
             else:
-                panel_data[abx].append((MIC, SIR))
+                panel_data[abx].append((mic, sir))
     return panel_data
 
 
@@ -43,9 +43,9 @@ def calc_spread_score(
         np.log2(concentration_ranges["Lowest concentration"])
     )
     spread_per_antibiotic = {}
-    for abx, MIC_SIR in panel_data.items():
+    for abx, mic_sir in panel_data.items():
         # Create a set of the unique mic values and remove off-scale values, denoted as None
-        unique_mic_values = {MIC for MIC, _ in MIC_SIR if MIC is not None}
+        unique_mic_values = {mic for mic, _ in mic_sir if mic is not None}
 
         # Get the minimum and maximum on-scale concentration value for the antibiotic
         minimum_concentration = concentration_ranges[abx]["Lower"]
@@ -112,21 +112,21 @@ def calc_coverage_score(
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
     """Calculates the redundancy score"""
-    number_of_MICS = 0
-    number_of_redundant_MICS = 0
-    for MIC_SIR in panel_data.values():
-        MIC_counter = {}
-        for MIC, _ in MIC_SIR:
-            number_of_MICS += 1
-            if MIC not in MIC_counter:
-                MIC_counter[MIC] = 1
+    number_of_micS = 0
+    number_of_redundant_micS = 0
+    for mic_sir in panel_data.values():
+        mic_counter = {}
+        for mic, _ in mic_sir:
+            number_of_micS += 1
+            if mic not in mic_counter:
+                mic_counter[mic] = 1
             else:
-                MIC_counter[MIC] += 1
-                if MIC_counter[MIC] > redundancy_threshold:
-                    number_of_redundant_MICS += 1
-    if number_of_MICS == 0:
+                mic_counter[mic] += 1
+                if mic_counter[mic] > redundancy_threshold:
+                    number_of_redundant_micS += 1
+    if number_of_micS == 0:
         return 0
-    return number_of_redundant_MICS / number_of_MICS
+    return number_of_redundant_micS / number_of_micS
 
 
 def calc_scores(
