@@ -12,7 +12,7 @@ from Classes.panel_class import Panel
 from Classes.isolate_class import create_isolate_list
 from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
-from Visualisation.plotly_testpanel_vis import main as visualize_panel
+#from Visualisation.plotly_testpanel_vis import main as visualize_panel
 
 
 def measure_time(func):
@@ -47,6 +47,7 @@ def main():
         number_of_isolates,
         coefficients,
         coverage_demands,
+        coverage_total,
         redundancy_threshold,
     ) = validate_parameters(json.load(open(parameters_file_path)))
 
@@ -62,6 +63,7 @@ def main():
         antibiotic_concentration_ranges,
         redundancy_threshold,
         coverage_demands,
+        coverage_total
     )
 
     if VISUALIZE:

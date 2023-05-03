@@ -112,18 +112,18 @@ def calc_coverage_score_old(
 
 
 def calc_coverage_score(
-    panel_data: dict, number_of_antibiotics: int, coverage_demands: dict
+    panel_data: dict, number_of_antibiotics: int, coverage_demands: dict, coverage_total: int
 ):
     """Calculates the coverage score"""
-    coverage_score = 0
+    coverage_sir_score = 0
     for mic_sir in panel_data.values():
         coverage_counter = {key:0 for key in coverage_demands}
         for _, sir in mic_sir:
             coverage_counter[sir] += 1
         for sir in coverage_counter:
             coverage_counter[sir] = min(coverage_counter[sir], coverage_demands[sir])
-        coverage_score += sum(coverage_counter.values())/sum(coverage_demands.values())
-    return coverage_score / number_of_antibiotics
+        coverage_sir_score += sum(coverage_counter.values())/sum(coverage_demands.values())
+    return coverage_sir_score / number_of_antibiotics
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
@@ -150,6 +150,7 @@ def calc_scores(
     concentration_ranges: dict,
     redundancy_threshold: int,
     coverage_penalties: dict,
+    coverage_total: int
 ):
     """Calculates spread, coverage and redundancy score for entire panel"""
     antibiotic_mic = extract_panel_data(panel)
@@ -158,7 +159,7 @@ def calc_scores(
             antibiotic_mic, concentration_ranges, panel.get_number_antibiotics()
         ),
         calc_coverage_score(
-            antibiotic_mic, panel.get_number_antibiotics(), coverage_penalties
+            antibiotic_mic, panel.get_number_antibiotics(), coverage_penalties, coverage_total
         ),
         calc_redundancy_score(antibiotic_mic, redundancy_threshold),
     )

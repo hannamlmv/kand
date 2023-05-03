@@ -56,6 +56,10 @@ def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
     if demand_sum == 0:
         raise ValueError("Sum of demand values can not be 0.")
 
+def validate_coverage_total(coverage_total: int) -> None:
+    if not isinstance(coverage_total, int) or coverage_total < 0:
+        raise TypeError("Total coverage must be an integer greater than or equal to 0.")
+
 def validate_redundancy_threshold(redundancy_threshold: int) -> None:
     if not isinstance(redundancy_threshold, int) or redundancy_threshold < 1:
         raise ValueError(
@@ -65,7 +69,7 @@ def validate_redundancy_threshold(redundancy_threshold: int) -> None:
 
 def validate_parameters(
     parameters: dict,
-) -> dict[str : int | float | dict[str:float]]:
+) -> dict[str : int | dict[str:float] | dict[str:int] | int | int]:
     """
     Parses the parameters and checks if the inputs are of correct data type and values.
     """
@@ -78,6 +82,9 @@ def validate_parameters(
     coverage_demands = parameters["Coverage demands"]
     validate_coverage_demands(coverage_demands)
 
+    coverage_total = parameters["Total coverage"]
+    validate_coverage_total(coverage_total)
+
     redundancy_threshold = parameters["Redundancy threshold"]
     validate_redundancy_threshold(redundancy_threshold)
 
@@ -89,5 +96,6 @@ def validate_parameters(
         number_of_isolates,
         coefficients_array,
         coverage_demands,
+        coverage_total,
         redundancy_threshold,
     )
