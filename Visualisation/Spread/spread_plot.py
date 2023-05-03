@@ -1,5 +1,5 @@
 import pandas as pd
-from Spread_plot.spread_plot_functions import *
+from Spread.spread_plot_functions import *
 
 
 def main(chosen_isolates_list=None):

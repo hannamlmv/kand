@@ -6,7 +6,7 @@ Author: Hanna Malmvall
 """
 
 from Visualisation.plotly_testpanel_vis import main as spread_vis
-from spread_per_antibiotic import main as spread_print
+from Visualisation.Spread_plot.spread_per_antibiotic import main as spread_print
 
 panel = "Chosen_isolates_folder/Chosen_isolates.csv"
 all_isolates = "Chosen_isolates_folder/all_isolates.csv"
