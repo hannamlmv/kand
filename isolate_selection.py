@@ -9,10 +9,10 @@ import json
 import time
 import pandas as pd
 from Classes.panel_class import Panel
-from Classes.isolate_class import create_isolate_list
-from help_functions.validate_parameters import validate_parameters
-from help_functions.add_isolate_functions import add_isolate
-#from Visualisation.plotly_testpanel_vis import main as visualize_panel
+from help_functions.create_isolate_list import create_isolate_list
+from Isolate_selection_functions.validate_parameters import validate_parameters
+from Isolate_selection_functions.add_isolate_functions import add_isolate
+from Visualisation.Plots.Spread.spread_plot import main as visualize_panel
 
 
 def measure_time(func):
