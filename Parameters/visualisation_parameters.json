@@ -1,0 +1,10 @@
+{
+    "Spread visualisation": true,
+    "Coverage visualisation": true,
+    "Redundancy heatmap": true,
+    "Redundancy tree": true,
+    "Redundancy bars": true,
+
+    "Spread per antibiotic print-out": true,
+    "Uniqueness print-out": true
+}

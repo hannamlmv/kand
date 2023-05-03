@@ -6,7 +6,7 @@ Author: Hanna Malmvall
 """
 import pandas as pd
 from Classes.panel_class import Panel
-from Classes.isolate_class import create_isolate_list
+from help_functions.create_isolate_list import create_isolate_list
 
 
 def create_panel(isolate_list: list):

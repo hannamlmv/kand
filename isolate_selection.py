@@ -10,9 +10,9 @@ import time
 import pandas as pd
 from Classes.panel_class import Panel
 from help_functions.create_isolate_list import create_isolate_list
-from Isolate_selection_functions.validate_parameters import validate_parameters
-from Isolate_selection_functions.add_isolate_functions import add_isolate
-from Visualisation.Plots.Spread.spread_plot import main as visualize_panel
+from help_functions.validate_parameters import validate_parameters
+from help_functions.add_isolate_functions import add_isolate
+#from Visualisation.Plots.Spread.spread_plot import main as visualize_panel
 
 
 def measure_time(func):
@@ -30,9 +30,9 @@ def measure_time(func):
 def main():
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
     excel_sheet_name = "matrix EU"
-    antibiotic_ranges_file_path = "abx_ranges.json"
-    parameters_file_path = "parameters.json"
-    VISUALIZE = False
+    antibiotic_ranges_file_path = "Parameters/abx_ranges.json"
+    parameters_file_path = "Parameters/isolate_selection_parameters.json"
+    #VISUALIZE = False
     GET_CSV = True
     chosen_isolates_file_path = "Chosen_Isolates_folder/Chosen_isolates.csv"
 
@@ -66,8 +66,8 @@ def main():
         coverage_total
     )
 
-    if VISUALIZE:
-        visualize_panel(panel.to_DataFrame())
+    #if VISUALIZE:
+        #visualize_panel(panel.to_DataFrame())
 
     if GET_CSV:
         panel.to_csv(chosen_isolates_file_path)
