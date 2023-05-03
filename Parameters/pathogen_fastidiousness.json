@@ -1,0 +1,31 @@
+{
+    "Non-fastidious": [
+        "Staphylococcus epidermidis",
+        "Staphylococcus hominis",
+        "Staphylococcus capitis",
+        "Staphylococcus haemolyticus",
+        "Staphylococcus warneri",
+        "Staphylococcus auricularis",
+        "Staphylococcus aureus",
+        "Staphylococcus lugdunensis",
+        "Enterococcus faecium",
+        "Enterococcus faecalis"
+    ],
+    "Fastidious": [
+        "Streptococcus pneumoniae",
+        "Streptococcus mitis",
+        "Streptococcus oralis",
+        "Streptococcus anginosus",
+        "Streptococcus salivarius",
+        "Streptococcus gallolyticus",
+        "Streptococcus parasanguinis",
+        "Streptococcus constellatus",
+        "Streptococcus gordonii",
+        "Streptococcus intermedius",
+        "Streptococcus mutans",
+        "Streptococcus pyogenes",
+        "Streptococcus agalactiae",
+        "Streptococcus dysgalactiae",
+        "Streptococcus sanguinis"
+    ]
+}

@@ -6,8 +6,16 @@ Author: Victor Wong
 """
 
 import pandas as pd
-from Visualisation.Plots.Spread.spread_plot_functions import *
-from Visualisation.Plots.Spread.data_extraction_functions import *
+from Visualisation.Plots.Spread.spread_plot_functions import (
+    create_plot_df,
+    plotly_dotplot,
+)
+from Visualisation.Plots.Spread.data_extraction_functions import (
+    extract_chosen_isolates,
+    extract_mic_data,
+    extract_SIR,
+    filter_mic_values,
+)
 
 
 def main(chosen_isolates_list=None):

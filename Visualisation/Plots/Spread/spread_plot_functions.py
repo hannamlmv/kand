@@ -8,7 +8,11 @@ Author: Victor Wong
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from Visualisation.Plots.Spread.data_extraction_functions import parse_fastidious, parse_on_off_scale
+from Visualisation.Plots.Spread.data_extraction_functions import (
+    parse_fastidious,
+    parse_on_off_scale,
+)
+
 
 def create_plot_df(
     antibiotics: list, mic_data: list, x_jitter: float = 0.15, y_jitter: float = 0.05
@@ -17,6 +21,10 @@ def create_plot_df(
 
     mic_dict = {"S": "Sensitive", "I": "Intermediate", "R": "Resistant"}
 
+    # Set ticks of x axis
+    x_axis = [i for i in range(len(antibiotics))]
+
+    # TODO Move this outside of function. Read in this data from json file
     fastidious_dict = {
         "Non-fastidious": [
             "Staphylococcus epidermidis",
@@ -48,9 +56,6 @@ def create_plot_df(
             "Streptococcus sanguinis",
         ],
     }
-
-    # Set ticks of x axis
-    x_axis = [i for i in range(len(antibiotics))]
 
     # Initialize lists to hold values used for plotting
     x_values, y_values = [], []
@@ -184,6 +189,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]
 
+    # TODO should this be outside of function scope?
     y_axis_ticktext = [
         "Min C",
         "0.00195",
@@ -213,7 +219,7 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
     fig = px.scatter(
         plot_df,
         x="Antibiotics",
-        y="Log2(MIC-value)",
+        y="MIC-value",
         hover_name="Isolate names",
         color="SIR",
         opacity=0.7,
@@ -232,7 +238,6 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
 
     # Changes the dot color depending on SIR category
     def change_trace_color(trace):
-        print(trace)
         if trace.name == "Resistant":
             trace.update(marker_color="tomato")
         elif trace.name == "Intermediate":
@@ -261,5 +266,5 @@ def plotly_dotplot(plot_df: pd.DataFrame, antibiotics: list) -> None:
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         title_x=0.5,
     )
-    fig.write_html("first_figure.html", auto_open=True)
-    # fig.show()
+    # fig.write_html("first_figure.html", auto_open=True)
+    fig.show()
