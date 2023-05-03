@@ -7,7 +7,6 @@ Author: Victor Wong
 
 import numpy as np
 
-
 def validate_number_of_isolates(number_of_isolates: int) -> None:
     """
     Validate number of isolates. Must be integer greater than or equal to 1

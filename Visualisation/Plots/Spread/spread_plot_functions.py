@@ -1,3 +1,10 @@
+"""
+Functions used when creating the spread-plot 
+
+Date: 10/4 
+Author: Victor Wong
+"""
+
 import pandas as pd
 import numpy as np
 import plotly.express as px

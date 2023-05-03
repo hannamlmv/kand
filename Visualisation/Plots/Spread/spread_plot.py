@@ -1,7 +1,13 @@
+"""
+Creates the spread-plot 
+
+Date: 10/4 
+Author: Victor Wong
+"""
+
 import pandas as pd
 from Visualisation.Plots.Spread.spread_plot_functions import *
 from Visualisation.Plots.Spread.data_extraction_functions import *
-
 
 def main(chosen_isolates_list=None):
     # Load files

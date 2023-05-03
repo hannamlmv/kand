@@ -1,3 +1,10 @@
+"""
+Creates a list of isolates from a dataframe
+
+Date: 25/4 
+Author: Victor Wong
+"""
+
 import pandas as pd
 from help_functions.extract_and_parse import parse_antibiotic_data, extract_antibiotic_data
 from Classes.isolate_class import Isolate

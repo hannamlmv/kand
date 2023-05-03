@@ -6,7 +6,6 @@ Date: 10/4
 Author: Victor Wong
 """
 
-
 def parse_antibiotic_data(data: str):
     """Checks if the data is 'nip' or Missing BP'. Used in"""
     if type(data) is not str:
