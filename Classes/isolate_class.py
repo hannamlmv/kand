@@ -23,6 +23,7 @@ class Isolate:
     def __repr__(self) -> str:
         return self.name
 
+    ### Getter methods ###
     def get_name(self) -> str:
         return self.name
 

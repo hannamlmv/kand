@@ -8,7 +8,6 @@ Author: Victor Wong and Hanna Malmvall
 import pandas as pd
 from Classes.isolate_class import Isolate
 
-
 class Panel:
     def __init__(
         self,
@@ -29,7 +28,6 @@ class Panel:
         self.number_of_antibiotics = number_of_antibiotics
 
     ### Getter methods ###
-
     def get_chosen_isolates(self) -> list[Isolate]:
         return self.chosen_isolates
 
@@ -57,7 +55,6 @@ class Panel:
         }
 
     ### Methods to add and remove isolates from the panel ###
-
     def append_isolate(self, isolate) -> None:
         self.chosen_isolates.append(isolate)
 
