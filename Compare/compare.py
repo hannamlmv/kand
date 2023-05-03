@@ -10,7 +10,7 @@ import pandas as pd
 import json
 from help_functions.score_calc_functions import calc_scores
 from help_functions.validate_parameters import *
-from help_functions.create_panel import create_panel
+from create_panel import create_panel
 
 # Makes the bar-chart
 def compare_plot(panels):

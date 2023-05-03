@@ -8,7 +8,7 @@ Author: Hanna Malmvall
 import pandas as pd
 import json
 from pprint import pprint
-from help_functions.create_panel import create_panel
+from Compare.create_panel import create_panel
 from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
 
 def main(chosen_isolates, all_isolates):
