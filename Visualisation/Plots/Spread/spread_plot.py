@@ -50,9 +50,9 @@ def main(chosen_isolates_list=None):
     mic_data = extract_mic_data(filtered_chosen_isolates_SIR, antibiotics)
 
     # Create dataframe used for plotting
-    plot_df = create_plot_df(antibiotics, mic_data, antibiotic_ranges, fastidious_dict)
+    plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)
 
-    plotly_dotplot(plot_df, antibiotics)
+    plotly_dotplot(plot_df, antibiotics, antibiotic_ranges)
 
 
 if __name__ == "__main__":
