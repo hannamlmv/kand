@@ -1,6 +1,7 @@
+import pandas as pd
 from help_functions.extract_and_parse import parse_antibiotic_data, extract_antibiotic_data
 from Classes.isolate_class import Isolate
-import pandas as pd
+
 
 def create_isolate_list(matrix_EU: pd.DataFrame) -> list[Isolate]:
     all_isolates = []

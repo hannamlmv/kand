@@ -20,7 +20,7 @@ bools = validate_visualisation_parameters(
 
 #Visualisations
 if bools["Spread visualisation"]:
-    #spread_vis(panel)
+    spread_vis(panel)
     pass
 if bools["Coverage visualisation"]:
     #coverage_vis(panel)
@@ -37,7 +37,7 @@ if bools["Redundancy bars"]:
 
 #Printouts
 if bools["Spread per antibiotic print-out"]:
-    #spread_print(panel, all_isolates)
+    spread_print(panel, all_isolates)
     pass
 if bools["Uniqueness print-out"]:
     #redundancy(panel)

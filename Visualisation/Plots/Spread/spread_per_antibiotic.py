@@ -18,7 +18,7 @@ def main(chosen_isolates, all_isolates):
         isolate_panel = create_panel(isolate_list)
         spread_per_abx = calc_spread_score(
             extract_panel_data(isolate_panel),
-            json.load(open("abx_ranges.json")),
+            json.load(open("Parameters/abx_ranges.json")),
             isolate_panel.get_number_antibiotics(),
             True
         )
