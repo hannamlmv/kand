@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from data_extraction_functions import parse_fastidious, parse_on_off_scale
+from Visualisation.Plots.Spread.data_extraction_functions import parse_fastidious, parse_on_off_scale
 
 def create_plot_df(
     antibiotics: list, mic_data: list, x_jitter: float = 0.15, y_jitter: float = 0.05

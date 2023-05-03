@@ -66,7 +66,7 @@ def validate_redundancy_threshold(redundancy_threshold: int) -> None:
             "Redundancy threshold must be an integer greater or equal to 1."
         )
 
-
+# Validates all isolate selection parameters
 def validate_parameters(
     parameters: dict,
 ) -> dict[str : int | dict[str:float] | dict[str:int] | int | int]:
@@ -99,3 +99,16 @@ def validate_parameters(
         coverage_total,
         redundancy_threshold,
     )
+
+
+# Validates all visualisation parameters
+def validate_visualisation_parameters(
+        parameters:dict,
+) -> dict:
+    for bools in parameters.values():
+        if not isinstance(bools, bool):
+            raise TypeError(
+            "Visualisation parameters must be 'true' or 'false'"
+        )
+    
+    return parameters

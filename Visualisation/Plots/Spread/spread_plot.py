@@ -1,6 +1,6 @@
 import pandas as pd
-from spread_plot_functions import *
-from data_extraction_functions import *
+from Visualisation.Plots.Spread.spread_plot_functions import *
+from Visualisation.Plots.Spread.data_extraction_functions import *
 
 
 def main(chosen_isolates_list=None):
