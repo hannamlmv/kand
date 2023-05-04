@@ -6,8 +6,6 @@ import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
 from IPython.display import display
-import random
-import json
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.graph_objects as go 
@@ -153,10 +151,13 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
         xaxis_title="Antibiotika",
         yaxis_title="Antal stammar",
         barmode='stack', 
-        template = 'plotly_dark')
-
-    # Saves the plot
-    #fig.write_image('stacked1.png')
+        template = 'plotly_dark',
+        showlegend=True,
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)',
+            font=dict(size=12, color='white')
+            )
+        )
 
     #Show the plot
     fig.show()
@@ -214,8 +215,6 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
             }, 
         xaxis_title="Antibiotika",
         yaxis_title="Stam",
-        height=1400,
-        width=550,
         margin=dict(l=50, r=50, b=50, t=50),
         showlegend=False,
         xaxis=dict(
@@ -229,15 +228,9 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
     template = 'plotly_dark')
 
     fig.update_traces(showscale = False)
-    
-    # Saves the plot
-    #fig.write_image('stacked2.png')
 
     #Show the plot
     fig.show()
-  
- 
-
 
 def main(panel, sir_stackplot, coverage_per_isolates):
    """ Creates the coverage plots. """

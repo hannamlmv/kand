@@ -7,6 +7,7 @@ import re
 import plotly.figure_factory as ff
 import screeninfo
 from pprint import pprint
+
 screen = screeninfo.get_monitors()[0]
 width, height = screen.width, screen.height
 
@@ -283,7 +284,7 @@ def barplot(SIR_total_per_anti, plot:bool):
                                    of each antibiotic
     Returns:
         (fig): a figure containing the bar plot
-    """
+    """ 
     colors = {'A': 'limegreen', 'B': 'gold', 'C': 'tomato'}
     keys = list(SIR_total_per_anti.keys())
     values = list(SIR_total_per_anti.values())
