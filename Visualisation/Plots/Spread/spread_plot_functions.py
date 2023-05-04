@@ -56,13 +56,13 @@ def create_plot_df(
     # Create a DF used for plotting
     plot_df = pd.DataFrame(
         {
-            "Antibiotics": x_values,
-            "Log2(MIC-value)": y_values,
-            "Isolate names": isolate_names,
+            "Antibiotikor": x_values,
+            "MIC värden": y_values,
+            "Isolatnamn": isolate_names,
             "SIR": SIR_category_list,
             "Scale": on_off_scale,
             "Patogen": pathogen_list,
-            "MIC värde": MIC_value_list,
+            "Display MIC värde": MIC_value_list,
             "Fastidiousness": fastidious_list,
         },
         index=np.arange(len(x_values)),
@@ -202,11 +202,11 @@ def plotly_dotplot(
         range_y=[-11, 12],
         template="plotly_dark",
         hover_data={
-            "Antibiotics": False,
-            "Log2(MIC-value)": False,
+            "Antibiotikor": False,
+            "MIC värden": False,
             "Scale": False,
             "Patogen": True,
-            "MIC värde": True,
+            "Display MIC värde": True,
             "Fastidiousness": True,
         },
     )
@@ -225,7 +225,7 @@ def plotly_dotplot(
     # Update dot color
     fig.for_each_trace(change_trace_color)
 
-    add_rectangles_to_plot(fig, antibiotics, antibiotic_ranges)
+    add_rectangles_to_plot(fig, antibiotics)
 
     # Add border to dots
     fig.update_traces(marker=dict(line=dict(width=1, color="DarkSlateGrey")))
@@ -241,5 +241,5 @@ def plotly_dotplot(
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         title_x=0.5,
     )
-    # fig.write_html("first_figure.html", auto_open=True)
-    fig.show()
+    fig.write_html("first_figure.html", auto_open=True)
+    #fig.show()

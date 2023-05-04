@@ -123,7 +123,7 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list) -> di
             else:
                 # If SIR = "Missing BP" or "nip"
                 chosen_isolates_mic_sir_data[antibiotic].append(
-                    (isolate, mic, None, None, pathogen)
+                    (isolate, mic_sir_data, None, None, pathogen)
                 )
     return chosen_isolates_mic_sir_data
 
