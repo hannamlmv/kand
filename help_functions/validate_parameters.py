@@ -9,7 +9,7 @@ import numpy as np
 
 def validate_number_of_isolates(number_of_isolates: int) -> None:
     """
-    Validate number of isolates. Must be integer greater than or equal to 1
+    Validate number of isolates. Must be integer greater than or equal to 1.
     """
     if not isinstance(number_of_isolates, int) or number_of_isolates < 1:
         raise ValueError(
@@ -19,7 +19,7 @@ def validate_number_of_isolates(number_of_isolates: int) -> None:
 
 def validate_coefficients(coefficients: dict[str:float]) -> None:
     """
-    Validate coefficients. Must be dictionary with str as key and float as value
+    Validate coefficients. Must be dictionary with str as key and float as value.
     """
     if not isinstance(coefficients, dict):
         raise TypeError("Coefficients must be a dictionary.")
@@ -39,7 +39,7 @@ def validate_coefficients(coefficients: dict[str:float]) -> None:
 def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
     """
     Checks to see if the coverage_demands dictionary contains
-    correct data types and if the demands are greater than 0
+    correct data types and if the demands are greater than 0.
     """
     if not isinstance(coverage_demands, dict):
         raise TypeError("Coverage demands must be a dictionary.")
@@ -56,10 +56,12 @@ def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
         raise ValueError("Sum of demand values can not be 0.")
 
 def validate_coverage_total(coverage_total: int) -> None:
+    """ Checks to see that coverage_total is an integer greater than 0. """
     if not isinstance(coverage_total, int) or coverage_total < 0:
         raise TypeError("Total coverage must be an integer greater than or equal to 0.")
 
 def validate_redundancy_threshold(redundancy_threshold: int) -> None:
+    """ Checks to see that redundancy_threshold is an integer greater than 0. """
     if not isinstance(redundancy_threshold, int) or redundancy_threshold < 1:
         raise ValueError(
             "Redundancy threshold must be an integer greater or equal to 1."
@@ -104,6 +106,7 @@ def validate_parameters(
 def validate_visualisation_parameters(
         parameters:dict,
 ) -> dict:
+    """ Checks that all visualisation parameters are either 'true' or 'false'. """
     for bools in parameters.values():
         if not isinstance(bools, bool):
             raise TypeError(
