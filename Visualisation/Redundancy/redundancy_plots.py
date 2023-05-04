@@ -193,9 +193,9 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
         x=chosen_isolate_names,
         y=chosen_isolate_names,
         colorscale='mint',
-        customdata=[(x, y) for x in chosen_isolate_names for y in chosen_isolate_names],
+        #customdata=[(x, y) for x in chosen_isolate_names for y in chosen_isolate_names],
         hovertemplate='Isolat 1: %{x}<br>Isolat 2: %{y}<br>Likhet: %{z}<br>',
-                        zhoverformat='.2f'
+        zhoverformat='.2f'
     )
 )
 
