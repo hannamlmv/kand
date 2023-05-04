@@ -223,6 +223,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
         ),
     template = 'plotly_dark')
 
+    fig.update_traces(showscale = False)
     
     # Saves the plot
     #fig.write_image('stacked2.png')
