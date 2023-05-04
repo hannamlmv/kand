@@ -292,9 +292,9 @@ def barplot(SIR_total_per_anti, plot:bool):
     R = [dict['R'] for dict in values]
 
     fig = go.Figure(data=[
-        go.Bar(name='Sensitive', x = keys, y = S, marker={'color': colors['A']}),
-        go.Bar(name='Intermediate', x = keys, y = I, marker={'color': colors['B']}),
-        go.Bar(name='Resistant', x = keys, y = R, marker ={'color': colors['C']})
+        go.Bar(name='Känslig', x = keys, y = S, marker={'color': colors['A']}),
+        go.Bar(name='Intermediär', x = keys, y = I, marker={'color': colors['B']}),
+        go.Bar(name='Resistent', x = keys, y = R, marker ={'color': colors['C']})
     ])
 
     fig.update_layout(barmode='stack', template="plotly_dark" ,title={
