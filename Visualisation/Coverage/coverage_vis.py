@@ -18,14 +18,15 @@ def extract_chosen_isolates(
    chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
 ) -> pd.DataFrame:
    """
-   Select the chosen isolates from the script. Return a DataFrame only containing the rows of selected isolates
+   Select the chosen isolates from the script. Return a 
+   DataFrame only containing the rows of selected isolates.
    """
    chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
    return matrix_EU[chosen_rows]
 
 
 def find_digits(SIR: str) -> int:
-   """Find numbers in a string"""
+   """ Find numbers in a string. """
    digit = ""
    for character in SIR:
        if character.isdigit() or character == ".":
@@ -88,9 +89,7 @@ def extract_SIR_M(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
 
 
 def filter_mic_values(chosen_isolates_SIR: dict) -> None:
-   """
-   Remove the tuples that have None in their SIR data
-   """
+   """ Remove the tuples that have None in their SIR data. """
    for antibiotic, SIR_data in chosen_isolates_SIR.items():
        chosen_isolates_SIR[antibiotic] = list((tup for tup in SIR_data if tup is not None))
    return chosen_isolates_SIR
@@ -98,8 +97,9 @@ def filter_mic_values(chosen_isolates_SIR: dict) -> None:
 
 def collect_number_of_S_I_R(chosen_isolates_SIR: dict, antibiotics: list) -> dict:
     """
-    Counts every S,I,R value for every antibiotic. Returns a dictionary with the antibiotic as the key, and a list with hte counts of the S,I,R-values 
-    (in that order)
+    Counts every S,I,R value for every antibiotic. Returns a dictionary with the 
+    antibiotic as the key, and a list with hte counts of the S,I,R-values 
+    (in that order).
     """
     count_isolates_SIR={}
     for antibiotic, SIR_data in chosen_isolates_SIR.items():
@@ -121,7 +121,8 @@ def collect_number_of_S_I_R(chosen_isolates_SIR: dict, antibiotics: list) -> dic
 
 def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
     """
-    Plots the panel in the form of a stack plot, with the amount of Sensitive MIC-values in green, Intermediate MIC-values in yellow, and Resistant
+    Plots the panel in the form of a stack plot, with the amount of Sensitive 
+    MIC-values in green, Intermediate MIC-values in yellow, and Resistant
     MIC-values in red. 
     """
     S =[]
@@ -163,8 +164,8 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
 
 def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M: dict):
     """
-    Creates heatmap over every single isolate and the coverage amount for every antibiotic. Green for sensitive, yellow for intermediate and
-    red for resistant.
+    Creates heatmap over every single isolate and the coverage amount for every 
+    antibiotic. Green for sensitive, yellow for intermediate and red for resistant.
     """
     y_list = []
     x = chosen_isolates_list
@@ -235,6 +236,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
 
 
 def main(panel, sir_stackplot, coverage_per_isolates):
+   """ Creates the coverage plots. """
    # Load files
    chosen_isolates_list = pd.read_csv(panel)
    CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
@@ -256,9 +258,6 @@ def main(panel, sir_stackplot, coverage_per_isolates):
    S_I_R_per_antibiotic = collect_number_of_S_I_R(filtered_chosen_isolates_SIR, antibiotics)
 
    # Plots a stackplot over the panel, with S,I,R-values in different colors.
-
-   """sir_stackplot och coverage_per_isolates kan tas bort helt och läggastill i parameterlistan"""
-
    if sir_stackplot:
         plot_coverage(antibiotics, S_I_R_per_antibiotic)
 
