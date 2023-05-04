@@ -12,37 +12,19 @@ screen = screeninfo.get_monitors()[0]
 width, height = screen.width, screen.height
 
 def read_csv(Csv_name: str):
-    """
-    Reads the CSV file
-    Args:
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-    Returns:
-        (Dataframe): a new DataFrame with the data and labels from the CSV-file, in this case the isolate names
-    """
+    """ Reads the CSV file. """
     return pd.read_csv(Csv_name)
 
 def read_excel(excel_name: str, sheet_name: str):
-    """
-    Reads the excel file c
-    Args:
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (Dataframe): a new DataFrame with the data and labels from the excel sheet
-    """
+    """ Reads the excel file. """
     excel_file = pd.ExcelFile(excel_name)
     title_excel = sheet_name
     return pd.read_excel(excel_file, title_excel)
 
 def choose_isolates(Csv_name: str, excel_name: str, sheet_name: str):
     """
-    Looks at the isolates from the CSV-file and picks out these isolates and their MIC-values from the excel sheet
-    Args:
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (Dataframe): a new DataFrame with the data and labels from the excel sheet
+    Looks at the isolates from the CSV-file and picks out these isolates 
+    and their MIC-values from the excel sheet.
     """
     csv = read_csv(Csv_name)
     excel_sheet = read_excel(excel_name, sheet_name)
@@ -52,35 +34,26 @@ def choose_isolates(Csv_name: str, excel_name: str, sheet_name: str):
 
 def get_antibiotic_names(excel_name: str, sheet_name: str):
     """
-    Uses the function read_excel to read the excel file and then take out the names of the antibiotics
-    Args:
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (list): a list containing the names of the antibiotics
+    Uses the function read_excel to read the excel file and then take 
+    out the names of the antibiotics.
     """
     matrix = read_excel(excel_name, sheet_name)
     return list(matrix.drop(columns=["Isolate", "Pathogen","Source RMT","D-test"]).columns)
 
 def antibiotic_dict(antibiotic_names: list):
     """
-    Takes a list of antibiotic names and initiates a dictionary where the antibiotics are the keys
-    Args:
-        antibiotic_names (lst): a list conating all antibiotics
-    Returns:
-        (dict): a dictionary with the antibiotics as keys and an empty list as their value
+    Takes a list of antibiotic names and initiates a dictionary where 
+    the antibiotics are the keys.
     """
     return {antibiotic: [] for antibiotic in antibiotic_names}
 
 def extract_abx_data(abx_data: tuple):
     """
-    Takes a touple containing an the MIC-value as well as the SIR-category in a string
-    for an antibiotic as well as the antibiotic name and extracts the SIR-category and the MIC-value respectively.
-    If there is no MIC value it is set to zero and will later be sorted away. The same will be done if the MIC-value is Off-scale.
-    Args:
-        abx_data (tuple): a tuple containing the MIC-value from the excel sheet and the antibiotic it belongs to
-    Returns:
-        (tuple): a tuple containg the MIC value and SIR category for a certain isolate and antibiotic
+    Takes a touple containing an the MIC-value as well as the SIR-category 
+    in a string for an antibiotic as well as the antibiotic name and extracts 
+    the SIR-category and the MIC-value respectively. If there is no MIC value 
+    it is set to zero and will later be sorted away. The same will be done 
+    if the MIC-value is Off-scale.
     """
     SIR_category = re.findall('^[a-zA-Z]+', str(abx_data[1]))
     MIC_value = ['0']
@@ -104,14 +77,7 @@ def extract_abx_data(abx_data: tuple):
 def create_isolate_data(Csv_name: str, excel_name: str, sheet_name: str):
     """
     Uses the function choose_isolates to get the wanted isolates and create a dictionary where
-    the isolates are the keys and their values are all the MIC-valaues for that isolate
-    Args:
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (dict): a dictionary with the isolates as keys and a list containing all the MIC-values and
-                their SIR category of that isolate in a touple
+    the isolates are the keys and their values are all the MIC-valaues for that isolate.
     """
     chosen_isolate = choose_isolates(Csv_name, excel_name, sheet_name)
     isolate_data = {}
@@ -123,24 +89,16 @@ def create_isolate_data(Csv_name: str, excel_name: str, sheet_name: str):
 
 def count_values(lst: list):
     """
-    A counter that is used to count the frequency of elements in a list and return a dictionary that maps each unique element in the list to its frequency.
-    This will be used to count the R-score.
-    Args:
-        lst (list): a list containing elements to be countes
-    Returns:
-        (dict): a dictionary containing the elements of the list as keys and their frequency
+    A counter that is used to count the frequency of elements in a list and return a 
+    dictionary that maps each unique element in the list to its frequency. This will 
+    be used to count the R-score.
     """
     return dict(Counter(lst))
 
 def antibiotic_names_gets_values(Csv_name: str, excel_name: str, sheet_name: str):
     """
-    Creates a dictionary where the antibiotic is the key and the value includes all it's MIC-values and their SIR category in touples for every isolate
-    Args:
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (dict): a dictionary containing the antibiotics as keys and their values are for every isolate there is a tuple containing the MIC-value and the SIR-category
+    Creates a dictionary where the antibiotic is the key and the value includes all 
+    it's MIC-values and their SIR category in touples for every isolate.
     """
     isolates = choose_isolates(Csv_name, excel_name, sheet_name)
     choosen_isolate_names = isolates.Isolate.values.tolist()
@@ -158,17 +116,6 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
     """
     Calculates the amount of redundant MIC-values that exists for each antibiotic and categorizes these
     after the SIR-category of the MIC-value.
-    Args:
-        dict_with_iso (dict): a dictionary containing the antibiotics as keys. The value is a tuple containing
-                              the MIC-value and the SIR-category for every isolate.
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for
-                                  each antibiotic
-        threshold_redundancy (int): a integer that decides how many
-    Returns:
-        (list): a list that contains the amount of redundant MIC-values for each antibiotic
-        (dict): a dictionary that tells us how many redundant MIC-values there is for each SIR-category
-                of each antibiotic
     """
     antibiotic_names = get_antibiotic_names(excel_name, sheet_name)
     redundant_dictionary = {antibiotic: 0 for antibiotic in antibiotic_names}
@@ -215,15 +162,8 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
 
 def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name: str, plot : bool):
     """
-    Takes in a dictionary containing the isolate data and uses this data to create a heatmap that shows how similar each isolate is to eachother.
-    Args:
-        isolate_data (dict): a dictionary with the isolates as keys and a list containing all the MIC-values and their SIR category of that isolate in a touple
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value for each antibiotic
-    Returns:
-        (np.array): a np.array that contains a similarity matrix
-        (list): a list containing the worst isolate scores??????????
+    Takes in a dictionary containing the isolate data and uses this data to create a 
+    heatmap that shows how similar each isolate is to eachother.
     """
     chosen_isolate = choose_isolates(Csv_name, excel_name, sheet_name)
     chosen_isolate_names = chosen_isolate.Isolate.values.tolist()
@@ -278,12 +218,6 @@ def barplot(SIR_total_per_anti, plot:bool):
     """
     Plots the bar plot containing the amounts of MIC-values that are redundant for each antibiotic. It also
     shows the amount of redundant MIC-values from each SIR-cateegory in different colors.
-    Args:
-        R_score (list): a list that contains the amount of redundant MIC-values for each antibiotic
-        SIR_total_per_anti (dict): a dictionary that tells us how many redundant MIC-values there is for each SIR-category
-                                   of each antibiotic
-    Returns:
-        (fig): a figure containing the bar plot
     """ 
     colors = {'A': 'limegreen', 'B': 'gold', 'C': 'tomato'}
     keys = list(SIR_total_per_anti.keys())
@@ -331,14 +265,6 @@ def heatmapscore(y):
 def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, plot:bool):
     """
     Plots a tree plot to see how closely related the isolates are when comparing their MIC-values.
-    Args:
-        similarity (np.array): a np.array that contains a similarity matrix
-        Csv_name (CSV-file): a CSV-file with a list of isolate names chosen for the panel
-        excel_name (Excel-file): a Excel-file containing data concerning isolates and antibiotics
-        sheet_name (Excel sheet): a sheet in the excel file that contains isolates and their MIC-value
-                                  for each antibiotic
-    Returns:
-        (fig): a figure containing the phylogenetic tree
     """
     chosen_isolate = choose_isolates(Csv_name, excel_name, sheet_name)
     chosen_isolate_names = chosen_isolate.Isolate.values.tolist()
@@ -369,17 +295,6 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
     This by comparing each isolates MIC-value with every other isolates MIC-value with the same index. 
     If an isolate has a value at a specific index, that no other isolate has at the same index. 
     Then the mic-value, the region(SIR) and the name of the antibiotic is saved.
-
-    Args:
-        isolate_selection (dict): A dictionary that contains the isolate names as keys and a list as a value.
-        The list contains each MIC-value that the isolate have.
-        Antibiotic_names (list): A list with the names of each antibiotic. 
-
-    Returns:
-        Dictionary: Returns a dictionary that has the name of the isolate as key and two different type of values. A tuple and a string.
-        The tuple has two elements, where the first element is the MIC-value for the isolate,
-        and the second is whether the value was S I or R.
-        The second value in the dicionary, has the type string and it represents which antibiotic the first value occurs in.
     """
     result = {}
     for key, value in isolate_selection.items():
@@ -405,18 +320,9 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
         return pprint(sorted_dict)
 
 def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool):
-    """The main function calls upon all the other functions and takes boolean inputs that the user chooses themselves.
-    A true means that the visualisation or print out will be performed, and a false would mean that it would not be performed.
-
-    Args:
-        display_barplot (bool): A true or false that is chosen in another file, regards whether the user wants to visualise
-        the barplot or not.
-        display_heatmap (bool):A true or false that is chosen in another file, regards whether the user wants to visualise
-        the heatmap or not.
-        display_phylo (bool): A true or false that is chosen in another file, regards whether the user wants to visualise
-        the dendrogram or not.
-        print_unique_scores (bool): A true or false that is chosen in another file, regards whether the user wants to print out
-        the uniqueness of each panel or not.
+    """The main function calls upon all the other functions and takes boolean inputs that the 
+    user chooses themselves. A true means that the visualisation or print out will be performed, 
+    and a false would mean that it would not be performed.
     """
     # The specified threshold for how many values that are allowed to have the same MIC-value until it is considered redundant
     threshold_redundancy = 1
