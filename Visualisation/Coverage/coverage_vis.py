@@ -187,18 +187,22 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
     # Create heatmap trace
     colorscale = [[0, 'green'], [0.2, 'yellow'], [0.5, 'Red'], [1, '#111111']]
 
+    # Change the largest name to smaller
+    antibiotics_edited=[i for i in antibiotics]
+    antibiotics_edited[20]='T.sulfamethoxazole'
+
     # Create heatmap trace with categorical color scale
-    heatmap = go.Heatmap(z=data, colorscale=colorscale)
+    heatmap = go.Heatmap(z=data, 
+                        colorscale=colorscale,
+                        hovertemplate='Antibiotika: %{x}<br>Isolat: %{y}',
+                        zhoverformat='.2f'
+                        )
 
     # Create subplot grid
     fig = sp.make_subplots(rows=1, cols=1)
 
     # Add heatmap trace to subplot
     fig.add_trace(heatmap)
-
-    # Change the largest name to smaller
-    antibiotics_edited=[i for i in antibiotics]
-    antibiotics_edited[20]='T.sulfamethoxazole'
 
     # Set layout properties
     fig.update_layout(

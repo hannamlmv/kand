@@ -245,21 +245,16 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
                 else:
                     cosine_similarity_val = cosine_similarity([list1, list2])[0][1]
                     similarity_matrix[i][j] = cosine_similarity_val
-    hovertext = list()
-    for yi, yy in enumerate(chosen_isolate_names):
-        hovertext.append(list())
-        for xi, xx in enumerate(chosen_isolate_names):
-            hovertext[-1].append('Isolat 1: {}<br />Isolat 2: {}<br />Likhet: {}'.format(xx, yy, similarity_matrix[yi][xi]))
 
     fig = go.Figure(
-    data=go.Heatmap(
+        data=go.Heatmap(
         z=similarity_matrix,
         x=chosen_isolate_names,
         y=chosen_isolate_names,
         colorscale='mint',
         customdata=[(x, y) for x in chosen_isolate_names for y in chosen_isolate_names],
-        hoverinfo='text',
-        text=hovertext
+        hovertemplate='Isolat 1: %{x}<br>Isolat 2: %{y}<br>Likhet: %{z}<br>',
+                        zhoverformat='.2f'
     )
 )
 
