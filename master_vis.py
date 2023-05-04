@@ -18,23 +18,36 @@ bools = validate_visualisation_parameters(
     json.load(open("Parameters/visualisation_parameters.json"))
     )
 
-#Visualisations
+
+
+#Spread
 if bools["Spread visualisation"]:
     spread_vis(panel)
 if bools["Spread per antibiotic print-out"]:
     spread_print(panel, all_isolates)
-if bools["Coverage visualisation"]:
-    #coverage_vis(panel)
-    pass
+
+#Coverage
+if (
+    bools["Coverage bars"] or 
+    bools["Coverage heatmap"]
+    ):
+    coverage_vis(
+        panel, 
+        bools["Coverage bars"], 
+        bools["Coverage heatmap"]
+        )
+    
+#Redundancy
 if (
     bools["Redundancy heatmap"] or 
     bools["Redundancy tree"] or 
     bools["Redundancy bars"] or 
     bools["Uniqueness print-out"]):
-    redundancy(panel, 
-               bools["Redundancy bars"], 
-               bools["Redundancy heatmap"], 
-               bools["Redundancy tree"], 
-               bools["Uniqueness print-out"]
-               )
+    redundancy(
+        panel, 
+        bools["Redundancy bars"], 
+        bools["Redundancy heatmap"], 
+        bools["Redundancy tree"], 
+        bools["Uniqueness print-out"]
+        )
 

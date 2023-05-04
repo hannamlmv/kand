@@ -1,6 +1,7 @@
 {
     "Spread visualisation": true,
-    "Coverage visualisation": true,
+    "Coverage bars": true,
+    "Coverage heatmap": true,
     "Redundancy heatmap": true,
     "Redundancy tree": true,
     "Redundancy bars": true,

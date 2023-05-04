@@ -212,9 +212,9 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
  
 
 
-def main(sir_stackplot, coverage_per_isolates):
+def main(panel, sir_stackplot, coverage_per_isolates):
    # Load files
-   chosen_isolates_list = pd.read_csv("Chosen_isolates_folder/Chosen_isolates_list.csv")
+   chosen_isolates_list = pd.read_csv(panel)
    CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
    matrix_EU = pd.read_excel(CIB, "matrix EU")
   
@@ -252,4 +252,4 @@ def main(sir_stackplot, coverage_per_isolates):
 
   
 if __name__ == "__main__":
-   main(True, True)
+   main("Chosen_isolates_folder/Chosen_isolates.csv", True, True)
