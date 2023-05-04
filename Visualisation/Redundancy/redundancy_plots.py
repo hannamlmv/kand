@@ -83,7 +83,7 @@ def extract_abx_data(abx_data: tuple):
     """
     SIR_category = re.findall('^[a-zA-Z]+', str(abx_data[1]))
     MIC_value = ['0']
-# Special cases if the value is shown as Missing BP or nip we put the MIC value to zero, this makes it easier to sort our later
+
     if 'Missing BP' in abx_data[1] or 'nip' in abx_data[1]:
         MIC_value = ['0']
         SIR_category = ['Missing BP']
@@ -91,13 +91,11 @@ def extract_abx_data(abx_data: tuple):
     elif 'nip' in abx_data[1]:
         MIC_value = ['0']
         SIR_category = ['Not in panel'] 
-        
-# Special cases if the value is Off-scale, this value is also set to zero so that it cana be sorted out later
+
     elif '<' in abx_data[1] or '>' in abx_data[1]:
         MIC_value = ['0']
         SIR_category = ['Off-scale']
 
-# Otherwise we found the MIC value by using another type of regular expression
     else:
         MIC_value = re.findall('(\d+\.?\d*)', str(abx_data[1]))
     return(MIC_value[0], SIR_category[0])
@@ -247,6 +245,11 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
                 else:
                     cosine_similarity_val = cosine_similarity([list1, list2])[0][1]
                     similarity_matrix[i][j] = cosine_similarity_val
+    hovertext = list()
+    for yi, yy in enumerate(chosen_isolate_names):
+        hovertext.append(list())
+        for xi, xx in enumerate(chosen_isolate_names):
+            hovertext[-1].append('FY: {}<br />Month: {}<br />Count: {}'.format(xx, yy, similarity_matrix[yi][xi]))
 
     fig = go.Figure(
     data=go.Heatmap(
@@ -254,7 +257,9 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
         x=chosen_isolate_names,
         y=chosen_isolate_names,
         colorscale='mint',
-        customdata=[(x, y) for x in chosen_isolate_names for y in chosen_isolate_names]
+        customdata=[(x, y) for x in chosen_isolate_names for y in chosen_isolate_names],
+        hoverinfo='text',
+        text=hovertext
     )
 )
 
