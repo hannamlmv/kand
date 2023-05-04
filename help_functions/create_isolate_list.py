@@ -11,6 +11,7 @@ from Classes.isolate_class import Isolate
 
 
 def create_isolate_list(matrix_EU: pd.DataFrame) -> list[Isolate]:
+    """ Creates a list of Isolate objects from a data frame. """
     all_isolates = []
     for _, row in matrix_EU.iterrows():
         isolate, pathogen, antibiotic_data = row[0], row[1], list(row[3:].items())
