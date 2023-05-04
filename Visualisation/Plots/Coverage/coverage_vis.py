@@ -145,7 +145,10 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
     fig.update_layout(barmode='stack', template = 'plotly_dark')
 
     # Saves the plot
-    fig.write_image('stacked1.png')
+    #fig.write_image('stacked1.png')
+
+    #Show the plot
+    fig.show()
 
 
 def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M: dict):
@@ -207,7 +210,10 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
 
     
     # Saves the plot
-    fig.write_image('stacked2.png')
+    #fig.write_image('stacked2.png')
+
+    #Show the plot
+    fig.show()
   
  
 
