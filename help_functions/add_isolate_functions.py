@@ -69,18 +69,7 @@ def add_isolate(
     coverage_penalties: dict,
     coverage_total: int,
 ):
-    """Use choose_isolate function to add desired number of isolates to the panel
-
-    Args:
-        number_of_isolates (int):
-        all_isolates (list[Isolate]):
-        panel (Panel):
-        coefficients (np.ndarray):
-        concentration_ranges (dict):
-        redundancy_threshold (int):
-        coverage_penalties (dict):
-        coverage_total (int):
-    """
+    """Use choose_isolate function to add desired number of isolates to the panel"""
     available_isolates = [
         isolate
         for isolate in all_isolates
