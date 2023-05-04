@@ -7,10 +7,10 @@ Author: Hanna Malmvall
 
 import json
 from help_functions.validate_parameters import validate_visualisation_parameters
-from Visualisation.Plots.Spread.spread_plot import main as spread_vis
-from Visualisation.Plots.Spread.spread_per_antibiotic import main as spread_print
-from Visualisation.Plots.Coverage.coverage_vis import main as coverage_vis
-from Visualisation.Plots.Redundancy.redundancy_plots import main as redundancy
+from Visualisation.Spread.spread_plot import main as spread_vis
+from Visualisation.Spread.spread_per_antibiotic import main as spread_print
+from Visualisation.Coverage.coverage_vis import main as coverage_vis
+from Visualisation.Redundancy.redundancy_plots import main as redundancy
 
 panel = "Chosen_isolates_folder/Chosen_isolates.csv"
 all_isolates = "Chosen_isolates_folder/all_isolates.csv"
