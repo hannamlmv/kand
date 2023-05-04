@@ -259,13 +259,21 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
 )
 
     fig.update_layout(
+        title={
+        'text': "Färgdiagram",
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis_title='Isolat',
+    yaxis_title='Isolat',
     template="plotly_dark"
 )
     if plot:
         fig.show()
     return worst_isolate_values, similarity_matrix
    
-def barplot(R_score, SIR_total_per_anti, plot:bool):
+def barplot(SIR_total_per_anti, plot:bool):
     """
     Plots the bar plot containing the amounts of MIC-values that are redundant for each antibiotic. It also
     shows the amount of redundant MIC-values from each SIR-cateegory in different colors.
@@ -277,7 +285,6 @@ def barplot(R_score, SIR_total_per_anti, plot:bool):
         (fig): a figure containing the bar plot
     """
     colors = {'A': 'limegreen', 'B': 'gold', 'C': 'tomato'}
-    title = {'x': 'Antibiotic', 'y': 'Antalet redundanta MIC-värden'}
     keys = list(SIR_total_per_anti.keys())
     values = list(SIR_total_per_anti.values())
     S = [dict['S'] for dict in values]
@@ -341,9 +348,14 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     fig.update_layout(
     width = 1400,
     height = width/2,
-    title='Phylogenetic Tree',
-    xaxis_title='Isolates',
-    yaxis_title='Distance',
+    title={
+        'text': "Dendrogram",
+        'y': 0.95,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+    xaxis_title='Isolat',
+    yaxis_title='Distans',
     template="plotly_dark")
 
     if plot:
@@ -368,9 +380,6 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
         and the second is whether the value was S I or R.
         The second value in the dicionary, has the type string and it represents which antibiotic the first value occurs in.
     """
-    
-    
-    
     result = {}
     for key, value in isolate_selection.items():
         other_values = [l for key2, l in isolate_selection.items() if key2 != key]
@@ -425,7 +434,7 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     redundancy_value, SIR_total_per_anti = r_score(anti_mic_values, excel, excel_sheet, threshold_redundancy)
 
     # Plot the barplot
-    barplot(redundancy_value, SIR_total_per_anti, display_barplot)
+    barplot(SIR_total_per_anti, display_barplot)
 
     # Plot the heatmap and get the worst isolate score???
     worst, similarity = heatmap_plot(isolate_data, csv, excel, excel_sheet, display_heatmap)
