@@ -171,7 +171,7 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
         (dict): a dictionary that tells us how many redundant MIC-values there is for each SIR-category
                 of each antibiotic
     """
-    antibiotic_names = get_antibiotic_names(excel_name, sheet_name, print_R_score)
+    antibiotic_names = get_antibiotic_names(excel_name, sheet_name)
     redundant_dictionary = {antibiotic: 0 for antibiotic in antibiotic_names}
     total_mic_dictionary = {antibiotic: 0 for antibiotic in antibiotic_names}
     amount_of_extra_isolates = {antibiotic: 0 for antibiotic in antibiotic_names}
@@ -208,9 +208,7 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
             r_score = sum(amount_of_extra_isolates.values())/sum(total_amount_of_isolates.values())
         else:
             r_score = 0
-        if print_R_score:
-            print(r_score)
-    return r_score, SIR_total_per_antibiotic
+    return print(r_score), SIR_total_per_antibiotic
 
 # ------------------------------------------------------------------------------------------------------------
 # ------------------------------------------ Visualization ---------------------------------------------------
@@ -396,7 +394,7 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
     if perform:
         return pprint(sorted_dict)
 
-def main(display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool, print_R_score: bool):
+def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool):
     """The main function calls upon all the other functions and takes boolean inputs that the user chooses themselves.
     A true means that the visualisation or print out will be performed, and a false would mean that it would not be performed.
 
@@ -414,8 +412,7 @@ def main(display_barplot: bool, display_heatmap: bool, display_phylo:bool, print
     threshold_redundancy = 1
 
     # The names of the excel file and the specific excel sheet as well as the name of the CSV-file containing the panel
-    excel = 'CIB_TF-data_AllIsolates_20230302.xlsx'
-    csv = "Chosen_isolates_2.csv"
+    excel = '"Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"'
     excel_sheet = 'refMIC-matrix_US'
 
     # Here we get all the names of the isolates in the panel, this will later be used as a key
