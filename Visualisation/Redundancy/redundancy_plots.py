@@ -242,25 +242,6 @@ def barplot(SIR_total_per_anti, plot:bool):
     if plot:
         fig.show()
 
-def heatmapscore(y):
-    """
-    vet ej om denna behövdes
-    """
-    x_data = list(y.keys())
-    y_data = list(y.values())
-
-   
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(x=x_data, y=y_data))
-    fig.update_layout(
-    title='Data Plot',
-    xaxis_title='Names',
-    yaxis_title='Values',
-    template="plotly_dark"
-)
-    #fig.show()
-
 
 def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, plot:bool):
     """
