@@ -142,7 +142,15 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
     ])
 
 
-    fig.update_layout(barmode='stack', template = 'plotly_dark')
+    fig.update_layout(
+        title={
+            'text': "Täckning per antibiotika", 
+            'x': 0.5, 
+            'xanchor': 'center', 
+            'font_size': 25
+            }, 
+        barmode='stack', 
+        template = 'plotly_dark')
 
     # Saves the plot
     #fig.write_image('stacked1.png')
