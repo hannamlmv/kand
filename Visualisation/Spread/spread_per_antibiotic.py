@@ -12,7 +12,7 @@ from help_functions.create_panel import create_panel
 from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
 
 def main(chosen_isolates, all_isolates):
-
+    """ Calculates and prints the relative spread per antibiotic. """
     for isolates in [chosen_isolates, all_isolates]:
         isolate_list = pd.read_csv(isolates)["Isolate"].tolist()
         isolate_panel = create_panel(isolate_list)

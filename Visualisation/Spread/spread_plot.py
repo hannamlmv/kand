@@ -20,6 +20,7 @@ from Visualisation.Spread.data_extraction_functions import (
 
 
 def main(chosen_isolates_list=None):
+    """ Creates a plot which visualises the spread of a panel. """
     # Load files
     if chosen_isolates_list is None:
         chosen_isolates_list = pd.read_csv("Chosen_isolates_1.csv")
