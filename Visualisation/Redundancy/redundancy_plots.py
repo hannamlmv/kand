@@ -15,7 +15,7 @@ def read_csv(Csv_name: str):
     """ Reads the CSV file. """
     return pd.read_csv(Csv_name)
 
-def read_excel(excel_name: str, sheet_name: str):
+def read_the_excel(excel_name: str, sheet_name: str):
     """ Reads the excel file. """
     excel_file = pd.ExcelFile(excel_name)
     title_excel = sheet_name
@@ -27,17 +27,17 @@ def choose_isolates(Csv_name: str, excel_name: str, sheet_name: str):
     and their MIC-values from the excel sheet.
     """
     csv = read_csv(Csv_name)
-    excel_sheet = read_excel(excel_name, sheet_name)
+    excel_sheet = read_the_excel(excel_name, sheet_name)
     chosen_rows = excel_sheet["Isolate"].isin(csv["Isolate"])
     chosen_isolate = excel_sheet.loc[chosen_rows].drop(columns=["Pathogen","Source RMT","D-test"])
     return chosen_isolate
 
 def get_antibiotic_names(excel_name: str, sheet_name: str):
     """
-    Uses the function read_excel to read the excel file and then take 
+    Uses the function read_the_excel to read the excel file and then take 
     out the names of the antibiotics.
     """
-    matrix = read_excel(excel_name, sheet_name)
+    matrix = read_the_excel(excel_name, sheet_name)
     return list(matrix.drop(columns=["Isolate", "Pathogen","Source RMT","D-test"]).columns)
 
 def antibiotic_dict(antibiotic_names: list):
