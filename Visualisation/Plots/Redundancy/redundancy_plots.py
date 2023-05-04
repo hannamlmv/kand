@@ -171,7 +171,7 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
         (dict): a dictionary that tells us how many redundant MIC-values there is for each SIR-category
                 of each antibiotic
     """
-    antibiotic_names = get_antibiotic_names(excel_name, sheet_name)
+    antibiotic_names = get_antibiotic_names(excel_name, sheet_name, print_R_score)
     redundant_dictionary = {antibiotic: 0 for antibiotic in antibiotic_names}
     total_mic_dictionary = {antibiotic: 0 for antibiotic in antibiotic_names}
     amount_of_extra_isolates = {antibiotic: 0 for antibiotic in antibiotic_names}
@@ -208,6 +208,8 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
             r_score = sum(amount_of_extra_isolates.values())/sum(total_amount_of_isolates.values())
         else:
             r_score = 0
+        if print_R_score:
+            print(r_score)
     return r_score, SIR_total_per_antibiotic
 
 # ------------------------------------------------------------------------------------------------------------
@@ -394,7 +396,7 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
     if perform:
         return pprint(sorted_dict)
 
-def main(display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool):
+def main(display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool, print_R_score: bool):
     """The main function calls upon all the other functions and takes boolean inputs that the user chooses themselves.
     A true means that the visualisation or print out will be performed, and a false would mean that it would not be performed.
 
@@ -423,7 +425,7 @@ def main(display_barplot: bool, display_heatmap: bool, display_phylo:bool, print
     anti_mic_values = antibiotic_names_gets_values(csv, excel, excel_sheet)
 
     # Get the r-score for each antibiotic and their SIR_category
-    redundancy_value, SIR_total_per_anti = r_score(anti_mic_values, excel, excel_sheet, threshold_redundancy)
+    redundancy_value, SIR_total_per_anti = r_score(anti_mic_values, excel, excel_sheet, threshold_redundancy, print_R_score)
 
     # Plot the barplot
     barplot(redundancy_value, SIR_total_per_anti, display_barplot)
