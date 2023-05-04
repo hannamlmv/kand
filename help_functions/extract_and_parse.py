@@ -6,9 +6,8 @@ Date: 10/4
 Author: Victor Wong
 """
 
-
 def parse_antibiotic_data(data: str):
-    """Checks if the data is 'nip' or Missing BP'. Used in"""
+    """Checks if the data is 'nip' or Missing BP'. """
     if type(data) is not str:
         return False
     if data == "nip" or data.startswith("Missing BP"):
@@ -17,7 +16,7 @@ def parse_antibiotic_data(data: str):
 
 
 def extract_antibiotic_data(data: str):
-    """Returns MIC value and SIR category. If off-scale, set MIC value to None"""
+    """Returns MIC value and SIR category. If off-scale, set MIC value to None. """
     sir_category = data[0]
     if "<" in data or ">" in data:
         return (None, sir_category)
