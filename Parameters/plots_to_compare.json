@@ -12,6 +12,8 @@
         "Chosen_isolates_folder/Chosen_isolates70.csv",
         "Chosen_isolates_folder/Chosen_isolates80.csv",
         "Chosen_isolates_folder/Chosen_isolates90.csv",
-        "Chosen_isolates_folder/Chosen_isolates100.csv"
+        "Chosen_isolates_folder/Chosen_isolates100.csv",
+        "Chosen_isolates_folder/Chosen_isolates400.csv",
+        "Chosen_isolates_folder/all_isolates.csv"
     ]
 }

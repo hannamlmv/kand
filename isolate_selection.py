@@ -30,7 +30,7 @@ from help_functions.add_isolate_functions import add_isolate
 def main():
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
     excel_sheet_name = "matrix EU"
-    antibiotic_ranges_file_path = "Parameters/abx_ranges.json"
+    antibiotic_ranges_file_path = "Parameters/antibiotic_ranges.json"
     parameters_file_path = "Parameters/isolate_selection_parameters.json"
     #VISUALIZE = False
     GET_CSV = True
