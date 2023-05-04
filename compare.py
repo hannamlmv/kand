@@ -54,7 +54,7 @@ def main():
     all_isolates_panel = create_panel(all_isolates_list)
     (max_spread, max_coverage, max_redundancy) = calc_scores(
             all_isolates_panel,
-            json.load(open("Parameters/antibiotic_ranges.json")),
+            json.load(open("Parameters/antibiotic_info.json")),
             redundancy_threshold,
             coverage_demands,
             coverage_total
@@ -66,7 +66,7 @@ def main():
         panel = create_panel(isolate_lists[i])
         (spread, coverage, redundancy) = calc_scores(
             panel,
-            json.load(open("Parameters/antibiotic_ranges.json")),
+            json.load(open("Parameters/antibiotic_info.json")),
             redundancy_threshold,
             coverage_demands,
             coverage_total
