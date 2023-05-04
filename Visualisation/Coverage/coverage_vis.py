@@ -136,9 +136,9 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
     labels[20]='T.sulfamethoxazole'
 
     fig = go.Figure(data=[
-        go.Bar(name='Sensitive', x = labels, y=S, marker=dict(color='limegreen')),
-        go.Bar(name='Intermediate', x = labels, y=I, marker=dict(color='gold')),
-        go.Bar(name='Resistant', x = labels, y=R, marker = dict(color='tomato'), )
+        go.Bar(name='Känslig', x = labels, y=S, marker=dict(color='limegreen')),
+        go.Bar(name='Intermediär', x = labels, y=I, marker=dict(color='gold')),
+        go.Bar(name='Resistent', x = labels, y=R, marker = dict(color='tomato'), )
     ])
 
 
