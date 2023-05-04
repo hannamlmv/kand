@@ -27,6 +27,7 @@ from help_functions.add_isolate_functions import add_isolate
 
 #@measure_time
 def main():
+    """ Creates a panel. """
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
     excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "Parameters/antibiotic_info.json"

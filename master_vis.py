@@ -14,6 +14,10 @@ from Visualisation.Redundancy.redundancy_plots import main as redundancy
 
 
 def main():
+    """ 
+    Generates all graphs and print-outs for a panel.Which ones are to 
+    be generated is specialised in visualisation_parameters.json.
+    """
     panel = "Chosen_isolates_folder/Chosen_isolates.csv"
     all_isolates = "Chosen_isolates_folder/all_isolates.csv"
     bools = validate_visualisation_parameters(
