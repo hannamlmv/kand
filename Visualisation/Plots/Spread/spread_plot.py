@@ -40,15 +40,15 @@ def main(chosen_isolates_list=None):
     # List of antiiotic names
     antibiotics = list(chosen_isolates.columns[3:])
 
-    # Extract all SIRs for an antibiotic.
-    chosen_isolates_SIR = extract_mic_sir_data(chosen_isolates, antibiotics)
+    # Extract all data for an antibiotic.
+    chosen_isolates_data = extract_mic_sir_data(chosen_isolates, antibiotics)
 
     # Remove the tuples that have None in their SIR data
-    filtered_chosen_isolates_SIR = filter_mic_sir_data(chosen_isolates_SIR)
+    filtered_chosen_isolates_data = filter_mic_sir_data(chosen_isolates_data)
 
     # Extract the mic-values of each isolate for each antibiotic.
     mic_data = extract_mic_values_per_antibiotic(
-        filtered_chosen_isolates_SIR, antibiotics
+        filtered_chosen_isolates_data, antibiotics
     )
 
     # Create dataframe used for plotting
