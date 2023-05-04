@@ -1,5 +1,5 @@
 {
-    "All isolates" : "Chosen_isolates_folder/all_isolates.csv",
+    "All isolates" : "all_isolates.csv",
     "Chosen isolates": [
         "Chosen_isolates_folder/Chosen_isolates1.csv",
         "Chosen_isolates_folder/Chosen_isolates5.csv",
