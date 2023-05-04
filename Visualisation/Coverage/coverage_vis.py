@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 from pprint import pprint
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 from IPython.display import display
 import plotly.express as px
 import plotly.graph_objects as go
@@ -148,7 +152,12 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
         yaxis_title="Antal stammar",
         barmode='stack', 
         template = 'plotly_dark',
+        showlegend=True,
+        legend=dict(
+            bgcolor='rgba(0, 0, 0, 0)',
+            font=dict(size=12, color='white')
             )
+        )
 
     #Show the plot
     fig.show()
@@ -207,6 +216,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
         xaxis_title="Antibiotika",
         yaxis_title="Stam",
         margin=dict(l=50, r=50, b=50, t=50),
+        showlegend=False,
         xaxis=dict(
             tickvals=[i for i in range(len(antibiotics_edited))],
             ticktext= list(antibiotics_edited)
@@ -215,7 +225,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
             tickvals=[i for i in range(len(x))],
             ticktext=list(x)
         ),
-    template = 'plotly_dark') 
+    template = 'plotly_dark')
 
     fig.update_traces(showscale = False)
 
