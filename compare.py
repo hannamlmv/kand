@@ -14,6 +14,10 @@ from help_functions.create_panel import create_panel
 
 # Makes the bar-chart
 def compare_plot(panels):
+    """ 
+    Create a bar-chart with all indicator scores for different 
+    panels given a data frame with all panel-scores. 
+    """
     fig = px.bar(
         panels,
         x="Panel",
@@ -36,7 +40,7 @@ def compare_plot(panels):
     fig.show()
 
 def main():
-
+    """ Create a bar-chart with all indicator scores for different panels. """
     (_, coefficients, coverage_demands, coverage_total, redundancy_threshold) = validate_parameters(
         json.load(open("Parameters/isolate_selection_parameters.json"))
     )
