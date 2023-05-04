@@ -149,6 +149,8 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
             'xanchor': 'center', 
             'font_size': 25
             }, 
+        xaxis_title="Antibiotika",
+        yaxis_title="Antal stammar",
         barmode='stack', 
         template = 'plotly_dark')
 
@@ -199,9 +201,14 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
 
     # Set layout properties
     fig.update_layout(
-        title='Heatmap with Categorical Color Scale',
-        xaxis_title='X Axis Title',
-        yaxis_title='Y Axis Title',
+        title={
+            'text': "Täckning för varje antbiotika och stam", 
+            'x': 0.5, 
+            'xanchor': 'center', 
+            'font_size': 25
+            }, 
+        xaxis_title="Antibiotika",
+        yaxis_title="Stam",
         height=1400,
         width=550,
         margin=dict(l=50, r=50, b=50, t=50),
