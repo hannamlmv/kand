@@ -25,8 +25,9 @@ def choose_isolate(
         1. Add it to the panel
         2. Calculate all scores
         3. Check if the score is better than current best, if yes, then replace, else, pass
-    Add the best isolate to the panel
+    Return best isolate
     """
+
     best_isolate, best_score = None, -np.inf
     best_score_vec = None
     for isolate in available_isolates:
@@ -68,7 +69,18 @@ def add_isolate(
     coverage_penalties: dict,
     coverage_total: int,
 ):
-    """Uses choose_isolate() function to add n isolates to the panel"""
+    """Use choose_isolate function to add desired number of isolates to the panel
+
+    Args:
+        number_of_isolates (int):
+        all_isolates (list[Isolate]):
+        panel (Panel):
+        coefficients (np.ndarray):
+        concentration_ranges (dict):
+        redundancy_threshold (int):
+        coverage_penalties (dict):
+        coverage_total (int):
+    """
     available_isolates = [
         isolate
         for isolate in all_isolates

@@ -12,7 +12,6 @@ from help_functions.spread_score_functions import score_spread_list
 
 def concentration_to_index(concentration: float, abs_lowest_concentration: int):
     """Converts the concentration to a list index value"""
-    # print(concentration)
     return int(np.log2(float(concentration)) + abs_lowest_concentration)
 
 
@@ -24,11 +23,11 @@ def extract_panel_data(panel: Panel):
     """
     panel_data = {}
     for isolate in panel.get_chosen_isolates():
-        for abx, (mic, sir) in isolate.get_data().items():
-            if abx not in panel_data:
-                panel_data[abx] = [(mic, sir)]
+        for antibiotic, (mic, sir) in isolate.get_data().items():
+            if antibiotic not in panel_data:
+                panel_data[antibiotic] = [(mic, sir)]
             else:
-                panel_data[abx].append((mic, sir))
+                panel_data[antibiotic].append((mic, sir))
     return panel_data
 
 
@@ -46,13 +45,13 @@ def calc_spread_score(
         np.log2(concentration_ranges["Lowest concentration"])
     )
     spread_per_antibiotic = {}
-    for abx, mic_sir in panel_data.items():
+    for antibiotic, mic_sir in panel_data.items():
         # Create a set of the unique mic values and remove off-scale values, denoted as None
         unique_mic_values = {mic for mic, _ in mic_sir if mic is not None}
 
         # Get the minimum and maximum on-scale concentration value for the antibiotic
-        minimum_concentration = concentration_ranges[abx]["Lower"]
-        maximum_concentration = concentration_ranges[abx]["Upper"]
+        minimum_concentration = concentration_ranges[antibiotic]["Lower"]
+        maximum_concentration = concentration_ranges[antibiotic]["Upper"]
 
         # Convert the concentration values to indices
         if minimum_concentration == "Min_C":
@@ -91,7 +90,7 @@ def calc_spread_score(
             spread_list[mic_value_index] = 1
         total_spread_list_score += score_spread_list(spread_list)
         if per_antibiotic:
-            spread_per_antibiotic[abx] = score_spread_list(spread_list)
+            spread_per_antibiotic[antibiotic] = score_spread_list(spread_list)
     if per_antibiotic:
         return spread_per_antibiotic
     return total_spread_list_score / number_of_antibiotics
@@ -121,21 +120,21 @@ def calc_coverage_score(
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
     """Calculates the redundancy score"""
-    number_of_micS = 0
-    number_of_redundant_micS = 0
+    number_of_mics = 0
+    number_of_redundant_mics = 0
     for mic_sir in panel_data.values():
         mic_counter = {}
         for mic, _ in mic_sir:
-            number_of_micS += 1
+            number_of_mics += 1
             if mic not in mic_counter:
                 mic_counter[mic] = 1
             else:
                 mic_counter[mic] += 1
                 if mic_counter[mic] > redundancy_threshold:
-                    number_of_redundant_micS += 1
-    if number_of_micS == 0:
+                    number_of_redundant_mics += 1
+    if number_of_mics == 0:
         return 0
-    return number_of_redundant_micS / number_of_micS
+    return number_of_redundant_mics / number_of_mics
 
 
 def calc_scores(
@@ -171,25 +170,25 @@ def calc_scores(
 #     total_spread_list_score = 0
 #     spread_per_antibiotic = {}
 
-#     for abx, mic_sir in panel_data.items():
+#     for antibiotic, mic_sir in panel_data.items():
 #         unique_mic_values = {mic for mic, _ in mic_sir if mic is not None}
 #         abs_lowest_concentration = np.abs(np.log2(concentration_ranges["Lowest concentration"]))
 
-#         spread_list = create_spread_list(unique_mic_values, abx, concentration_ranges, abs_lowest_concentration)
+#         spread_list = create_spread_list(unique_mic_values, antibiotic, concentration_ranges, abs_lowest_concentration)
 #         total_spread_list_score += score_spread_list(spread_list)
 
 #         if per_antibiotic:
-#             spread_per_antibiotic[abx] = score_spread_list(spread_list)
+#             spread_per_antibiotic[antibiotic] = score_spread_list(spread_list)
 
 #     if per_antibiotic:
 #         return spread_per_antibiotic
 #     return total_spread_list_score / number_of_antibiotics
 
 
-# def create_spread_list(unique_mic_values, abx, concentration_ranges, abs_lowest_concentration):
+# def create_spread_list(unique_mic_values, antibiotic, concentration_ranges, abs_lowest_concentration):
 #     """Create a list for each antibiotic to display the spread of values"""
 #     minimum_concentration_index, maximum_concentration_index = convert_concentrations_to_indices(
-#         abx, concentration_ranges, abs_lowest_concentration
+#         antibiotic, concentration_ranges, abs_lowest_concentration
 #     )
 #     spread_list = set_off_scale_values_to_none(
 #         minimum_concentration_index, maximum_concentration_index, concentration_ranges
@@ -198,10 +197,10 @@ def calc_scores(
 #     return spread_list
 
 
-# def convert_concentrations_to_indices(abx, concentration_ranges, abs_lowest_concentration):
+# def convert_concentrations_to_indices(antibiotic, concentration_ranges, abs_lowest_concentration):
 #     """Convert the concentration values to indices"""
-#     minimum_concentration = concentration_ranges[abx]["Lower"]
-#     maximum_concentration = concentration_ranges[abx]["Upper"]
+#     minimum_concentration = concentration_ranges[antibiotic]["Lower"]
+#     maximum_concentration = concentration_ranges[antibiotic]["Upper"]
 
 #     if minimum_concentration == "Min_C":
 #         minimum_concentration_index = 0
