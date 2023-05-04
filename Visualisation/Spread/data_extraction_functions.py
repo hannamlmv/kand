@@ -13,14 +13,15 @@ def extract_chosen_isolates(
     chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
 ) -> pd.DataFrame:
     """
-    Select the chosen isolates from the script. Return a DataFrame only containing the rows of selected isolates
+    Select the chosen isolates from the script. Return a 
+    DataFrame only containing the rows of selected isolates.
     """
     chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
     return matrix_EU[chosen_rows]
 
 
 def find_digits(mic_sir_data: str) -> int:
-    """Find numbers in a string"""
+    """ Find numbers in a string. """
     digit = ""
     for character in mic_sir_data:
         if character.isdigit() or character == ".":
@@ -29,7 +30,7 @@ def find_digits(mic_sir_data: str) -> int:
 
 
 def get_scale(mic_sir_data: str) -> bool:
-    """Get on or off scale. True == on-scale"""
+    """ Get on or off scale. True == on-scale. """
     if "=" in mic_sir_data:
         return True
     elif "<" in mic_sir_data or ">" in mic_sir_data:
@@ -130,7 +131,7 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list) -> di
 
 def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict) -> None:
     """
-    Remove the tuples that have None in their SIR data
+    Remove the tuples that have None in their SIR data.
     """
     for antibiotic, mic_sir_data in chosen_isolates_mic_sir_data.items():
         # tup = (isolate, mic_value, mic_category, scale, pathogen)
