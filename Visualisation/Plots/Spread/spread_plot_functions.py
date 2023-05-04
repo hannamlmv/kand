@@ -50,7 +50,6 @@ def create_plot_df(
             on_off_scale.append(scale)
             pathogen_list.append(pathogen)
             parse_on_off_scale(scale, SIR_category, y_values, mic_value_jitter)
-            print(isolate)
             parse_fastidious(fastidious_dict, pathogen, fastidious_list)
 
     # Create a DF used for plotting
