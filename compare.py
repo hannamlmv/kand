@@ -17,7 +17,8 @@ def compare_plot(panels):
     fig = px.bar(
         panels,
         x="Panel",
-        y=["Spridning", "Täckning", "Redundans", "Totalt score"],
+        y=["Spridningsvärde", "Täckningsvärde", "Redundansvärde", "Totalt värde"],
+        labels={"variable": "Indikator"},
         color_discrete_sequence=[
             "DarkSeaGreen",
             "Teal",
@@ -27,9 +28,9 @@ def compare_plot(panels):
         barmode="group",
     )
     fig.update_layout(
-        title="Jämförelse av testpaneler",
+        title={'text': "Jämförelse av testpaneler", 'x': 0.5, 'xanchor': 'center', 'font_size': 25},
         xaxis_tickfont_size=14,
-        yaxis=dict(title="Score", titlefont_size=16, tickfont_size=14),
+        yaxis=dict(title="Värde", titlefont_size=16, tickfont_size=14),
         template="plotly_dark",
     )
     fig.show()
@@ -72,10 +73,10 @@ def main():
         )
         panel_dict = {
             "Panel": panel_names[i],
-            "Spridning": spread/max_spread,
-            "Täckning": coverage/max_coverage,
-            "Redundans": redundancy/max_redundancy,
-            "Totalt score": (
+            "Spridningsvärde": spread/max_spread,
+            "Täckningsvärde": coverage/max_coverage,
+            "Redundansvärde": redundancy/max_redundancy,
+            "Totalt värde": (
                 coefficients[0] * spread/max_spread
                 + coefficients[1] * coverage/max_coverage
                 - coefficients[2] * redundancy/max_redundancy
