@@ -24,7 +24,12 @@ bools = validate_visualisation_parameters(
 if bools["Spread visualisation"]:
     spread_vis(panel)
 if bools["Spread per antibiotic print-out"]:
+    print()
+    print("---------------------------------------------")
+    print("Spridning i förhållande till möjlig spridning")
+    print("---------------------------------------------")
     spread_print(panel, all_isolates)
+    print()
 
 #Coverage
 if (
@@ -43,6 +48,11 @@ if (
     bools["Redundancy tree"] or 
     bools["Redundancy bars"] or 
     bools["Uniqueness print-out"]):
+    if bools["Uniqueness print-out"]:
+        print()
+        print("-------------------------------")
+        print("Unika MIC-värden för varje stam")
+        print("-------------------------------")
     redundancy(
         panel, 
         bools["Redundancy bars"], 

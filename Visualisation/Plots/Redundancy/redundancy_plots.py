@@ -208,7 +208,7 @@ def r_score(dict_with_iso: dict, excel_name: str, sheet_name: str, threshold_red
             r_score = sum(amount_of_extra_isolates.values())/sum(total_amount_of_isolates.values())
         else:
             r_score = 0
-    return print(r_score), SIR_total_per_antibiotic
+    return r_score, SIR_total_per_antibiotic
 
 # ------------------------------------------------------------------------------------------------------------
 # ------------------------------------------ Visualization ---------------------------------------------------
@@ -412,7 +412,7 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     threshold_redundancy = 1
 
     # The names of the excel file and the specific excel sheet as well as the name of the CSV-file containing the panel
-    excel = '"Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"'
+    excel = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
     excel_sheet = 'refMIC-matrix_US'
 
     # Here we get all the names of the isolates in the panel, this will later be used as a key
@@ -422,7 +422,7 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     anti_mic_values = antibiotic_names_gets_values(csv, excel, excel_sheet)
 
     # Get the r-score for each antibiotic and their SIR_category
-    redundancy_value, SIR_total_per_anti = r_score(anti_mic_values, excel, excel_sheet, threshold_redundancy, print_R_score)
+    redundancy_value, SIR_total_per_anti = r_score(anti_mic_values, excel, excel_sheet, threshold_redundancy)
 
     # Plot the barplot
     barplot(redundancy_value, SIR_total_per_anti, display_barplot)
@@ -438,4 +438,6 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     #print out the unique score, depending on the boolean input of print_unique_scores:
     unique_score(isolate_data, Names, print_unique_scores)
 
+if __name__ == "__main__":
+   main("Chosen_isolates_folder/Chosen_isolates.csv", True, True, True, True)
 
