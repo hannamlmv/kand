@@ -16,5 +16,3 @@ The primary goal of the project was to develope indicators that represent spred,
 ### Isolate Selection
 
 In order to test the indicators and see if they work in practice, a script was developed that uses the indicators to select isolates. 
-
-hej
