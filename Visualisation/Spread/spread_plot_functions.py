@@ -8,7 +8,7 @@ Author: Victor Wong
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from Visualisation.Plots.Spread.data_extraction_functions import (
+from Visualisation.Spread.data_extraction_functions import (
     parse_fastidious,
     parse_on_off_scale,
 )

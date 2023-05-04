@@ -12,7 +12,6 @@ from Classes.panel_class import Panel
 from help_functions.create_isolate_list import create_isolate_list
 from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
-#from Visualisation.Plots.Spread.spread_plot import main as visualize_panel
 
 
 #def measure_time(func):
@@ -32,8 +31,6 @@ def main():
     excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "Parameters/antibiotic_ranges.json"
     parameters_file_path = "Parameters/isolate_selection_parameters.json"
-    #VISUALIZE = False
-    GET_CSV = True
     chosen_isolates_file_path = "Chosen_Isolates_folder/Chosen_isolates.csv"
 
     # Read in data from Excel
@@ -66,11 +63,7 @@ def main():
         coverage_total
     )
 
-    #if VISUALIZE:
-        #visualize_panel(panel.to_DataFrame())
-
-    if GET_CSV:
-        panel.to_csv(chosen_isolates_file_path)
+    panel.to_csv(chosen_isolates_file_path)
 
 
 if __name__ == "__main__":

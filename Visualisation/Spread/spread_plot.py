@@ -7,11 +7,11 @@ Author: Victor Wong
 
 import json
 import pandas as pd
-from Visualisation.Plots.Spread.spread_plot_functions import (
+from Visualisation.Spread.spread_plot_functions import (
     create_plot_df,
     plotly_dotplot,
 )
-from Visualisation.Plots.Spread.data_extraction_functions import (
+from Visualisation.Spread.data_extraction_functions import (
     extract_chosen_isolates,
     extract_mic_sir_data,
     filter_mic_sir_data,
