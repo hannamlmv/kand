@@ -11,7 +11,7 @@ from help_functions.spread_score_functions import score_spread_list
 
 
 def concentration_to_index(concentration: float, abs_lowest_concentration: int):
-    """Converts the concentration to a list index value"""
+    """ Converts the concentration to a list index value. """
     return int(np.log2(float(concentration)) + abs_lowest_concentration)
 
 
@@ -39,7 +39,7 @@ def calc_spread_score(
 ):
     # TODO: Clean this function up. Very messy atm. Does too many things. concentration conversion should most likely
     # be handled in own function entirely instead of partly, which it is now.
-    """Calculates the spread score"""
+    """ Calculates the spread score. """
     total_spread_list_score = 0
     abs_lowest_concentration = np.abs(
         np.log2(concentration_ranges["Lowest concentration"])
@@ -102,7 +102,7 @@ def calc_coverage_score(
     coverage_demands: dict,
     coverage_total: int,
 ):
-    """Calculates the coverage score"""
+    """ Calculates the coverage score. """
     coverage_score = 0
     for mic_sir in panel_data.values():
         coverage_counter = {key: 0 for key in coverage_demands}
@@ -119,7 +119,7 @@ def calc_coverage_score(
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
-    """Calculates the redundancy score"""
+    """ Calculates the redundancy score. """
     number_of_mics = 0
     number_of_redundant_mics = 0
     for mic_sir in panel_data.values():
@@ -144,7 +144,7 @@ def calc_scores(
     coverage_penalties: dict,
     coverage_total: int,
 ):
-    """Calculates spread, coverage and redundancy score for entire panel"""
+    """ Calculates spread, coverage and redundancy score for entire panel. """
     antibiotic_mic = extract_panel_data(panel)
     scores = (
         calc_spread_score(
