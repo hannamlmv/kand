@@ -249,7 +249,7 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
     for yi, yy in enumerate(chosen_isolate_names):
         hovertext.append(list())
         for xi, xx in enumerate(chosen_isolate_names):
-            hovertext[-1].append('FY: {}<br />Month: {}<br />Count: {}'.format(xx, yy, similarity_matrix[yi][xi]))
+            hovertext[-1].append('Isolat 1: {}<br />Isolat 1: {}<br />Likhet: {}'.format(xx, yy, similarity_matrix[yi][xi]))
 
     fig = go.Figure(
     data=go.Heatmap(
