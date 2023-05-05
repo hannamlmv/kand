@@ -4,29 +4,7 @@ import plotly.graph_objects as go
 import plotly.graph_objects as go 
 import plotly.subplots as sp
 import numpy as np
-#from Visulisation.data_extraction functions import extract_chosen_isolates, find_digits
-
-
-#Ta bort
-def extract_chosen_isolates(
-   chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
-) -> pd.DataFrame:
-   """
-   Select the chosen isolates from the script. Return a 
-   DataFrame only containing the rows of selected isolates.
-   """
-   chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
-   return matrix_EU[chosen_rows]
-
-#Ta bort
-def find_digits(SIR: str) -> int:
-   """ Find numbers in a string. """
-   digit = ""
-   for character in SIR:
-       if character.isdigit() or character == ".":
-           digit += character
-   return float(digit)
-
+from Visualisation.data_extraction_functions import extract_chosen_isolates, find_digits
 
 def parse_SIR(SIR: str) -> bool:
    """
