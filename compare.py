@@ -45,7 +45,7 @@ def main():
         json.load(open("Parameters/isolate_selection_parameters.json"))
     )
 
-    panel_names = json.load(open("Parameters/plots_to_compare.json"))["Chosen isolates"]
+    panel_names = json.load(open("Parameters/panels_to_compare.json"))["Chosen isolates"]
 
     # Converts csv files to lists of chosen isolates
     isolate_lists = []
@@ -53,7 +53,7 @@ def main():
         isolate_lists.append(pd.read_csv(panel)["Isolate"].tolist())
 
     # Calculate scores of panel with all isolates
-    all_isolates = json.load(open("Parameters/plots_to_compare.json"))["All isolates"]
+    all_isolates = json.load(open("Parameters/panels_to_compare.json"))["All isolates"]
     all_isolates_list = pd.read_csv(all_isolates)["Isolate"].tolist()
     all_isolates_panel = create_panel(all_isolates_list)
     (max_spread, max_coverage, max_redundancy) = calc_scores(
