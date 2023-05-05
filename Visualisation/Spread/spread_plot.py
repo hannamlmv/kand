@@ -11,7 +11,7 @@ from Visualisation.Spread.spread_plot_functions import (
     create_plot_df,
     plotly_dotplot,
 )
-from Visualisation.Spread.data_extraction_functions import (
+from Visualisation.data_extraction_functions import (
     extract_chosen_isolates,
     extract_mic_sir_data,
     filter_mic_sir_data,

@@ -4,7 +4,10 @@ import plotly.graph_objects as go
 import plotly.graph_objects as go 
 import plotly.subplots as sp
 import numpy as np
+#from Visulisation.data_extraction functions import extract_chosen_isolates, find_digits
 
+
+#Ta bort
 def extract_chosen_isolates(
    chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
 ) -> pd.DataFrame:
@@ -15,7 +18,7 @@ def extract_chosen_isolates(
    chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
    return matrix_EU[chosen_rows]
 
-
+#Ta bort
 def find_digits(SIR: str) -> int:
    """ Find numbers in a string. """
    digit = ""
