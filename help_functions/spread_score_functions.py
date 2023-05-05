@@ -23,7 +23,6 @@ def count_gap_length(valid_list: list) -> float:
         total_gap_length += gap_length - 1
     return total_gap_length
 
-
 def check_edges(valid_list: list) -> float:
     edge_penalty = 0
 
@@ -34,7 +33,6 @@ def check_edges(valid_list: list) -> float:
         edge_penalty += 0.5
 
     return edge_penalty
-
 
 def score_spread_list(spread_list: list) -> float:
     valid_list = [i for i in spread_list if i == 0 or i == 1]

@@ -10,7 +10,6 @@ from Classes.isolate_class import Isolate
 from Classes.panel_class import Panel
 from help_functions.score_calc_functions import calc_scores
 
-
 def choose_isolate(
     available_isolates: list[Isolate],
     panel: Panel,
@@ -44,7 +43,6 @@ def choose_isolate(
                 temp_spread_score,
                 temp_coverage_score,
                 -temp_redundancy_score,
-                # panel.get_number_of_isolates(),
             )
         )
         # Matrix multiplcation to get coefficients times scores

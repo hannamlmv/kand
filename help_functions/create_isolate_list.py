@@ -9,7 +9,6 @@ import pandas as pd
 from help_functions.extract_and_parse import parse_antibiotic_data, extract_antibiotic_data
 from Classes.isolate_class import Isolate
 
-
 def create_isolate_list(matrix_EU: pd.DataFrame) -> list[Isolate]:
     """ Creates a list of Isolate objects from a data frame. """
     all_isolates = []

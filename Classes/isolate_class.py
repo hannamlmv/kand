@@ -5,9 +5,9 @@ Date: 24/4
 Author: Victor Wong and Hanna Malmvall
 """
 
-
 class Isolate:
     """ An Isolate Class. """
+    
     def __init__(
         self,
         isolate_name: str,
