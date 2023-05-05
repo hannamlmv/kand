@@ -13,6 +13,9 @@ from Visualisation.Spread.data_extraction_functions import (
     parse_on_off_scale,
 )
 
+# Set random seed
+np.random.seed(1)
+
 
 def create_plot_df(
     antibiotics: list,
@@ -21,7 +24,7 @@ def create_plot_df(
     x_jitter: float = 0.15,
     y_jitter: float = 0.05,
 ) -> pd.DataFrame:
-    """ Create dataframe used for plotting. """
+    """Create dataframe used for plotting."""
 
     mic_dict = {"S": "Sensitive", "I": "Intermediate", "R": "Resistant"}
 
@@ -71,7 +74,7 @@ def create_plot_df(
 
 
 def add_rectangles_to_plot(fig, antibiotics: list) -> None:
-    """ Adds rectangles to represent the on-scale concentrations. """
+    """Adds rectangles to represent the on-scale concentrations."""
     names_to_conc = {
         "Benzylpenicillin": ["0.015 - 32.0", "0.008 - 16.0"],
         "Ampicillin": ["0.125 - 64.0", "0.008 - 16.0"],
@@ -241,5 +244,5 @@ def plotly_dotplot(
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         title_x=0.5,
     )
-    #fig.write_html("first_figure.html", auto_open=True)
+    # fig.write_html("first_figure.html", auto_open=True)
     fig.show()
