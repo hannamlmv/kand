@@ -307,7 +307,8 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
         if value[0] != 0:
             table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
 
-    print(table)
+    if perform:
+        print(table)
 
 def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool):
     """The main function calls upon all the other functions and takes boolean inputs that the 
