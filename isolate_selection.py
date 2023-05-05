@@ -6,26 +6,12 @@ Author: Victor Wong
 """
 
 import json
-#import time
 import pandas as pd
 from Classes.panel_class import Panel
 from help_functions.create_isolate_list import create_isolate_list
 from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
 
-
-#def measure_time(func):
-    #def wrapper(*args, **kwargs):
-        #start_time = time.time()
-        #result = func(*args, **kwargs)
-        #end_time = time.time()
-        #print(f"Elapsed time: {end_time - start_time:.3f} seconds")
-        #return result
-
-    #return wrapper
-
-
-#@measure_time
 def main():
     """ Creates a panel. """
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
@@ -65,7 +51,6 @@ def main():
     )
 
     panel.to_csv(chosen_isolates_file_path)
-
 
 if __name__ == "__main__":
     main()

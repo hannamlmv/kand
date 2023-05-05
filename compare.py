@@ -90,6 +90,5 @@ def main():
 
     compare_plot(pd.DataFrame(data=panel_scores))
 
-
 if __name__ == "__main__":
     main()
