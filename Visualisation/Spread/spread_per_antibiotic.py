@@ -11,7 +11,6 @@ from prettytable import PrettyTable
 from help_functions.create_panel import create_panel
 from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
 
-
 def main(chosen_isolates: str, all_isolates: str) -> None:
     """Calculates and prints the relative spread per antibiotic."""
     for isolates in [chosen_isolates, all_isolates]:
@@ -37,7 +36,7 @@ def main(chosen_isolates: str, all_isolates: str) -> None:
             )
 
     table = PrettyTable()
-    table.field_names = ["Antibiotic", "Relativ spridning"]
+    table.field_names = ["Antibiotika", "Relativ spridning"]
     for antibiotic, mic in chosen_spread_per_abx.items():
         table.add_row([antibiotic, mic])
 

@@ -18,7 +18,6 @@ from Visualisation.data_extraction_functions import (
     extract_mic_values_per_antibiotic,
 )
 
-
 def main(chosen_isolates_list=None):
     """Creates a plot which visualises the spread of a panel."""
     # Load files
@@ -58,7 +57,6 @@ def main(chosen_isolates_list=None):
     plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)
 
     plotly_dotplot(plot_df, antibiotics, antibiotic_ranges)
-
 
 if __name__ == "__main__":
     main()

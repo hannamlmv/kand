@@ -8,7 +8,6 @@ Author: Victor Wong and Hanna Malmvall
 import pandas as pd
 from Classes.isolate_class import Isolate
 
-
 class Panel:
     """A Panel Class."""
 

@@ -12,7 +12,6 @@ from Visualisation.Spread.spread_per_antibiotic import main as spread_print
 from Visualisation.Coverage.coverage_vis import main as coverage_vis
 from Visualisation.Redundancy.redundancy_plots import main as redundancy
 
-
 def main():
     """
     Generates all graphs and print-outs for a panel.Which ones are to
@@ -58,7 +57,6 @@ def main():
             bools["Redundancy tree"],
             bools["Uniqueness print-out"],
         )
-
 
 if __name__ == "__main__":
     main()

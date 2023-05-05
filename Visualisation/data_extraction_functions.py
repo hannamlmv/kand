@@ -1,12 +1,12 @@
 """
 Data extraction functions
+
 Date: 10/4 
 Author: Victor Wong
 """
 
 import pandas as pd
 import numpy as np
-
 
 def extract_chosen_isolates(
     chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
@@ -18,7 +18,6 @@ def extract_chosen_isolates(
     chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
     return matrix_EU[chosen_rows]
 
-
 def find_digits(mic_sir_data: str) -> int:
     """Find numbers in a string."""
     digit = ""
@@ -26,7 +25,6 @@ def find_digits(mic_sir_data: str) -> int:
         if character.isdigit() or character == ".":
             digit += character
     return float(digit)
-
 
 def get_scale(mic_sir_data: str) -> bool:
     """Get on or off scale. True == on-scale."""
@@ -36,7 +34,6 @@ def get_scale(mic_sir_data: str) -> bool:
         return False
     else:
         raise ValueError("Not a valid SIR")
-
 
 def parse_on_off_scale(
     scale: bool,
@@ -69,7 +66,6 @@ def parse_on_off_scale(
         else:
             raise ValueError(f"SIR Category must be either S or R, not: {sir_category}")
 
-
 def parse_fastidious(
     fastidious_dict: dict[str:str], pathogen: str, fastidious_list: list[str]
 ) -> None:
@@ -91,7 +87,6 @@ def parse_fastidious(
     elif pathogen in fastidious_dict["Icke-kräsen"]:
         fastidious_list.append("Icke-kräsen")
 
-
 def parse_mic_sir_data(mic_sir_data: str) -> bool:
     """
     Find the isolates with valid data. Not 'Missing BP'
@@ -104,7 +99,6 @@ def parse_mic_sir_data(mic_sir_data: str) -> bool:
     if mic_sir_data == "nip":
         return False
     return True
-
 
 def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) -> dict:
     """
@@ -129,7 +123,6 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) 
                     (isolate, mic, sir_category, scale, pathogen)
                 )
             else:
-                # If SIR = "Missing BP" or "nip"
                 chosen_isolates_mic_sir_data[antibiotic].append(
                     (isolate, mic_sir_data, None, None, pathogen)
                 )
@@ -141,14 +134,11 @@ def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict[str:tuple]) -> None:
     Remove the tuples that have None in their SIR data.
     """
     for antibiotic, mic_sir_data in chosen_isolates_mic_sir_data.items():
-        # tup = (isolate, mic_value, mic_category, scale, pathogen)
-
-        chosen_isolates_mic_sir_data[antibiotic] = [
+         chosen_isolates_mic_sir_data[antibiotic] = [
             tup for tup in mic_sir_data if tup[2] is not None
         ]
 
     return chosen_isolates_mic_sir_data
-
 
 def extract_mic_values_per_antibiotic(
     chosen_isolates_sir: dict, antibiotics: list[str]

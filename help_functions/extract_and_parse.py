@@ -14,7 +14,6 @@ def parse_antibiotic_data(data: str):
         return False
     return True
 
-
 def extract_antibiotic_data(data: str):
     """ Returns MIC value and SIR category. If off-scale, set MIC value to None. """
     sir_category = data[0]

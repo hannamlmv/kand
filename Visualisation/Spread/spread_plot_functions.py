@@ -1,5 +1,6 @@
 """
 Functions used when creating the spread-plot 
+
 Date: 10/4 
 Author: Victor Wong
 """
@@ -245,5 +246,4 @@ def plotly_dotplot(
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         title_x=0.5,
     )
-    # fig.write_html("first_figure.html", auto_open=True)
     fig.show()

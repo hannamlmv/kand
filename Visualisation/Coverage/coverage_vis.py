@@ -1,3 +1,10 @@
+"""
+Creates the coverage plots
+
+Date: 2/4
+Author: Elin Berg & Julia Ancker
+"""
+
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
@@ -17,7 +24,6 @@ def parse_SIR(SIR: str) -> bool:
        return False
    return True
 
-
 def extract_SIR(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
    """
    Extract all SIRs for an antibiotic. Returns a dictionary
@@ -34,10 +40,8 @@ def extract_SIR(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
                mic = find_digits(SIR)
                chosen_isolates_SIR[antibiotic].append(mic_category)
            else:
-               # If SIR = "Missing BP" or "nip"
                chosen_isolates_SIR[antibiotic].append((None))
    return chosen_isolates_SIR
-
 
 def extract_SIR_M(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
    """
@@ -55,17 +59,14 @@ def extract_SIR_M(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
                mic = find_digits(SIR)
                chosen_isolates_SIR[antibiotic].append(mic_category)
            else:
-               # If SIR = "Missing BP" or "nip"
                chosen_isolates_SIR[antibiotic].append(('M'))
    return chosen_isolates_SIR
-
 
 def filter_mic_values(chosen_isolates_SIR: dict) -> None:
    """ Remove the tuples that have None in their SIR data. """
    for antibiotic, SIR_data in chosen_isolates_SIR.items():
        chosen_isolates_SIR[antibiotic] = list((tup for tup in SIR_data if tup is not None))
    return chosen_isolates_SIR
-
 
 def collect_number_of_S_I_R(chosen_isolates_SIR: dict, antibiotics: list) -> dict:
     """
@@ -86,7 +87,6 @@ def collect_number_of_S_I_R(chosen_isolates_SIR: dict, antibiotics: list) -> dic
                 I_count+=1
             if SIR=='R':
                 R_count+=1
-
 
         count_isolates_SIR[antibiotic]=  list((S_count, I_count, R_count))
     return count_isolates_SIR
@@ -113,7 +113,6 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
         go.Bar(name='Intermediär', x = labels, y=I, marker=dict(color='gold')),
         go.Bar(name='Resistent', x = labels, y=R, marker = dict(color='tomato'), )
     ])
-
 
     fig.update_layout(
         title={
@@ -241,7 +240,5 @@ def main(panel, sir_stackplot, coverage_per_isolates):
         # plots the heatmap
         plot_grid(antibiotics, chosen_isolates_list, chosen_isolates_SIR_M)
         
-
-  
 if __name__ == "__main__":
    main("Chosen_isolates_folder/Chosen_isolates.csv", True, True)
