@@ -26,7 +26,7 @@ def create_plot_df(
 ) -> pd.DataFrame:
     """Create dataframe used for plotting."""
 
-    mic_dict = {"S": "Känslig", "I": "Intemediär", "R": "Resistent"}
+    mic_dict = {"S": "Känslig", "I": "Intermediär", "R": "Resistent"}
 
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]
