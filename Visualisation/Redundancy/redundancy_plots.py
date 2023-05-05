@@ -1,3 +1,4 @@
+
 import pandas as pd
 import numpy as np
 from collections import Counter
@@ -6,7 +7,7 @@ import plotly.graph_objs as go
 import re
 import plotly.figure_factory as ff
 import screeninfo
-from pprint import pprint
+from prettytable import PrettyTable
 
 screen = screeninfo.get_monitors()[0]
 width, height = screen.width, screen.height
@@ -201,7 +202,7 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
 
     fig.update_layout(
         title={
-        'text': "Likhet mellan isolat",
+        'text': "Färgdiagram",
         'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
@@ -257,7 +258,7 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     width = width,
     height = width/2,
     title={
-        'text': "Likhet mellan isolat",
+        'text': "Dendrogram",
         'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
@@ -297,8 +298,16 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
 
 
     sorted_dict = dict(sorted(result.items(), key=lambda item: item[1][0]))
-    if perform:
-        return pprint(sorted_dict)
+
+    table = PrettyTable()
+    table.field_names = ["Isolate", "Number of unique MIC-values", "Antibiotic (MIC-value, SIR-category))"]
+    table.hrules = True
+
+    for key, value in sorted_dict.items():
+        if value[0] != 0:
+            table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
+
+    print(table)
 
 def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, print_unique_scores: bool):
     """The main function calls upon all the other functions and takes boolean inputs that the 
@@ -336,5 +345,6 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     unique_score(isolate_data, Names, print_unique_scores)
 
 if __name__ == "__main__":
-   main("Chosen_isolates_folder/Chosen_isolates.csv", True, True, True, True)
+   main("Chosen_isolates_folder/Chosen_isolates.csv", False, False, False, True)
+
 
