@@ -26,7 +26,7 @@ def create_plot_df(
 ) -> pd.DataFrame:
     """Create dataframe used for plotting."""
 
-    mic_dict = {"S": "Sensitive", "I": "Intermediate", "R": "Resistant"}
+    mic_dict = {"S": "Känslig", "I": "Intemediär", "R": "Resistent"}
 
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]
@@ -58,14 +58,14 @@ def create_plot_df(
     # Create a DF used for plotting
     plot_df = pd.DataFrame(
         {
-            "Antibiotikor": x_values,
-            "MIC värden": y_values,
+            "Antibiotika": x_values,
+            "MIC": y_values,
             "Isolatnamn": isolate_names,
             "SIR": SIR_category_list,
             "Scale": on_off_scale,
             "Patogen": pathogen_list,
-            "Display MIC värde": MIC_value_list,
-            "Fastidiousness": fastidious_list,
+            "MIC värde": MIC_value_list,
+            "Kräsenhet": fastidious_list,
         },
         index=np.arange(len(x_values)),
     )
@@ -170,7 +170,7 @@ def plotly_dotplot(
 
     # TODO should this be outside of function scope?
     y_axis_ticktext = [
-        "Min C",
+        "Off-scale Min C",
         "0.00195",
         "0.00391",
         "0.00781",
@@ -191,14 +191,14 @@ def plotly_dotplot(
         "256",
         "512",
         "1024",
-        "Max C",
+        "Off-scale Max C",
     ]
 
     # plot
     fig = px.scatter(
         plot_df,
-        x="Antibiotikor",
-        y="MIC värden",
+        x="Antibiotika",
+        y="MIC",
         hover_name="Isolatnamn",
         color="SIR",
         opacity=0.7,
@@ -206,22 +206,22 @@ def plotly_dotplot(
         range_y=[-11, 12],
         template="plotly_dark",
         hover_data={
-            "Antibiotikor": False,
-            "MIC värden": False,
+            "Antibiotika": False,
+            "MIC": False,
             "Scale": False,
             "Patogen": True,
-            "Display MIC värde": True,
-            "Fastidiousness": True,
+            "MIC värde": True,
+            "Kräsenhet": True,
         },
     )
 
     # Changes the dot color depending on SIR category
     def change_trace_color(trace):
-        if trace.name == "Resistant":
+        if trace.name == "Resistent":
             trace.update(marker_color="tomato")
-        elif trace.name == "Intermediate":
+        elif trace.name == "Intermediär":
             trace.update(marker_color="gold")
-        elif trace.name == "Sensitive":
+        elif trace.name == "Känslig":
             trace.update(marker_color="limegreen")
         else:
             raise ValueError("Not a valid trace")
