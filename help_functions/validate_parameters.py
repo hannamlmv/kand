@@ -16,7 +16,6 @@ def validate_number_of_isolates(number_of_isolates: int) -> None:
             "Number of isolates must be an integer greater than or equal to 1."
         )
 
-
 def validate_coefficients(coefficients: dict[str:float]) -> None:
     """
     Validate coefficients. Must be dictionary with str as key and float as value.
@@ -34,7 +33,6 @@ def validate_coefficients(coefficients: dict[str:float]) -> None:
             )
         if not isinstance(coefficient, float) or coefficient < 0:
             raise ValueError("Coefficient values must be floats greater than 0.")
-
 
 def validate_coverage_demands(coverage_demands: dict[str:float]) -> None:
     """
@@ -100,7 +98,6 @@ def validate_parameters(
         coverage_total,
         redundancy_threshold,
     )
-
 
 # Validates all visualisation parameters
 def validate_visualisation_parameters(
