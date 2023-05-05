@@ -163,6 +163,7 @@ def plotly_dotplot(
     antibiotics: list,
     antibiotic_ranges: dict,
 ) -> None:
+    """Plot a scatter plot of the isolates."""
 
     # Set ticks of x axis
     x_axis = [i for i in range(len(antibiotics))]

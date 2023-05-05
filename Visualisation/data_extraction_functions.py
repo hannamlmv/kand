@@ -39,8 +39,17 @@ def get_scale(mic_sir_data: str) -> bool:
 
 
 def parse_on_off_scale(
-    scale: bool, sir_category: str, y_values: list[float], mic_value_jitter: float
+    scale: bool,
+    sir_category: str,
+    y_values: list[float],
+    mic_value_jitter: float,
+    min_conc=-10,
+    max_conc=11,
 ) -> None:
+    """
+    Adds the correct placement y-value placement for each data point.
+    If the point is off-scale it will move it either the top or bottom of the plot
+    """
 
     if not isinstance(scale, bool):
         raise ValueError(
@@ -54,9 +63,9 @@ def parse_on_off_scale(
     # If off-scale move value to MAX_C or MIN_C
     elif scale is False:
         if sir_category == "S":
-            y_values.append(-10)
+            y_values.append(min_conc)
         elif sir_category == "R":
-            y_values.append(11)
+            y_values.append(max_conc)
         else:
             raise ValueError(f"SIR Category must be either S or R, not: {sir_category}")
 
@@ -64,6 +73,7 @@ def parse_on_off_scale(
 def parse_fastidious(
     fastidious_dict: dict[str:str], pathogen: str, fastidious_list: list[str]
 ) -> None:
+    """Adds the fastidiousness of the isolate to the fastidious list."""
     if (
         pathogen not in fastidious_dict["Kräsen"]
         and pathogen not in fastidious_dict["Icke-kräsen"]

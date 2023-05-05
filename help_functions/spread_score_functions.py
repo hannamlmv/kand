@@ -6,7 +6,9 @@ Date: 24/4
 Author: Victor Wong
 """
 
+
 def count_gap_length(valid_list: list) -> float:
+    """Calculates the gap length for a spread list and penalizes."""
     total_gap_length = 0
     gap_length = 0
 
@@ -25,6 +27,7 @@ def count_gap_length(valid_list: list) -> float:
 
 
 def check_edges(valid_list: list) -> float:
+    """Checks if the edges are empty or not and penalizes accordingly."""
     edge_penalty = 0
 
     # Add 0.5 penalty if the edge values are empty.
@@ -37,6 +40,7 @@ def check_edges(valid_list: list) -> float:
 
 
 def score_spread_list(spread_list: list) -> float:
+    """Calculates the score"""
     valid_list = [i for i in spread_list if i == 0 or i == 1]
 
     if len(valid_list) <= 1:
