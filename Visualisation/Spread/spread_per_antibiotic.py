@@ -37,7 +37,7 @@ def main(chosen_isolates: str, all_isolates: str) -> None:
             )
 
     table = PrettyTable()
-    table.field_names = ["Antibiotic", "Relativ spridning"]
+    table.field_names = ["Antibiotika", "Relativ spridning"]
     for antibiotic, mic in chosen_spread_per_abx.items():
         table.add_row([antibiotic, mic])
 

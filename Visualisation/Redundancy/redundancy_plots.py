@@ -300,7 +300,7 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
     sorted_dict = dict(sorted(result.items(), key=lambda item: item[1][0]))
 
     table = PrettyTable()
-    table.field_names = ["Isolate", "Number of unique MIC-values", "Antibiotic (MIC-value, SIR-category))"]
+    table.field_names = ["Isolat", "Antal unika MIC-värden", "Antibiotika (MIC-värde, SIR-kategori))"]
     table.hrules = True
 
     for key, value in sorted_dict.items():
