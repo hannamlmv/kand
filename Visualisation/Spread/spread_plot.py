@@ -20,7 +20,7 @@ from Visualisation.Spread.data_extraction_functions import (
 
 
 def main(chosen_isolates_list=None):
-    """ Creates a plot which visualises the spread of a panel. """
+    """Creates a plot which visualises the spread of a panel."""
     # Load files
     if chosen_isolates_list is None:
         chosen_isolates_list = pd.read_csv("Chosen_isolates_1.csv")
@@ -29,7 +29,9 @@ def main(chosen_isolates_list=None):
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     antibiotic_ranges = json.load(open("Parameters/antibiotic_info.json"))
-    fastidious_dict = json.load(open("Parameters/pathogen_fastidiousness.json"))
+    fastidious_dict = json.load(
+        open("Parameters/pathogen_fastidiousness.json", encoding="UTF-8")
+    )
 
     # Rename a long name for plotting purposes
     matrix_EU.rename(

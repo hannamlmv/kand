@@ -66,23 +66,21 @@ def parse_fastidious(
     fastidious_dict: dict[str:str], pathogen: str, fastidious_list: list[str]
 ) -> None:
     if (
-        pathogen not in fastidious_dict["Fastidious"]
-        and pathogen not in fastidious_dict["Non-fastidious"]
+        pathogen not in fastidious_dict["Kräsen"]
+        and pathogen not in fastidious_dict["Icke-kräsen"]
     ):
-        raise ValueError(
-            f"Pathogen name, {pathogen}, not found in Fastidious or Non-fastidious dictionary"
-        )
+        raise ValueError(f"Pathogen name, {pathogen}, not found in dictionary")
     if (
-        pathogen in fastidious_dict["Fastidious"]
-        and pathogen in fastidious_dict["Non-fastidious"]
+        pathogen in fastidious_dict["Kräsen"]
+        and pathogen in fastidious_dict["Icke-kräsen"]
     ):
         raise LookupError(
             f"Pathogen must be either fastidious or non-fastidious. Error raised by: {pathogen}"
         )
-    if pathogen in fastidious_dict["Fastidious"]:
-        fastidious_list.append("Fastidious")
-    elif pathogen in fastidious_dict["Non-fastidious"]:
-        fastidious_list.append("Non-fastidious")
+    if pathogen in fastidious_dict["Kräsen"]:
+        fastidious_list.append("Kräsen")
+    elif pathogen in fastidious_dict["Icke-kräsen"]:
+        fastidious_list.append("Icke-kräsen")
 
 
 def parse_mic_sir_data(mic_sir_data: str) -> bool:

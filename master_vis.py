@@ -9,13 +9,14 @@ import json
 from help_functions.validate_parameters import validate_visualisation_parameters
 from Visualisation.Spread.spread_plot import main as spread_vis
 from Visualisation.Spread.spread_per_antibiotic import main as spread_print
+
 from Visualisation.Coverage.coverage_vis import main as coverage_vis
 from Visualisation.Redundancy.redundancy_plots import main as redundancy
 
 
 def main():
-    """ 
-    Generates all graphs and print-outs for a panel.Which ones are to 
+    """
+    Generates all graphs and print-outs for a panel.Which ones are to
     be generated is specialised in visualisation_parameters.json.
     """
     panel = "Chosen_isolates_folder/Chosen_isolates.csv"

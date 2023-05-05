@@ -1,5 +1,5 @@
 {
-    "Non-fastidious": [
+    "Icke-kräsen": [
         "Staphylococcus epidermidis",
         "Staphylococcus hominis",
         "Staphylococcus capitis",
@@ -11,7 +11,7 @@
         "Enterococcus faecium",
         "Enterococcus faecalis"
     ],
-    "Fastidious": [
+    "Kräsen": [
         "Streptococcus pneumoniae",
         "Streptococcus mitis",
         "Streptococcus oralis",
