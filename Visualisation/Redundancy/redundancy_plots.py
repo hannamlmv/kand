@@ -1,3 +1,10 @@
+"""
+Creates the redundancy plots and the uniqueness print-out
+
+Date: 2/4
+Author: Therese Björkman & Hanad Abdullahi
+"""
+
 import pandas as pd
 import numpy as np
 from collections import Counter

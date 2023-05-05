@@ -1,3 +1,10 @@
+"""
+Creates the coverage plots
+
+Date: 2/4
+Author: Elin Berg & Julia Ancker
+"""
+
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go

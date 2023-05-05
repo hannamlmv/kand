@@ -1,5 +1,6 @@
 """
 Data extraction functions
+
 Date: 10/4 
 Author: Victor Wong
 """
