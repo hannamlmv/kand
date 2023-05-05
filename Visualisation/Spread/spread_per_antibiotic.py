@@ -7,7 +7,7 @@ Author: Hanna Malmvall
 
 import pandas as pd
 import json
-from pprint import pprint
+from prettytable import PrettyTable
 from help_functions.create_panel import create_panel
 from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
 
@@ -36,8 +36,12 @@ def main(chosen_isolates: str, all_isolates: str) -> None:
                 chosen_spread_per_abx[abx] / all_spread_per_abx[abx], 2
             )
 
-    pprint(chosen_spread_per_abx)
+    table = PrettyTable()
+    table.field_names = ["Antibiotic", "Relativ spridning"]
+    for antibiotic, mic in chosen_spread_per_abx.items():
+        table.add_row([antibiotic, mic])
 
+    print(table)
 
 if __name__ == "__main__":
     main(
