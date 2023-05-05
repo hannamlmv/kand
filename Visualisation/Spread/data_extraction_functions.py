@@ -1,6 +1,5 @@
 """
 Data extraction functions
-
 Date: 10/4 
 Author: Victor Wong
 """
@@ -103,7 +102,7 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) 
     with antibiotcs as keys and lists of the isolates and their
     SIRs in tuples as value.
     """
-    chosen_isolates_mic_sir_data = []
+    chosen_isolates_mic_sir_data = {antibiotic: [] for antibiotic in antibiotics}
 
     for index, row in chosen_isolates.iterrows():
         isolate, pathogen, antibiotic_mic_sir_data = (
@@ -117,14 +116,13 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) 
                 mic = find_digits(mic_sir_data)
                 scale = get_scale(mic_sir_data)
                 chosen_isolates_mic_sir_data[antibiotic].append(
-                    (isolate, np.log2(mic), sir_category, scale, pathogen)
+                    (isolate, mic, sir_category, scale, pathogen)
                 )
             else:
-                continue
                 # If SIR = "Missing BP" or "nip"
-                # chosen_isolates_mic_sir_data[antibiotic].append(
-                #     (isolate, mic_sir_data, None, None, pathogen)
-                # )
+                chosen_isolates_mic_sir_data[antibiotic].append(
+                    (isolate, mic_sir_data, None, None, pathogen)
+                )
     return chosen_isolates_mic_sir_data
 
 
