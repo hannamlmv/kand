@@ -13,7 +13,7 @@ def extract_chosen_isolates(
     chosen_isolates: pd.DataFrame, matrix_EU: pd.DataFrame
 ) -> pd.DataFrame:
     """
-    Select the chosen isolates from the script. Return a 
+    Select the chosen isolates from the script. Return a
     DataFrame only containing the rows of selected isolates.
     """
     chosen_rows = matrix_EU["Isolate"].isin(chosen_isolates["Isolate"])
@@ -21,7 +21,7 @@ def extract_chosen_isolates(
 
 
 def find_digits(mic_sir_data: str) -> int:
-    """ Find numbers in a string. """
+    """Find numbers in a string."""
     digit = ""
     for character in mic_sir_data:
         if character.isdigit() or character == ".":
@@ -30,7 +30,7 @@ def find_digits(mic_sir_data: str) -> int:
 
 
 def get_scale(mic_sir_data: str) -> bool:
-    """ Get on or off scale. True == on-scale. """
+    """Get on or off scale. True == on-scale."""
     if "=" in mic_sir_data:
         return True
     elif "<" in mic_sir_data or ">" in mic_sir_data:
@@ -40,7 +40,7 @@ def get_scale(mic_sir_data: str) -> bool:
 
 
 def parse_on_off_scale(
-    scale: bool, sir_category: str, y_values: list, mic_value_jitter: float
+    scale: bool, sir_category: str, y_values: list[float], mic_value_jitter: float
 ) -> None:
 
     if not isinstance(scale, bool):
@@ -63,7 +63,7 @@ def parse_on_off_scale(
 
 
 def parse_fastidious(
-    fastidious_dict: dict, pathogen: str, fastidious_list: list
+    fastidious_dict: dict[str:str], pathogen: str, fastidious_list: list[str]
 ) -> None:
     if (
         pathogen not in fastidious_dict["Fastidious"]
@@ -99,7 +99,7 @@ def parse_mic_sir_data(mic_sir_data: str) -> bool:
     return True
 
 
-def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
+def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) -> dict:
     """
     Extract all SIRs for an antibiotic. Returns a dictionary
     with antibiotcs as keys and lists of the isolates and their
@@ -129,7 +129,7 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list) -> di
     return chosen_isolates_mic_sir_data
 
 
-def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict) -> None:
+def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict[str:tuple]) -> None:
     """
     Remove the tuples that have None in their SIR data.
     """
@@ -144,7 +144,7 @@ def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict) -> None:
 
 
 def extract_mic_values_per_antibiotic(
-    chosen_isolates_sir: dict, antibiotics: list
+    chosen_isolates_sir: dict, antibiotics: list[str]
 ) -> list:
     """
     Extract the mic-values of each isolate for each antibiotic.
