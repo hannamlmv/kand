@@ -1,4 +1,3 @@
-
 import pandas as pd
 import numpy as np
 from collections import Counter
@@ -243,7 +242,6 @@ def barplot(SIR_total_per_anti, plot:bool):
     if plot:
         fig.show()
 
-
 def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, plot:bool):
     """
     Plots a tree plot to see how closely related the isolates are when comparing their MIC-values.
@@ -269,8 +267,7 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
 
     if plot:
         fig.show()
-    
-    
+     
 def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool):
     """
     This function produces a dictionary that displays how many unique mic-values each isolate has.
