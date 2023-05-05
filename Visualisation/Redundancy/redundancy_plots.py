@@ -202,7 +202,7 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
 
     fig.update_layout(
         title={
-        'text': "Färgdiagram",
+        'text': "Likhet mellan isolat",
         'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
@@ -258,7 +258,7 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     width = width,
     height = width/2,
     title={
-        'text': "Dendrogram",
+        'text': "Likhet mellan isolat",
         'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
