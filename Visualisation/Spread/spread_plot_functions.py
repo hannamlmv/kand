@@ -22,7 +22,7 @@ def create_plot_df(
     mic_data: list,
     fastidious_dict: dict,
     x_jitter: float = 0.15,
-    y_jitter: float = 0.05,
+    y_jitter: float = 0.0,
 ) -> pd.DataFrame:
     """Create dataframe used for plotting."""
 

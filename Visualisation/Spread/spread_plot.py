@@ -46,16 +46,11 @@ def main(chosen_isolates_list=None):
     # Extract all data for an antibiotic.
     chosen_isolates_data = extract_mic_sir_data(chosen_isolates, antibiotics)
 
-    # Remove the tuples that have None in their SIR data
-    filtered_chosen_isolates_data = filter_mic_sir_data(chosen_isolates_data)
-
     # Extract the mic-values of each isolate for each antibiotic.
-    mic_data = extract_mic_values_per_antibiotic(
-        filtered_chosen_isolates_data, antibiotics
-    )
+    # mic_data = extract_mic_values_per_antibiotic(chosen_isolates_data, antibiotics)
 
     # Create dataframe used for plotting
-    plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)
+    plot_df = create_plot_df(antibiotics, chosen_isolates_data, fastidious_dict)
 
     plotly_dotplot(plot_df, antibiotics, antibiotic_ranges)
 
