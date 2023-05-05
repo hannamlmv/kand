@@ -304,8 +304,7 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
     table.hrules = True
 
     for key, value in sorted_dict.items():
-        if value[0] != 0:
-            table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
+        table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
 
     if perform:
         print(table)
@@ -346,6 +345,6 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     unique_score(isolate_data, Names, print_unique_scores)
 
 if __name__ == "__main__":
-   main("Chosen_isolates_folder/Chosen_isolates.csv", False, False, False, True)
+   main("Chosen_isolates_folder/Chosen_isolates.csv", True, True, True, True)
 
 
