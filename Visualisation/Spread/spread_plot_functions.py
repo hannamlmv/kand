@@ -15,7 +15,6 @@ from Visualisation.data_extraction_functions import (
 # Set random seed
 np.random.seed(1)
 
-
 def create_plot_df(
     antibiotics: list,
     mic_data: list,
@@ -70,7 +69,6 @@ def create_plot_df(
     )
 
     return plot_df
-
 
 def add_rectangles_to_plot(fig, antibiotics: list) -> None:
     """Adds rectangles to represent the on-scale concentrations."""
@@ -156,7 +154,6 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         annotation_text="Koncentrationsintervall - Kräsna",
         annotation_position="top",
     )
-
 
 def plotly_dotplot(
     plot_df: pd.DataFrame,
@@ -244,5 +241,4 @@ def plotly_dotplot(
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
         title_x=0.5,
     )
-    # fig.write_html("first_figure.html", auto_open=True)
     fig.show()
