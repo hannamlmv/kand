@@ -228,6 +228,7 @@ def barplot(SIR_total_per_anti, plot:bool):
     """ 
     colors = {'A': 'limegreen', 'B': 'gold', 'C': 'tomato'}
     keys = list(SIR_total_per_anti.keys())
+    keys = list(map(lambda x: x.replace('Trimethoprim-sulfamethoxazole', 'T.sulfamethoxazole'), keys))
     values = list(SIR_total_per_anti.values())
     S = [dict['S'] for dict in values]
     I = [dict['I'] for dict in values]
