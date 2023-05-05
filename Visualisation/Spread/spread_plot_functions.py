@@ -143,7 +143,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         fillcolor="skyblue",
         line_width=0,
         opacity=0.8,
-        annotation_text="Non-fastidious concentration ranges",
+        annotation_text="Koncentrationsintervall - Icke-kräsna",
         annotation_position="top",
     )
     fig.add_vrect(
@@ -151,7 +151,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         x1=22.5,
         y0=0.97,
         y1=1,
-        fillcolor="Koncentrationsintervall - Icke-kräsna",
+        fillcolor="ghostwhite",
         line_width=0,
         opacity=0.3,
         annotation_text="Koncentrationsintervall - Kräsna",
