@@ -34,7 +34,7 @@ def main(chosen_isolates_list=None):
 
     # Rename a long name for plotting purposes
     matrix_EU.rename(
-        columns={"Trimethoprim-sulfamethoxazole": "Trimeth-sulf"}, inplace=True
+        columns={"Trimethoprim-sulfamethoxazole": "T.sulfamethoxazole"}, inplace=True
     )
     # Select isolates
     chosen_isolates = extract_chosen_isolates(chosen_isolates_list, matrix_EU)

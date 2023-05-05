@@ -96,7 +96,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         "Linezolid": ["0.125 - 16.0", "0.0625 - 8.0"],
         "Daptomycin": ["0.03125 - 16.0", None],
         "Rifampicin": ["0.002 - 8.0", None],
-        "Trimeth-sulf": ["0.0625 - 16.0", "0.0625 - 8.0"],
+        "T.sulfamethoxazole": ["0.0625 - 16.0", "0.0625 - 8.0"],
     }
 
     for i in range(len(antibiotics)):
