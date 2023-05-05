@@ -3,87 +3,87 @@
     "Lowest concentration": 0.00195,
     "Benzylpenicillin": {
         "Lower": "0.00781",
-        "Upper": "16.0"
+        "Upper": "32.0"
     },
     "Ampicillin": {
         "Lower": "0.00781",
-        "Upper": "16.0"
+        "Upper": "64.0"
     },
     "Cefoxitin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.25",
+        "Upper": "16"
     },
     "Ceftaroline": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.03125",
+        "Upper": "16"
     },
     "Ceftobiprole": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.03125",
+        "Upper": "16"
     },
     "Ceftriaxone": {
         "Lower": "0.00781",
         "Upper": "16.0"
     },
     "Imipenem": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.03125",
+        "Upper": "16"
     },
     "Meropenem": {
         "Lower": "0.00781",
         "Upper": "8.0"
     },
     "Ciprofloxacin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.0625",
+        "Upper": "8"
     },
     "Levofloxacin": {
         "Lower": "0.03125",
         "Upper": "16.0"
     },
     "Gentamicin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "128.0",
+        "Upper": "500.0"
     },
     "Dalbavancin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.01563",
+        "Upper": "1.0"
     },
     "Teicoplanin": {
         "Lower": "0.03125",
-        "Upper": "8.0"
+        "Upper": "16.0"
     },
     "Vancomycin": {
-        "Lower": "0.03125",
-        "Upper": "8.0"
+        "Lower": "0.125",
+        "Upper": "64.0"
     },
     "Erythromycin": {
         "Lower": "0.00391",
-        "Upper": "4.0"
+        "Upper": "16.0"
     },
     "Clindamycin": {
         "Lower": "0.00781",
-        "Upper": "4.0"
+        "Upper": "16.0"
     },
     "Tetracycline": {
         "Lower": "0.01563",
-        "Upper": "16.0"
+        "Upper": "32.0"
     },
     "Linezolid": {
         "Lower": "0.0625",
-        "Upper": "8.0"
+        "Upper": "16.0"
     },
     "Daptomycin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.03125",
+        "Upper": "16.0"
     },
     "Rifampicin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.00195",
+        "Upper": "8.0"
     },
     "Trimethoprim-sulfamethoxazole": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Lower": "0.0625",
+        "Upper": "16.0"
     },
     "D-test": {
         "Lower": "Min_C",
