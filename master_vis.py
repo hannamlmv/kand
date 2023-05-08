@@ -11,6 +11,7 @@ from Visualisation.Spread.spread_plot import main as spread_vis
 from Visualisation.Spread.spread_per_antibiotic import main as spread_print
 from Visualisation.Coverage.coverage_vis import main as coverage_vis
 from Visualisation.Redundancy.redundancy_plots import main as redundancy
+from help_functions.validate_parameters import validate_parameters
 
 def main():
     """
@@ -21,7 +22,10 @@ def main():
     all_isolates = "Chosen_isolates_folder/all_isolates.csv"
     bools = validate_visualisation_parameters(
         json.load(open("Parameters/visualisation_parameters.json"))
-    )
+        )
+    _, _, _, _, redundancy_threshold = validate_parameters(
+        json.load(open("Parameters/isolate_selection_parameters.json"))
+        )
 
     # Spread
     if bools["Spread visualisation"]:
@@ -52,6 +56,7 @@ def main():
             print("-------------------------------")
         redundancy(
             panel,
+            redundancy_threshold,
             bools["Redundancy bars"],
             bools["Redundancy heatmap"],
             bools["Redundancy tree"],
