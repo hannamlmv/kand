@@ -56,7 +56,6 @@ def choose_isolate(
     print(best_isolate, best_score, best_score_vec)
     return best_isolate
 
-
 def add_isolate(
     number_of_isolates: int,
     all_isolates: list[Isolate],

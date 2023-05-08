@@ -16,7 +16,6 @@ from Visualisation.data_extraction_functions import (
 # Set random seed
 np.random.seed(1)
 
-
 def create_plot_df(
     antibiotics: list,
     mic_data: list,
@@ -71,7 +70,6 @@ def create_plot_df(
     )
 
     return plot_df
-
 
 def add_rectangles_to_plot(fig, antibiotics: list) -> None:
     """Adds rectangles to represent the on-scale concentrations."""

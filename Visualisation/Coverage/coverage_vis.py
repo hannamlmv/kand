@@ -131,10 +131,7 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
             font=dict(size=12, color='white')
             )
         )
-
-    #Show the plot
     fig.show()
-
 
 def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M: dict):
     """
@@ -201,8 +198,6 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
     template = 'plotly_dark')
 
     fig.update_traces(showscale = False)
-
-    #Show the plot
     fig.show()
 
 def main(panel, sir_stackplot, coverage_per_isolates):

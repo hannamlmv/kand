@@ -294,16 +294,12 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
                 new_tuple_list.append(new_tuple_item)
         result[key] = (value[0], new_tuple_list + removed_tuple_list)
 
-
     sorted_dict = dict(sorted(result.items(), key=lambda item: item[1][0]))
-
     table = PrettyTable()
     table.field_names = ["Isolat", "Antal unika MIC-värden", "Antibiotika (MIC-värde, SIR-kategori))"]
     table.hrules = True
-
     for key, value in sorted_dict.items():
         table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
-
     if perform:
         print(table)
 

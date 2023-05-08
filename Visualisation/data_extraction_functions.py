@@ -128,7 +128,6 @@ def extract_mic_sir_data(chosen_isolates: pd.DataFrame, antibiotics: list[str]) 
                 )
     return chosen_isolates_mic_sir_data
 
-
 def filter_mic_sir_data(chosen_isolates_mic_sir_data: dict[str:tuple]) -> None:
     """
     Remove the tuples that have None in their SIR data.
