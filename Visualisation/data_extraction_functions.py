@@ -151,9 +151,9 @@ def extract_mic_values_per_antibiotic(
     mic_values = []
     # Iterate over all antibiotics
     for antibiotic in antibiotics:
-        # Create a list to hold the mic-values of isolates for that abx
+        # Create a list to hold the mic-values of isolates for that antibiotic
         antibiotic_mic_values = []
-        # Get value of current abx.
+        # Get value of current antibiotic
         sir_data = chosen_isolates_sir[antibiotic]
         for isolate, mic_value, mic_category, scale, pathogen in sir_data:
             antibiotic_mic_values.append(

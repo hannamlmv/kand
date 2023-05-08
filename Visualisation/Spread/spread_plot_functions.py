@@ -40,8 +40,8 @@ def create_plot_df(
     pathogen_list = []
     fastidious_list = []
 
-    for x_value, abx_mic_data in zip(x_axis, mic_data):
-        for isolate, mic_value, SIR_category, scale, pathogen in abx_mic_data:
+    for x_value, antibiotic_mic_data in zip(x_axis, mic_data):
+        for isolate, mic_value, SIR_category, scale, pathogen in antibiotic_mic_data:
             # Add random noise to avoid overlapping
             x_value_jitter = x_value + np.random.uniform(-x_jitter, x_jitter)
             mic_value_jitter = mic_value + np.random.uniform(-y_jitter, y_jitter)

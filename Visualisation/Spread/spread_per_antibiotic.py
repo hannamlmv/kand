@@ -16,28 +16,28 @@ def main(chosen_isolates: str, all_isolates: str) -> None:
     for isolates in [chosen_isolates, all_isolates]:
         isolate_list = pd.read_csv(isolates)["Isolate"].tolist()
         isolate_panel = create_panel(isolate_list)
-        spread_per_abx = calc_spread_score(
+        spread_per_antibiotic = calc_spread_score(
             extract_panel_data(isolate_panel),
             json.load(open("Parameters/antibiotic_info.json")),
             isolate_panel.get_number_antibiotics(),
             True,
         )
         if isolates == chosen_isolates:
-            chosen_spread_per_abx = spread_per_abx
+            chosen_spread_per_antibiotic = spread_per_antibiotic
         else:
-            all_spread_per_abx = spread_per_abx
+            all_spread_per_antibiotic = spread_per_antibiotic
 
-    for abx in chosen_spread_per_abx:
-        if all_spread_per_abx[abx] == 0:
-            chosen_spread_per_abx[abx] = 1.0
+    for antibiotic in chosen_spread_per_antibiotic:
+        if all_spread_per_antibiotic[antibiotic] == 0:
+            chosen_spread_per_antibiotic[antibiotic] = 1.0
         else:
-            chosen_spread_per_abx[abx] = round(
-                chosen_spread_per_abx[abx] / all_spread_per_abx[abx], 2
+            chosen_spread_per_antibiotic[antibiotic] = round(
+                chosen_spread_per_antibiotic[antibiotic] / all_spread_per_antibiotic[antibiotic], 2
             )
 
     table = PrettyTable()
     table.field_names = ["Antibiotika", "Relativ spridning"]
-    for antibiotic, mic in chosen_spread_per_abx.items():
+    for antibiotic, mic in chosen_spread_per_antibiotic.items():
         table.add_row([antibiotic, mic])
 
     print(table)

@@ -50,7 +50,7 @@ def antibiotic_dict(antibiotic_names: list):
     """
     return {antibiotic: [] for antibiotic in antibiotic_names}
 
-def extract_abx_data(abx_data: tuple):
+def extract_antibiotic_data(antibiotic_data: tuple):
     """
     Takes a touple containing an the MIC-value as well as the SIR-category 
     in a string for an antibiotic as well as the antibiotic name and extracts 
@@ -58,23 +58,23 @@ def extract_abx_data(abx_data: tuple):
     it is set to zero and will later be sorted away. The same will be done 
     if the MIC-value is Off-scale.
     """
-    SIR_category = re.findall('^[a-zA-Z]+', str(abx_data[1]))
+    SIR_category = re.findall('^[a-zA-Z]+', str(antibiotic_data[1]))
     MIC_value = ['0']
 
-    if 'Missing BP' in abx_data[1] or 'nip' in abx_data[1]:
+    if 'Missing BP' in antibiotic_data[1] or 'nip' in antibiotic_data[1]:
         MIC_value = ['0']
         SIR_category = ['Missing BP']
     
-    elif 'nip' in abx_data[1]:
+    elif 'nip' in antibiotic_data[1]:
         MIC_value = ['0']
         SIR_category = ['Not in panel'] 
 
-    elif '<' in abx_data[1] or '>' in abx_data[1]:
+    elif '<' in antibiotic_data[1] or '>' in antibiotic_data[1]:
         MIC_value = ['0']
         SIR_category = ['Off-scale']
 
     else:
-        MIC_value = re.findall('(\d+\.?\d*)', str(abx_data[1]))
+        MIC_value = re.findall('(\d+\.?\d*)', str(antibiotic_data[1]))
     return(MIC_value[0], SIR_category[0])
 
 def create_isolate_data(Csv_name: str, excel_name: str, sheet_name: str):
@@ -87,7 +87,7 @@ def create_isolate_data(Csv_name: str, excel_name: str, sheet_name: str):
     for _, row in chosen_isolate.iterrows():
         isolate = row[0]
         antibiotic_data = row.iloc[1:].to_dict()
-        isolate_data[isolate] = [extract_abx_data((abx, value)) for abx, value in antibiotic_data.items()]
+        isolate_data[isolate] = [extract_antibiotic_data((antibiotic, value)) for antibiotic, value in antibiotic_data.items()]
     return isolate_data
 
 def count_values(lst: list):
