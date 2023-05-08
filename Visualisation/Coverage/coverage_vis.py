@@ -119,7 +119,7 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
             'text': "Täckning per antibiotika", 
             'x': 0.5, 
             'xanchor': 'center', 
-            'font_size': 25
+            'font_size': 17
             }, 
         xaxis_title="Antibiotika",
         yaxis_title="Antal stammar",
@@ -184,7 +184,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
             'text': "Täckning för varje antbiotika och stam", 
             'x': 0.5, 
             'xanchor': 'center', 
-            'font_size': 25
+            'font_size': 17
             }, 
         xaxis_title="Antibiotika",
         yaxis_title="Stam",

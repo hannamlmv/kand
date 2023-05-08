@@ -12,11 +12,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import plotly.graph_objs as go
 import re
 import plotly.figure_factory as ff
-import screeninfo
 from prettytable import PrettyTable
-
-screen = screeninfo.get_monitors()[0]
-width, height = screen.width, screen.height
 
 def read_csv(Csv_name: str):
     """ Reads the CSV file. """
@@ -211,7 +207,7 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
         'text': "Likhet mellan isolat",
         'x': 0.5,
         'xanchor': 'center',
-        'font_size': 25
+        'font_size': 17
         },
     xaxis_title='Isolat',
     yaxis_title='Isolat',
@@ -244,7 +240,7 @@ def barplot(SIR_total_per_anti, plot:bool):
         'text': "Antalet redundanta isolat för varje antibiotika",
         'x': 0.5,
         'xanchor': 'center',
-        'font_size': 25
+        'font_size': 17
     }, xaxis_title = "Antibiotika", yaxis_title = "Antal isolat")
     if plot:
         fig.show()
@@ -260,13 +256,12 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     fig = ff.create_dendrogram(distance_matrix, orientation='bottom', labels=chosen_isolate_names)
 
     fig.update_layout(
-    width = width,
-    height = width/2,
+    autosize  = True, 
     title={
         'text': "Likhet mellan isolat",
         'x': 0.5,
         'xanchor': 'center',
-        'font_size': 25},
+        'font_size': 17},
     xaxis_title='Isolat',
     yaxis_title='Distans',
     template="plotly_dark")

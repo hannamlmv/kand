@@ -143,7 +143,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         fillcolor="skyblue",
         line_width=0,
         opacity=0.8,
-        annotation_text="Koncentrationsintervall - Icke-kräsna",
+        annotation_text="Icke-kräsna",
         annotation_position="top",
     )
     fig.add_vrect(
@@ -154,7 +154,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
         fillcolor="ghostwhite",
         line_width=0,
         opacity=0.3,
-        annotation_text="Koncentrationsintervall - Kräsna",
+        annotation_text="Kräsna",
         annotation_position="top",
     )
 
@@ -236,10 +236,10 @@ def plotly_dotplot(
 
     # Modify x-ticks, y-ticks, legend and title
     fig.update_layout(
-        title = {'text': "Testpanel",
+        title = {'text': "Spridning inom on-scale koncentrationsintervall",
         'x': 0.5,
         'xanchor': 'center',
-        'font_size': 25
+        'font_size': 17
         },
         xaxis=dict(tickmode="array", tickvals=x_axis, ticktext=antibiotics),
         yaxis=dict(
@@ -247,7 +247,7 @@ def plotly_dotplot(
             tickvals=[i for i in range(-10, 12)],
             ticktext=y_axis_ticktext,
         ),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        legend=dict(orientation="h", yanchor="bottom", y=1, xanchor="right", x=1),
         title_x=0.5,
     )
     fig.show()
