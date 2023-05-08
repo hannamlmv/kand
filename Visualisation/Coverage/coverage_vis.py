@@ -37,7 +37,6 @@ def extract_SIR(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
        for antibiotic, SIR in antibiotic_SIR:
            if parse_SIR(SIR):
                mic_category = SIR[0]
-               mic = find_digits(SIR)
                chosen_isolates_SIR[antibiotic].append(mic_category)
            else:
                chosen_isolates_SIR[antibiotic].append((None))
@@ -56,7 +55,6 @@ def extract_SIR_M(chosen_isolates: pd.DataFrame, antibiotics: list) -> dict:
        for antibiotic, SIR in antibiotic_SIR:
            if parse_SIR(SIR):
                mic_category = SIR[0]
-               mic = find_digits(SIR)
                chosen_isolates_SIR[antibiotic].append(mic_category)
            else:
                chosen_isolates_SIR[antibiotic].append(('M'))
@@ -68,7 +66,7 @@ def filter_mic_values(chosen_isolates_SIR: dict) -> None:
        chosen_isolates_SIR[antibiotic] = list((tup for tup in SIR_data if tup is not None))
    return chosen_isolates_SIR
 
-def collect_number_of_S_I_R(chosen_isolates_SIR: dict, antibiotics: list) -> dict:
+def collect_number_of_S_I_R(chosen_isolates_SIR: dict) -> dict:
     """
     Counts every S,I,R value for every antibiotic. Returns a dictionary with the 
     antibiotic as the key, and a list with hte counts of the S,I,R-values 
@@ -220,7 +218,7 @@ def main(panel, sir_stackplot, coverage_per_isolates):
    filtered_chosen_isolates_SIR = filter_mic_values(chosen_isolates_SIR)
 
    # Count number of S,I,R per antibiotic:
-   S_I_R_per_antibiotic = collect_number_of_S_I_R(filtered_chosen_isolates_SIR, antibiotics)
+   S_I_R_per_antibiotic = collect_number_of_S_I_R(filtered_chosen_isolates_SIR)
 
    # Plots a stackplot over the panel, with S,I,R-values in different colors.
    if sir_stackplot:

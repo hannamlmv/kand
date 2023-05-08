@@ -87,7 +87,9 @@ def create_isolate_data(Csv_name: str, excel_name: str, sheet_name: str):
     for _, row in chosen_isolate.iterrows():
         isolate = row[0]
         antibiotic_data = row.iloc[1:].to_dict()
-        isolate_data[isolate] = [extract_antibiotic_data((antibiotic, value)) for antibiotic, value in antibiotic_data.items()]
+        isolate_data[isolate] = [
+            extract_antibiotic_data((antibiotic, value)) for antibiotic, value in antibiotic_data.items()
+            ]
     return isolate_data
 
 def count_values(lst: list):
@@ -171,7 +173,9 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
     chosen_isolate = choose_isolates(Csv_name, excel_name, sheet_name)
     chosen_isolate_names = chosen_isolate.Isolate.values.tolist()
     worst_isolate_values = {isolate: 0 for isolate in chosen_isolate_names}
-    first_values = {isolate: [float(tup[0] if tup[0] is not None else 0) for tup in isolate_data[isolate]] for isolate in chosen_isolate_names}
+    first_values = {
+        isolate: [float(tup[0] if tup[0] is not None else 0) for tup in isolate_data[isolate]] for isolate in chosen_isolate_names
+        }
 
     
     similarity_matrix = np.zeros((len(chosen_isolate_names), len(chosen_isolate_names)))
@@ -269,7 +273,7 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     if plot:
         fig.show()
      
-def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool):
+def unique_score(isolate_selection: dict,  antibiotic_names : list, perform:bool):
     """
     This function produces a dictionary that displays how many unique mic-values each isolate has.
     This by comparing each isolates MIC-value with every other isolates MIC-value with the same index. 
@@ -287,10 +291,17 @@ def unique_score(isolate_selection: dict,  Antibiotic_names : list, perform:bool
         new_tuple_list = []
         removed_tuple_list = []
         for tuple_item in value[1]:
-            if tuple_item[1] == 'Missing bp' or tuple_item[1] == 'Off-scale' or tuple_item[1] == 'Not in panel' :
-                removed_tuple_list.append((int(tuple_item[0])-1, tuple_item[1], Antibiotic_names[tuple_item[2]]))
+            if (
+                tuple_item[1] == 'Missing bp' or 
+                tuple_item[1] == 'Off-scale' or 
+                tuple_item[1] == 'Not in panel'
+                ):
+                removed_tuple_list.append(
+                    (int(tuple_item[0])-1, 
+                     tuple_item[1], 
+                     antibiotic_names[tuple_item[2]]))
             else:
-                new_tuple_item = (tuple_item[0], tuple_item[1], Antibiotic_names[tuple_item[2]])
+                new_tuple_item = (tuple_item[0], tuple_item[1], antibiotic_names[tuple_item[2]])
                 new_tuple_list.append(new_tuple_item)
         result[key] = (value[0], new_tuple_list + removed_tuple_list)
 

@@ -159,8 +159,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
 
 def plotly_dotplot(
     plot_df: pd.DataFrame,
-    antibiotics: list,
-    antibiotic_ranges: dict,
+    antibiotics: list
 ) -> None:
     """Plot a scatter plot of the isolates."""
 
