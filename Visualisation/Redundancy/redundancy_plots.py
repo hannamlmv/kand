@@ -172,7 +172,6 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
     """
     chosen_isolate = choose_isolates(Csv_name, excel_name, sheet_name)
     chosen_isolate_names = chosen_isolate.Isolate.values.tolist()
-    worst_isolate_values = {isolate: 0 for isolate in chosen_isolate_names}
     first_values = {
         isolate: [float(tup[0] if tup[0] is not None else 0) for tup in isolate_data[isolate]] for isolate in chosen_isolate_names
         }
