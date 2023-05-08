@@ -219,7 +219,7 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
 )
     if plot:
         fig.show()
-    return worst_isolate_values, similarity_matrix
+    return similarity_matrix
    
 def barplot(SIR_total_per_anti, plot:bool):
     """
@@ -339,7 +339,7 @@ def main(csv, display_barplot: bool, display_heatmap: bool, display_phylo:bool, 
     barplot(SIR_total_per_anti, display_barplot)
 
     # Plot the heatmap and get the worst isolate score???
-    worst, similarity = heatmap_plot(isolate_data, csv, excel, excel_sheet, display_heatmap)
+    similarity = heatmap_plot(isolate_data, csv, excel, excel_sheet, display_heatmap)
 
     # Plot the phylogram
     phylo(similarity, csv, excel, excel_sheet, display_phylo)
