@@ -203,7 +203,6 @@ def plotly_dotplot(
         hover_name="Isolatnamn",
         color="SIR",
         opacity=0.7,
-        title="Testpanel",
         range_y=[-11, 12],
         template="plotly_dark",
         hover_data={
@@ -237,6 +236,11 @@ def plotly_dotplot(
 
     # Modify x-ticks, y-ticks, legend and title
     fig.update_layout(
+        title = {'text': "Testpanel",
+        'x': 0.5,
+        'xanchor': 'center',
+        'font_size': 25
+        },
         xaxis=dict(tickmode="array", tickvals=x_axis, ticktext=antibiotics),
         yaxis=dict(
             tickmode="array",

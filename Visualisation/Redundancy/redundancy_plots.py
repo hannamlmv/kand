@@ -209,10 +209,10 @@ def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name:
     fig.update_layout(
         title={
         'text': "Likhet mellan isolat",
-        'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
-        'yanchor': 'top'},
+        'font_size': 25
+        },
     xaxis_title='Isolat',
     yaxis_title='Isolat',
     template="plotly_dark"
@@ -242,10 +242,9 @@ def barplot(SIR_total_per_anti, plot:bool):
 
     fig.update_layout(barmode='stack', template="plotly_dark" ,title={
         'text': "Antalet redundanta isolat för varje antibiotika",
-        'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
-        'yanchor': 'top'
+        'font_size': 25
     }, xaxis_title = "Antibiotika", yaxis_title = "Antal isolat")
     if plot:
         fig.show()
@@ -265,10 +264,9 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     height = width/2,
     title={
         'text': "Likhet mellan isolat",
-        'y': 0.95,
         'x': 0.5,
         'xanchor': 'center',
-        'yanchor': 'top'},
+        'font_size': 25},
     xaxis_title='Isolat',
     yaxis_title='Distans',
     template="plotly_dark")
