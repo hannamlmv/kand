@@ -32,7 +32,7 @@ def compare_plot(panels):
         barmode="group",
     )
     fig.update_layout(
-        title={'text': "Jämförelse av testpaneler", 'x': 0.5, 'xanchor': 'center', 'font_size': 25},
+        title={'text': "Jämförelse av testpaneler", 'x': 0.5, 'xanchor': 'center', 'font_size': 17},
         xaxis_tickfont_size=14,
         yaxis=dict(title="Värde", titlefont_size=16, tickfont_size=14),
         template="plotly_dark",
