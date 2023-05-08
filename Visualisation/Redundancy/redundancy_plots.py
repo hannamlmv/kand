@@ -264,6 +264,7 @@ def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str,
     xaxis_title='Isolat',
     yaxis_title='Distans',
     template="plotly_dark")
+    fig.update_yaxes(visible=False)
 
     if plot:
         fig.show()
