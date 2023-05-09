@@ -1,12 +1,16 @@
 """
-Creates the spread-plot 
+Creates the spread-plot and generates print-out of spread for different antibiotics 
 
-Date: 10/4 
-Author: Victor Wong
+Date: 28/4 
+Author: Victor Wong & Hanna Malmvall
 """
 
+import pandas as pd
+from prettytable import PrettyTable
 import json
 import pandas as pd
+from help_functions.create_panel import create_panel
+from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
 from Visualisation.Spread.spread_plot_functions import (
     create_plot_df,
     plotly_dotplot,
@@ -18,13 +22,10 @@ from Visualisation.data_extraction_functions import (
     extract_mic_values_per_antibiotic,
 )
 
-def main(chosen_isolates_list=None):
+def plot(chosen_isolates_list):
     """Creates a plot which visualises the spread of a panel."""
     # Load files
-    if chosen_isolates_list is None:
-        chosen_isolates_list = pd.read_csv("Chosen_isolates_1.csv")
-    else:
-        chosen_isolates_list = pd.read_csv(chosen_isolates_list)
+    chosen_isolates_list = pd.read_csv(chosen_isolates_list)
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU")
     fastidious_dict = json.load(
@@ -57,5 +58,51 @@ def main(chosen_isolates_list=None):
 
     plotly_dotplot(plot_df, antibiotics)
 
+def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
+    """Calculates and prints the relative spread per antibiotic."""
+    for isolates in [chosen_isolates, all_isolates]:
+        isolate_list = pd.read_csv(isolates)["Isolate"].tolist()
+        isolate_panel = create_panel(isolate_list)
+        spread_per_antibiotic = calc_spread_score(
+            extract_panel_data(isolate_panel),
+            json.load(open("Parameters/antibiotic_info.json")),
+            isolate_panel.get_number_antibiotics(),
+            True,
+        )
+        if isolates == chosen_isolates:
+            chosen_spread_per_antibiotic = spread_per_antibiotic
+        else:
+            all_spread_per_antibiotic = spread_per_antibiotic
+
+    for antibiotic in chosen_spread_per_antibiotic:
+        if all_spread_per_antibiotic[antibiotic] == 0:
+            chosen_spread_per_antibiotic[antibiotic] = 1.0
+        else:
+            chosen_spread_per_antibiotic[antibiotic] = round(
+                chosen_spread_per_antibiotic[antibiotic] / all_spread_per_antibiotic[antibiotic], 2
+            )
+
+    table = PrettyTable()
+    table.field_names = ["Antibiotika", "Relativ spridning"]
+    for antibiotic, mic in chosen_spread_per_antibiotic.items():
+        table.add_row([antibiotic, mic])
+    print()
+    print("---------------------------------------------")
+    print("Spridning i förhållande till möjlig spridning")
+    print("---------------------------------------------")
+    print(table)
+    print()
+
+def main(chosen_isolates: str, all_isolates: str, do_plot:bool, do_print:bool):
+    if do_plot:
+        plot(chosen_isolates)
+    if do_print:
+        spread_per_antibiotic(chosen_isolates, all_isolates)
+
 if __name__ == "__main__":
-    main()
+    main(
+        "Chosen_isolates_folder/Chosen_isolates.csv",
+        "Chosen_isolates_folder/all_isolates.csv", 
+        True,
+        True
+        )

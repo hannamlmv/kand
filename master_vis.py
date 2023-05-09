@@ -8,7 +8,6 @@ Author: Hanna Malmvall
 import json
 from help_functions.validate_parameters import validate_visualisation_parameters
 from Visualisation.Spread.spread_plot import main as spread_vis
-from Visualisation.Spread.spread_per_antibiotic import main as spread_print
 from Visualisation.Coverage.coverage_plots import main as coverage_vis
 from Visualisation.Redundancy.redundancy_plots import main as redundancy
 from help_functions.validate_parameters import validate_parameters
@@ -28,15 +27,13 @@ def main():
         )
 
     # Spread
-    if bools["Spread visualisation"]:
-        spread_vis(panel)
-    if bools["Spread per antibiotic print-out"]:
-        print()
-        print("---------------------------------------------")
-        print("Spridning i förhållande till möjlig spridning")
-        print("---------------------------------------------")
-        spread_print(panel, all_isolates)
-        print()
+    if bools["Spread visualisation"] or bools["Spread per antibiotic print-out"]:
+        spread_vis(
+            panel, 
+            all_isolates, 
+            bools["Spread visualisation"], 
+            bools["Spread per antibiotic print-out"]
+            )
 
     # Coverage
     if bools["Coverage bars"] or bools["Coverage heatmap"]:
@@ -49,11 +46,6 @@ def main():
         or bools["Redundancy bars"]
         or bools["Uniqueness print-out"]
     ):
-        if bools["Uniqueness print-out"]:
-            print()
-            print("-------------------------------")
-            print("Unika MIC-värden för varje stam")
-            print("-------------------------------")
         redundancy(
             panel,
             redundancy_threshold,

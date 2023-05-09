@@ -95,7 +95,7 @@ def barplot(SIR_total_per_anti, plot:bool):
     if plot:
         fig.show()
 
-def phylo(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, plot:bool):
+def tree(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, plot:bool):
     """
     Plots a tree plot to see how closely related the isolates are when comparing their MIC-values.
     """
@@ -159,14 +159,19 @@ def unique_score(isolate_selection: dict,  antibiotic_names : list, perform:bool
     for key, value in sorted_dict.items():
         table.add_row([key, value[0], "\n".join([f"{x[2]} ({x[0]}, {x[1]})" for x in value[1]])])
     if perform:
+        print()
+        print("-------------------------------")
+        print("Unika MIC-värden för varje stam")
+        print("-------------------------------")
         print(table)
+        print()
 
 def main(
         csv,
         threshold_redundancy, 
         display_barplot: bool, 
         display_heatmap: bool, 
-        display_phylo:bool, 
+        display_tree:bool, 
         print_unique_scores: bool
         ):
     """The main function calls upon all the other functions and takes boolean inputs that the 
@@ -194,8 +199,8 @@ def main(
     # Plot the heatmap and get the worst isolate score???
     similarity = heatmap_plot(isolate_data, csv, excel, excel_sheet, display_heatmap)
 
-    # Plot the phylogram
-    phylo(similarity, csv, excel, excel_sheet, display_phylo)
+    # Plot the treegram
+    tree(similarity, csv, excel, excel_sheet, display_tree)
     
     #Will calculate the list of antibiotic names
     Names = get_antibiotic_names(excel,excel_sheet)
