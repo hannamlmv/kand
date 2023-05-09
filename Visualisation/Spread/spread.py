@@ -11,7 +11,7 @@ import json
 import pandas as pd
 from help_functions.create_panel import create_panel
 from help_functions.score_calc_functions import extract_panel_data, calc_spread_score
-from Visualisation.Spread.spread_plot_functions import (
+from Visualisation.Spread.spread_functions import (
     create_plot_df,
     plotly_dotplot,
 )

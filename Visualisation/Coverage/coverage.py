@@ -12,7 +12,7 @@ import plotly.graph_objects as go
 import plotly.subplots as sp
 import numpy as np
 from Visualisation.data_extraction_functions import extract_chosen_isolates
-from Visualisation.Coverage.coverage_plot_functions import *
+from Visualisation.Coverage.coverage_functions import *
 
 def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
     """

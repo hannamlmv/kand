@@ -10,7 +10,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import plotly.graph_objs as go
 import plotly.figure_factory as ff
 from prettytable import PrettyTable
-from Visualisation.Redundancy.redundancy_plot_functions import *
+from Visualisation.Redundancy.redundancy_functions import *
 
 def heatmap_plot(isolate_data: dict, Csv_name: str, excel_name: str, sheet_name: str, plot : bool):
     """

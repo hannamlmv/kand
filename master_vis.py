@@ -7,9 +7,9 @@ Author: Hanna Malmvall
 
 import json
 from help_functions.validate_parameters import validate_visualisation_parameters
-from Visualisation.Spread.spread_plot import main as spread_vis
-from Visualisation.Coverage.coverage_plots import main as coverage_vis
-from Visualisation.Redundancy.redundancy_plots import main as redundancy
+from Visualisation.Spread.spread import main as spread
+from Visualisation.Coverage.coverage import main as coverage
+from Visualisation.Redundancy.redundancy import main as redundancy
 from help_functions.validate_parameters import validate_parameters
 
 def main():
@@ -28,7 +28,7 @@ def main():
 
     # Spread
     if bools["Spread visualisation"] or bools["Spread per antibiotic print-out"]:
-        spread_vis(
+        spread(
             panel, 
             all_isolates, 
             bools["Spread visualisation"], 
@@ -37,7 +37,7 @@ def main():
 
     # Coverage
     if bools["Coverage bars"] or bools["Coverage heatmap"]:
-        coverage_vis(panel, bools["Coverage bars"], bools["Coverage heatmap"])
+        coverage(panel, bools["Coverage bars"], bools["Coverage heatmap"])
 
     # Redundancy
     if (
