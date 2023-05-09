@@ -203,9 +203,9 @@ def main(
     tree(similarity, csv, excel, excel_sheet, display_tree)
     
     #Will calculate the list of antibiotic names
-    Names = get_antibiotic_names(excel,excel_sheet)
+    names = get_antibiotic_names(excel,excel_sheet)
     #print out the unique score, depending on the boolean input of print_unique_scores:
-    unique_score(isolate_data, Names, print_unique_scores)
+    unique_score(isolate_data, names, print_unique_scores)
 
 if __name__ == "__main__":
    main("Chosen_isolates_folder/Chosen_isolates.csv", 1, True, True, True, True)
