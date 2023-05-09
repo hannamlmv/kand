@@ -9,7 +9,7 @@ import json
 from help_functions.validate_parameters import validate_visualisation_parameters
 from Visualisation.Spread.spread_plot import main as spread_vis
 from Visualisation.Spread.spread_per_antibiotic import main as spread_print
-from Visualisation.Coverage.coverage_vis import main as coverage_vis
+from Visualisation.Coverage.coverage_plots import main as coverage_vis
 from Visualisation.Redundancy.redundancy_plots import main as redundancy
 from help_functions.validate_parameters import validate_parameters
 
