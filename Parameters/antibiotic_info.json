@@ -2,95 +2,129 @@
     "Concentration range length": 18,
     "Lowest concentration": 0.00195,
     "Benzylpenicillin": {
-        "Lower": "0.00781",
-        "Upper": "32.0"
+        "Non-Fastidious Minimum": 0.01563,
+        "Non-Fastidious Maximum": 32.0,
+        "Fastidious Minimum": 0.00781,
+        "Fastidious Maximum": 16.0
     },
     "Ampicillin": {
-        "Lower": "0.00781",
-        "Upper": "64.0"
+        "Non-Fastidious Minimum": 0.125,
+        "Non-Fastidious Maximum": 64.0,
+        "Fastidious Minimum": 0.00781,
+        "Fastidious Maximum": 16.0
     },
     "Cefoxitin": {
-        "Lower": "0.25",
-        "Upper": "16"
+        "Non-Fastidious Minimum": 0.25,
+        "Non-Fastidious Maximum": 16,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Ceftaroline": {
-        "Lower": "0.03125",
-        "Upper": "16"
+        "Non-Fastidious Minimum": 0.03125,
+        "Non-Fastidious Maximum": 16,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Ceftobiprole": {
-        "Lower": "0.03125",
-        "Upper": "16"
+        "Non-Fastidious Minimum": 0.03125,
+        "Non-Fastidious Maximum": 16,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Ceftriaxone": {
-        "Lower": "0.00781",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": null,
+        "Non-Fastidious Maximum": null,
+        "Fastidious Minimum": 0.00781,
+        "Fastidious Maximum": 16.0
     },
     "Imipenem": {
-        "Lower": "0.03125",
-        "Upper": "16"
+        "Non-Fastidious Minimum": 0.03125,
+        "Non-Fastidious Maximum": 16,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Meropenem": {
-        "Lower": "0.00781",
-        "Upper": "8.0"
+        "Non-Fastidious Minimum": null,
+        "Non-Fastidious Maximum": null,
+        "Fastidious Minimum": 0.00781,
+        "Fastidious Maximum": 8.0
     },
     "Ciprofloxacin": {
-        "Lower": "0.0625",
-        "Upper": "8"
+        "Non-Fastidious Minimum": 0.0625,
+        "Non-Fastidious Maximum": 8,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Levofloxacin": {
-        "Lower": "0.03125",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": null,
+        "Non-Fastidious Maximum": null,
+        "Fastidious Minimum": 0.03125,
+        "Fastidious Maximum": 16.0
     },
     "Gentamicin": {
-        "Lower": "128.0",
-        "Upper": "500.0"
+        "Non-Fastidious Minimum": 128.0,
+        "Non-Fastidious Maximum": 500.0,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Dalbavancin": {
-        "Lower": "0.01563",
-        "Upper": "1.0"
+        "Non-Fastidious Minimum": 0.01563,
+        "Non-Fastidious Maximum": 1.0,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Teicoplanin": {
-        "Lower": "0.03125",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": 0.03125,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": 0.03125,
+        "Fastidious Maximum": 8.0
     },
     "Vancomycin": {
-        "Lower": "0.125",
-        "Upper": "64.0"
+        "Non-Fastidious Minimum": 0.125,
+        "Non-Fastidious Maximum": 64.0,
+        "Fastidious Minimum": 0.01563,
+        "Fastidious Maximum": 8.0
     },
     "Erythromycin": {
-        "Lower": "0.00391",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": 0.01563,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": 0.00391,
+        "Fastidious Maximum": 4.0
     },
     "Clindamycin": {
-        "Lower": "0.00781",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": 0.01563,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": 0.00781,
+        "Fastidious Maximum": 4.0
     },
     "Tetracycline": {
-        "Lower": "0.01563",
-        "Upper": "32.0"
+        "Non-Fastidious Minimum": 0.01563,
+        "Non-Fastidious Maximum": 32.0,
+        "Fastidious Minimum": 0.01563,
+        "Fastidious Maximum": 16.0
     },
     "Linezolid": {
-        "Lower": "0.0625",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": 0.125,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": 0.0625,
+        "Fastidious Maximum": 8.0
     },
     "Daptomycin": {
-        "Lower": "0.03125",
-        "Upper": "16.0"
+        "Non-Fastidious Minimum": 0.03125,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Rifampicin": {
-        "Lower": "0.00195",
-        "Upper": "8.0"
+        "Non-Fastidious Minimum": 0.00195,
+        "Non-Fastidious Maximum": 8.0,
+        "Fastidious Minimum": null,
+        "Fastidious Maximum": null
     },
     "Trimethoprim-sulfamethoxazole": {
-        "Lower": "0.0625",
-        "Upper": "16.0"
-    },
-    "D-test": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
-    },
-    "Optochin": {
-        "Lower": "Min_C",
-        "Upper": "Max_C"
+        "Non-Fastidious Minimum": 0.0625,
+        "Non-Fastidious Maximum": 16.0,
+        "Fastidious Minimum": 0.0625,
+        "Fastidious Maximum": 8.0
     }
 }
