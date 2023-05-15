@@ -117,6 +117,9 @@ def tree(similarity: np.array, Csv_name: str, excel_name: str, sheet_name: str, 
     template="plotly_dark")
     fig.update_yaxes(visible=False)
 
+    # Customize the line thickness
+    fig.update_traces(line=dict(width=6))
+
     if plot:
         fig.show()
      
