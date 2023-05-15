@@ -12,8 +12,9 @@ from help_functions.create_isolate_list import create_isolate_list
 from help_functions.validate_parameters import validate_parameters
 from help_functions.add_isolate_functions import add_isolate
 
+
 def main():
-    """ Creates a panel. """
+    """Creates a panel."""
     CIB_file_path = "Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx"
     excel_sheet_name = "matrix EU"
     antibiotic_ranges_file_path = "Parameters/antibiotic_info.json"
@@ -22,7 +23,7 @@ def main():
 
     # Read in data from Excel
     CIB = pd.ExcelFile(CIB_file_path)
-    matrix_EU = pd.read_excel(CIB, excel_sheet_name)
+    matrix_EU = pd.read_excel(CIB, excel_sheet_name).drop("D-test", axis=1)
     number_of_antibiotics = len(matrix_EU.columns[3:])
 
     # Open json files
@@ -47,10 +48,11 @@ def main():
         antibiotic_concentration_ranges,
         redundancy_threshold,
         coverage_demands,
-        coverage_total
+        coverage_total,
     )
 
     panel.to_csv(chosen_isolates_file_path)
+
 
 if __name__ == "__main__":
     main()

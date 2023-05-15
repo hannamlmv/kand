@@ -12,6 +12,7 @@ from Visualisation.Coverage.coverage import main as coverage
 from Visualisation.Redundancy.redundancy import main as redundancy
 from help_functions.validate_parameters import validate_parameters
 
+
 def main():
     """
     Generates all graphs and print-outs for a panel.Which ones are to
@@ -21,19 +22,19 @@ def main():
     all_isolates = "Chosen_isolates_folder/all_isolates.csv"
     bools = validate_visualisation_parameters(
         json.load(open("Parameters/visualisation_parameters.json"))
-        )
+    )
     _, _, _, _, redundancy_threshold = validate_parameters(
         json.load(open("Parameters/isolate_selection_parameters.json"))
-        )
+    )
 
     # Spread
     if bools["Spread visualisation"] or bools["Spread per antibiotic print-out"]:
         spread(
-            panel, 
-            all_isolates, 
-            bools["Spread visualisation"], 
-            bools["Spread per antibiotic print-out"]
-            )
+            panel,
+            all_isolates,
+            bools["Spread visualisation"],
+            bools["Spread per antibiotic print-out"],
+        )
 
     # Coverage
     if bools["Coverage bars"] or bools["Coverage heatmap"]:
@@ -54,6 +55,7 @@ def main():
             bools["Redundancy tree"],
             bools["Uniqueness print-out"],
         )
+
 
 if __name__ == "__main__":
     main()
