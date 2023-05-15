@@ -9,9 +9,11 @@ import numpy as np
 from Classes.panel_class import Panel
 from help_functions.spread_score_functions import score_spread_list
 
+
 def concentration_to_index(concentration: float, abs_lowest_concentration: int):
-    """ Converts the concentration to a list index value. """
+    """Converts the concentration to a list index value."""
     return int(np.log2(float(concentration)) + abs_lowest_concentration)
+
 
 def extract_panel_data(panel: Panel):
     """
@@ -28,13 +30,14 @@ def extract_panel_data(panel: Panel):
                 panel_data[antibiotic].append((mic, sir))
     return panel_data
 
+
 def calc_spread_score(
     panel_data: dict,
     concentration_ranges: dict,
     number_of_antibiotics: int,
     per_antibiotic: bool = False,
 ):
-    """ Calculates the spread score. """
+    """Calculates the spread score."""
     total_spread_list_score = 0
     abs_lowest_concentration = np.abs(
         np.log2(concentration_ranges["Lowest concentration"])
@@ -45,8 +48,35 @@ def calc_spread_score(
         unique_mic_values = {mic for mic, _ in mic_sir if mic is not None}
 
         # Get the minimum and maximum on-scale concentration value for the antibiotic
-        minimum_concentration = concentration_ranges[antibiotic]["Lower"]
-        maximum_concentration = concentration_ranges[antibiotic]["Upper"]
+        non_fastidious_minimum = concentration_ranges[antibiotic][
+            "Non-Fastidious Minimum"
+        ]
+        fastidious_minimum = concentration_ranges[antibiotic]["Fastidious Minimum"]
+        non_fastidious_maximum = concentration_ranges[antibiotic][
+            "Non-Fastidious Maximum"
+        ]
+
+        fastidious_maximum = concentration_ranges[antibiotic]["Fastidious Maximum"]
+
+        if non_fastidious_minimum is None:
+            minimum_concentration = fastidious_minimum
+        elif fastidious_minimum is None:
+            minimum_concentration = non_fastidious_minimum
+        else:
+            minimum_concentration = min(
+                concentration_ranges[antibiotic]["Non-Fastidious Minimum"],
+                concentration_ranges[antibiotic]["Fastidious Minimum"],
+            )
+
+        if non_fastidious_maximum is None:
+            maximum_concentration = fastidious_maximum
+        elif fastidious_maximum is None:
+            maximum_concentration = non_fastidious_maximum
+        else:
+            maximum_concentration = max(
+                concentration_ranges[antibiotic]["Non-Fastidious Maximum"],
+                concentration_ranges[antibiotic]["Fastidious Maximum"],
+            )
 
         # Convert the concentration values to indices
         if minimum_concentration == "Min_C":
@@ -89,13 +119,14 @@ def calc_spread_score(
         return spread_per_antibiotic
     return total_spread_list_score / number_of_antibiotics
 
+
 def calc_coverage_score(
     panel_data: dict,
     number_of_antibiotics: int,
     coverage_demands: dict,
     coverage_total: int,
 ):
-    """ Calculates the coverage score. """
+    """Calculates the coverage score."""
     coverage_score = 0
     for mic_sir in panel_data.values():
         coverage_counter = {key: 0 for key in coverage_demands}
@@ -112,7 +143,7 @@ def calc_coverage_score(
 
 
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
-    """ Calculates the redundancy score. """
+    """Calculates the redundancy score."""
     number_of_mics = 0
     number_of_redundant_mics = 0
     for mic_sir in panel_data.values():
@@ -129,6 +160,7 @@ def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
         return 0
     return number_of_redundant_mics / number_of_mics
 
+
 def calc_scores(
     panel: Panel,
     concentration_ranges: dict,
@@ -136,7 +168,7 @@ def calc_scores(
     coverage_penalties: dict,
     coverage_total: int,
 ):
-    """ Calculates spread, coverage and redundancy score for entire panel. """
+    """Calculates spread, coverage and redundancy score for entire panel."""
     antibiotic_mic = extract_panel_data(panel)
     scores = (
         calc_spread_score(
