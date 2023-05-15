@@ -6,7 +6,6 @@ Date: 24/4
 Author: Victor Wong
 """
 
-
 def count_gap_length(valid_list: list) -> float:
     """Calculates the gap length for a spread list and penalizes."""
     total_gap_length = 0

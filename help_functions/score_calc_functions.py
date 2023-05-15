@@ -141,7 +141,6 @@ def calc_coverage_score(
         coverage_score += coverage_sir_score * total_coverage
     return coverage_score / number_of_antibiotics
 
-
 def calc_redundancy_score(panel_data: dict, redundancy_threshold: int):
     """Calculates the redundancy score."""
     number_of_mics = 0
