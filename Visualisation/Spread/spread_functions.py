@@ -16,6 +16,7 @@ from Visualisation.data_extraction_functions import (
 # Set random seed
 np.random.seed(1)
 
+
 def create_plot_df(
     antibiotics: list,
     mic_data: list,
@@ -71,62 +72,42 @@ def create_plot_df(
 
     return plot_df
 
-def add_rectangles_to_plot(fig, antibiotics: list) -> None:
+
+def add_rectangles_to_plot(fig, antibiotics: list, antibiotic_ranges: dict) -> None:
     """Adds rectangles to represent the on-scale concentrations."""
-    names_to_conc = {
-        "Benzylpenicillin": ["0.015 - 32.0", "0.008 - 16.0"],
-        "Ampicillin": ["0.125 - 64.0", "0.008 - 16.0"],
-        "Cefoxitin": ["0.25 - 16.0", None],
-        "Ceftaroline": ["0.03125 - 16.0", None],
-        "Ceftobiprole": ["0.03125 - 16.0", None],
-        "Ceftriaxone": [None, "0.0078125 - 16.0"],
-        "Imipenem": ["0.03125 - 16.0", None],
-        "Meropenem": [None, "0.0078125 - 8.0"],
-        "Ciprofloxacin": ["0.0625 - 8.0", None],
-        "Levofloxacin": [None, "0.03125 - 16.0"],
-        "Gentamicin": ["128.0 - 256.0", None],
-        "Dalbavancin": ["0.015 - 1.0", None],
-        "Teicoplanin": ["0.03125 - 16.0", "0.03125 - 8.0"],
-        "Vancomycin": ["0.125 - 64.0", "0.015 - 8.0"],
-        "Erythromycin": ["0.015 - 16.0", "0.004 - 4.0"],
-        "Clindamycin": ["0.015 - 16.0", "0.0078125 - 4.0"],
-        "Tetracycline": ["0.015 - 32.0", "0.015 - 16.0"],
-        "Linezolid": ["0.125 - 16.0", "0.0625 - 8.0"],
-        "Daptomycin": ["0.03125 - 16.0", None],
-        "Rifampicin": ["0.002 - 8.0", None],
-        "T.sulfamethoxazole": ["0.0625 - 16.0", "0.0625 - 8.0"],
-    }
-
     for i in range(len(antibiotics)):
-        if antibiotics[i] in names_to_conc:
-            if names_to_conc[antibiotics[i]][0] is not None:
-                conc = names_to_conc[antibiotics[i]][0].split("-")
-                conc_low = float(conc[0])
-                conc_high = float(conc[1])
+        if antibiotics[i] in antibiotic_ranges:
+            non_fastidious_minimum = antibiotic_ranges[antibiotics[i]][
+                "Non-Fastidious Minimum"
+            ]
+            non_fastidious_maximum = antibiotic_ranges[antibiotics[i]][
+                "Non-Fastidious Maximum"
+            ]
+            fastidious_minimum = antibiotic_ranges[antibiotics[i]]["Fastidious Minimum"]
+            fastidious_maximum = antibiotic_ranges[antibiotics[i]]["Fastidious Maximum"]
 
+            if (
+                non_fastidious_maximum is not None
+                and non_fastidious_minimum is not None
+            ):
                 box_witdh = 0.4
                 fig.add_vrect(
                     x0=i - box_witdh,
                     x1=i + box_witdh,
-                    y0=0.99 - (10 - np.log2(conc_low / 4)) / 23,
-                    y1=1.01 - (10 - np.log2(conc_high / 4)) / 23,
+                    y0=0.99 - (10 - np.log2(non_fastidious_minimum / 4)) / 23,
+                    y1=1.01 - (10 - np.log2(non_fastidious_maximum / 4)) / 23,
                     fillcolor="skyblue",
                     layer="below",
                     line_width=0,
                     opacity=0.8,
                 )
-
-            if names_to_conc[antibiotics[i]][1] is not None:
-                conc = names_to_conc[antibiotics[i]][1].split("-")
-                conc_low = float(conc[0])
-                conc_high = float(conc[1])
-
+            if fastidious_minimum is not None and fastidious_maximum is not None:
                 box_witdh = 0.3
                 fig.add_vrect(
                     x0=i - box_witdh,
                     x1=i + box_witdh,
-                    y0=0.99 - (10 - np.log2(conc_low / 4)) / 23,
-                    y1=1.01 - (10 - np.log2(conc_high / 4)) / 23,
+                    y0=0.99 - (10 - np.log2(fastidious_minimum / 4)) / 23,
+                    y1=1.01 - (10 - np.log2(fastidious_maximum / 4)) / 23,
                     fillcolor="ghostwhite",
                     layer="below",
                     line_width=0,
@@ -158,8 +139,7 @@ def add_rectangles_to_plot(fig, antibiotics: list) -> None:
 
 
 def plotly_dotplot(
-    plot_df: pd.DataFrame,
-    antibiotics: list
+    plot_df: pd.DataFrame, antibiotics: list, antibiotic_ranges: dict
 ) -> None:
     """Plot a scatter plot of the isolates."""
 
@@ -226,17 +206,18 @@ def plotly_dotplot(
     # Update dot color
     fig.for_each_trace(change_trace_color)
 
-    add_rectangles_to_plot(fig, antibiotics)
+    add_rectangles_to_plot(fig, antibiotics, antibiotic_ranges)
 
     # Add border to dots
     fig.update_traces(marker=dict(line=dict(width=1, color="DarkSlateGrey")))
 
     # Modify x-ticks, y-ticks, legend and title
     fig.update_layout(
-        title = {'text': "Spridning inom on-scale koncentrationsintervall",
-        'x': 0.5,
-        'xanchor': 'center',
-        'font_size': 17
+        title={
+            "text": "Spridning inom on-scale koncentrationsintervall",
+            "x": 0.5,
+            "xanchor": "center",
+            "font_size": 17,
         },
         xaxis=dict(tickmode="array", tickvals=x_axis, ticktext=antibiotics),
         yaxis=dict(

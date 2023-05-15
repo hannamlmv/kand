@@ -22,12 +22,14 @@ from Visualisation.data_extraction_functions import (
     extract_mic_values_per_antibiotic,
 )
 
+
 def plot(chosen_isolates_list):
     """Creates a plot which visualises the spread of a panel."""
     # Load files
     chosen_isolates_list = pd.read_csv(chosen_isolates_list)
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
-    matrix_EU = pd.read_excel(CIB, "matrix EU")
+    matrix_EU = pd.read_excel(CIB, "matrix EU").drop("D-test", axis=1)
+    antibiotic_ranges = json.load(open("Parameters\antibiotic_info.json"))
     fastidious_dict = json.load(
         open("Parameters/pathogen_fastidiousness.json", encoding="UTF-8")
     )
@@ -56,7 +58,8 @@ def plot(chosen_isolates_list):
     # Create dataframe used for plotting
     plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)
 
-    plotly_dotplot(plot_df, antibiotics)
+    plotly_dotplot(plot_df, antibiotics, antibiotic_ranges)
+
 
 def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
     """Calculates and prints the relative spread per antibiotic."""
@@ -79,7 +82,9 @@ def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
             chosen_spread_per_antibiotic[antibiotic] = 1.0
         else:
             chosen_spread_per_antibiotic[antibiotic] = round(
-                chosen_spread_per_antibiotic[antibiotic] / all_spread_per_antibiotic[antibiotic], 2
+                chosen_spread_per_antibiotic[antibiotic]
+                / all_spread_per_antibiotic[antibiotic],
+                2,
             )
 
     table = PrettyTable()
@@ -93,16 +98,18 @@ def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
     print(table)
     print()
 
-def main(chosen_isolates: str, all_isolates: str, do_plot:bool, do_print:bool):
+
+def main(chosen_isolates: str, all_isolates: str, do_plot: bool, do_print: bool):
     if do_plot:
         plot(chosen_isolates)
     if do_print:
         spread_per_antibiotic(chosen_isolates, all_isolates)
 
+
 if __name__ == "__main__":
     main(
         "Chosen_isolates_folder/Chosen_isolates.csv",
-        "Chosen_isolates_folder/all_isolates.csv", 
+        "Chosen_isolates_folder/all_isolates.csv",
         True,
-        True
-        )
+        True,
+    )
