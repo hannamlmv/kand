@@ -72,7 +72,6 @@ def create_plot_df(
 
     return plot_df
 
-
 def add_rectangles_to_plot(fig, antibiotics: list, antibiotic_ranges: dict) -> None:
     """Adds rectangles to represent the on-scale concentrations."""
     for i in range(len(antibiotics)):
@@ -136,7 +135,6 @@ def add_rectangles_to_plot(fig, antibiotics: list, antibiotic_ranges: dict) -> N
         annotation_text="Kräsna",
         annotation_position="top",
     )
-
 
 def plotly_dotplot(
     plot_df: pd.DataFrame, antibiotics: list, antibiotic_ranges: dict

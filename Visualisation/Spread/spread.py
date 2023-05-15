@@ -22,7 +22,6 @@ from Visualisation.data_extraction_functions import (
     extract_mic_values_per_antibiotic,
 )
 
-
 def plot(chosen_isolates_list):
     """Creates a plot which visualises the spread of a panel."""
     # Load files
@@ -34,10 +33,6 @@ def plot(chosen_isolates_list):
         open("Parameters/pathogen_fastidiousness.json", encoding="UTF-8")
     )
 
-    # Rename a long name for plotting purposes
-    #matrix_EU.rename(
-    #    columns={"Trimethoprim-sulfamethoxazole": "T.sulfamethoxazole"}, inplace=True
-    #)
     # Select isolates
     chosen_isolates = extract_chosen_isolates(chosen_isolates_list, matrix_EU)
 
@@ -59,7 +54,6 @@ def plot(chosen_isolates_list):
     plot_df = create_plot_df(antibiotics, mic_data, fastidious_dict)
 
     plotly_dotplot(plot_df, antibiotics, antibiotic_ranges)
-
 
 def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
     """Calculates and prints the relative spread per antibiotic."""
@@ -98,13 +92,11 @@ def spread_per_antibiotic(chosen_isolates: str, all_isolates: str) -> None:
     print(table)
     print()
 
-
 def main(chosen_isolates: str, all_isolates: str, do_plot: bool, do_print: bool):
     if do_plot:
         plot(chosen_isolates)
     if do_print:
         spread_per_antibiotic(chosen_isolates, all_isolates)
-
 
 if __name__ == "__main__":
     main(

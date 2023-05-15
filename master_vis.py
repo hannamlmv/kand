@@ -56,6 +56,5 @@ def main():
             bools["Uniqueness print-out"],
         )
 
-
 if __name__ == "__main__":
     main()
