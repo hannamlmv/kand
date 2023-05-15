@@ -12,7 +12,7 @@ from help_functions.create_isolate_list import create_isolate_list
 def create_panel(isolate_list: list) -> Panel:
     """ Create a Panel objects with Isolate objects from a list of isolate names. """
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
-    matrix_EU = pd.read_excel(CIB, "matrix EU")
+    matrix_EU = pd.read_excel(CIB, "matrix EU").drop("D-test", axis = 1)
     number_of_antibiotics = len(matrix_EU.columns[3:])
     isolate_objects = create_isolate_list(matrix_EU)
     chosen_isolate_objects = [

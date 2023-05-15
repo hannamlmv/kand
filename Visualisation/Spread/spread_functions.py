@@ -212,6 +212,7 @@ def plotly_dotplot(
     fig.update_traces(marker=dict(line=dict(width=1, color="DarkSlateGrey")))
 
     # Modify x-ticks, y-ticks, legend and title
+    antibiotics = list(map(lambda x: x.replace('Trimethoprim-sulfamethoxazole', 'T.sulfamethoxazole'), antibiotics))
     fig.update_layout(
         title={
             "text": "Spridning inom on-scale koncentrationsintervall",
