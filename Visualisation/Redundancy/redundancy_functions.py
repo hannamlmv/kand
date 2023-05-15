@@ -7,7 +7,7 @@ Author: Therese Björkman & Hanad Abdullahi
 
 import pandas as pd
 from collections import Counter
-import re
+import regex as re
 
 def read_csv(Csv_name: str):
     """ Reads the CSV file. """
