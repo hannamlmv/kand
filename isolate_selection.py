@@ -23,7 +23,7 @@ def main():
 
     # Read in data from Excel
     CIB = pd.ExcelFile(CIB_file_path)
-    matrix_EU = pd.read_excel(CIB, excel_sheet_name)
+    matrix_EU = pd.read_excel(CIB, excel_sheet_name).drop("D-test", axis=1)
     number_of_antibiotics = len(matrix_EU.columns[3:])
 
     # Open json files

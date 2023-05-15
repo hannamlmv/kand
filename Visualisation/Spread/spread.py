@@ -29,7 +29,7 @@ def plot(chosen_isolates_list):
     chosen_isolates_list = pd.read_csv(chosen_isolates_list)
     CIB = pd.ExcelFile("Q-linea_files/CIB_TF-data_AllIsolates_20230302.xlsx")
     matrix_EU = pd.read_excel(CIB, "matrix EU").drop("D-test", axis=1)
-    antibiotic_ranges = json.load(open("Parameters\antibiotic_info.json"))
+    antibiotic_ranges = json.load(open("Parameters/antibiotic_info.json"))
     fastidious_dict = json.load(
         open("Parameters/pathogen_fastidiousness.json", encoding="UTF-8")
     )
