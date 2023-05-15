@@ -12,7 +12,6 @@ from Visualisation.Coverage.coverage import main as coverage
 from Visualisation.Redundancy.redundancy import main as redundancy
 from help_functions.validate_parameters import validate_parameters
 
-
 def main():
     """
     Generates all graphs and print-outs for a panel.Which ones are to
