@@ -39,7 +39,7 @@ def plot_coverage(antibiotics: list, S_I_R_per_antibiotic: dict) -> None:
 
     fig.update_layout(
         title={
-            'text': "Täckning per antibiotika", 
+            'text': "Täckning per antibiotikum", 
             'x': 0.5, 
             'xanchor': 'center', 
             'font_size': 17
@@ -101,7 +101,7 @@ def plot_grid(antibiotics:list, chosen_isolates_list:list, chosen_isolates_SIR_M
     # Set layout properties
     fig.update_layout(
         title={
-            'text': "Täckning för varje antbiotika och stam", 
+            'text': "Täckning för varje antbiotikum och stam", 
             'x': 0.5, 
             'xanchor': 'center', 
             'font_size': 17

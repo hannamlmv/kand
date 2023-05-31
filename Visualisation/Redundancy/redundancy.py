@@ -87,7 +87,7 @@ def barplot(SIR_total_per_anti, plot:bool):
     ])
 
     fig.update_layout(barmode='stack', template="plotly_dark" ,title={
-        'text': "Antalet redundanta isolat för varje antibiotika",
+        'text': "Antalet redundanta isolat för varje antibiotikum",
         'x': 0.5,
         'xanchor': 'center',
         'font_size': 17
